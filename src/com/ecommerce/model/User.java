@@ -1,5 +1,7 @@
 package com.ecommerce.model;
 
+import java.io.Serializable;
+
 /**
  * @overview 
  * 		<pre>
@@ -36,16 +38,26 @@ package com.ecommerce.model;
  * 	
  * 	</pre>
  */
-public class User{
+public class User implements Serializable{
+	
 	private int userID;
+	
 	private String username;
+	
 	private String password;
+	
 	private String fullname;
+	
 	private String mobile;
+	
 	private String email;
+	
 	private String address;
+	
 	private String gender;
+	
 	private String dob;
+	
 	private int roleID;
 	
 	
@@ -54,13 +66,6 @@ public class User{
 		super();
 	}
 	
-	/**
-	 * @effects
-	 *  	<pre>
-	 *  initialize this as <userID, username, password, fullname, mobile, email, address,
-	 *  gender, dob, roleID>
-	 *  	</pre>
-	 */
 	public User(int userID, String username, String password, String fullname, String mobile, String email,
 			String address, String gender, String dob, int roleID) {
 		super();
@@ -76,145 +81,86 @@ public class User{
 		this.roleID = roleID;
 	}
 	
-
-
 	//Getters & Setters
-	/**
-	 * @effects return <tt>userID</tt>
-	 * 
-	 */
 	public int getUserID() {
 		return userID;
 	}
-	
-	/**
-	 * @effects return <tt>username</tt>
-	 * 
-	 */
-	public String getUserName() {
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public String getUsername() {
 		return username;
 	}
-	
-	/**
-	 * @effects return <tt>password</tt>
-	 * 
-	 */
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getPassword() {
 		return password;
 	}
-	
-	/**
-	 * @effects set this.password to password
-	 * 
-	 */
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	/**
-	 * @effects return <tt>fullname</tt>
-	 * 
-	 */
-	public String getFullName() {
+
+	public String getFullname() {
 		return fullname;
 	}
-	
-	/**
-	 * @effects set this.fullname to fullname
-	 * 
-	 */
-	public void setFullName(String fullname) {
+
+	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
-	
-	/**
-	 * @effects return <tt>mobile</tt>
-	 * 
-	 */
+
 	public String getMobile() {
 		return mobile;
 	}
-	
-	/**
-	 * @effects set this.mobile to mobile
-	 * 
-	 */
+
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	
-	/**
-	 * @effects return <tt>email</tt>
-	 * 
-	 */
+
 	public String getEmail() {
 		return email;
 	}
-	
-	/**
-	 * @effects set this.email to email
-	 * 
-	 */
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	/**
-	 * @effects return <tt>address</tt>
-	 * 
-	 */
+
 	public String getAddress() {
 		return address;
 	}
-	
-	/**
-	 * @effects set this.address to address
-	 * 
-	 */
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	/**
-	 * @effects return <tt>gender</tt>
-	 * 
-	 */
+
 	public String getGender() {
 		return gender;
 	}
-	
-	/**
-	 * @effects set this.gender to gender
-	 * 
-	 */
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	/**
-	 * @effects return <tt>dob</tt>
-	 * 
-	 */
+
 	public String getDob() {
 		return dob;
 	}
-	
-	/**
-	 * @effects set this.dob to dob
-	 * 
-	 */
+
 	public void setDob(String dob) {
 		this.dob = dob;
-			
 	}
-	
-	/**
-	 * @effects return <tt>roleID</tt>
-	 * 
-	 */
+
 	public int getRoleID() {
 		return roleID;
 	}
 
+	public void setRoleID(int roleID) {
+		this.roleID = roleID;
+	}
+	
 	
 }
