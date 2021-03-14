@@ -38,6 +38,8 @@ import java.sql.Date;
  * 	mutable(roleID) = false /\ optional(roleID) = false
  * 	
  * 	</pre>
+ * 
+ * @author Tus
  */
 public class User implements Serializable{
 	
