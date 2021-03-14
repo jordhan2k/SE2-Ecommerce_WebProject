@@ -328,7 +328,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean checkExistEmail(String email) {
 		boolean isDuplicated = false;
-		String sql = "SELECT * FROM user WHERE email = ?";
+		String sql = "SELECT * FROM user WHERE user_email = ?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, email);
