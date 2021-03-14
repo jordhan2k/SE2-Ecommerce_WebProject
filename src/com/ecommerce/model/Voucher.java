@@ -6,6 +6,7 @@ import java.sql.Date;
 /**
  * @overview 
  *  Voucher is uses to decrease price in percentage
+ *  
  * @attributes
  * <pre>
  * voucherID   			Integer  	int
@@ -13,6 +14,7 @@ import java.sql.Date;
  * discountPercentage	Integer		int
  * expireDate			Date
  * </pre>
+ * 
  * @abstract_properties
  * mutable(voucherID)=false /\ optional(voucherID)=false /\ length(voucherID)=6 /\
  * mutable(voucherCode)=true /\ optional(voucherCode)=false /\ length(voucherID)=10 /\

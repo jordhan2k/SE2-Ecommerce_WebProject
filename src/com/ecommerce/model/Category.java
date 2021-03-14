@@ -6,11 +6,13 @@ import java.io.Serializable;
 /**
  * @overview 
  *  Category is uses to sort products in different type
+ *  
  * @attributes
  * <pre>
  * categoryID   Integer int
  * categoryName String
  * </pre>
+ * 
  * @abstract_properties
  * mutable(categoryID)=false /\ optional(categoryID)=false /\
  * mutable(categoryName)=false /\ optional(categoryName)=false
