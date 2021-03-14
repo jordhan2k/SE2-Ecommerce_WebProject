@@ -114,7 +114,7 @@ public class UserDAOImpl implements UserDAO {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
 		}
-		return false;
+		return isDeleted;
 	}
 
 	/**
