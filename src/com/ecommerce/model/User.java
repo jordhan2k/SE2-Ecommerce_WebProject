@@ -1,6 +1,7 @@
 package com.ecommerce.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * @overview 
@@ -19,7 +20,7 @@ import java.io.Serializable;
  * email	String
  * address	String
  * gender	String
- * dob		String
+ * dob		Date
  * roleID	Integer		int
  * </pre>
  * 
@@ -56,7 +57,7 @@ public class User implements Serializable{
 	
 	private String gender;
 	
-	private String dob;
+	private Date dob;
 	
 	private int roleID;
 	
@@ -67,7 +68,7 @@ public class User implements Serializable{
 	}
 	
 	public User(int userID, String username, String password, String fullname, String mobile, String email,
-			String address, String gender, String dob, int roleID) {
+			String address, String gender, Date dob, int roleID) {
 		super();
 		this.userID = userID;
 		this.username = username;
@@ -146,11 +147,11 @@ public class User implements Serializable{
 		this.gender = gender;
 	}
 
-	public String getDob() {
+	public Date getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
