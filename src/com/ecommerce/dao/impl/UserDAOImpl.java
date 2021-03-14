@@ -174,7 +174,7 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public User getUserByUsername(String username) {
-		String sql = "SELECT * FROM user WHERE user_id = ?";
+		String sql = "SELECT * FROM user WHERE user_name = ?";
 		User user = null;
 
 		try {
