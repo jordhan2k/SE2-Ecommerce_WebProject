@@ -7,11 +7,11 @@ package com.ecommerce.model;
  *   </pre>
  * @attributes
  * 	<pre>
- * 		productId  Integer int
+ * 		productId   Integer int
  * 		productName       String
  * 		productImg        String
- * 		price      long  
- * 		categoryId  Integer int
+ * 		price             long  
+ * 		Category 
  * 		instock     Integer int
  * 		productDesc       String
  * 	</pre>
@@ -21,7 +21,6 @@ package com.ecommerce.model;
  *	 mutable (productName)= false /\ optional(productName)= false /\ length(productName)= 25
  *	 mutable (productImg)= true/\ optional(productImg)=false /\ length(productImg)= 2000
  *	 mutable (productPrice)= true /\ optional(productPrice)= false
- *	 mutable (categoryId) = false /\ optional(categoryId)= false /\ length(categoryId)=25 /\ min(categoryId)= 100000
  *   mutable (instock) = true /\ optional (instock) = false
  *   mutable (productDesc)= true /\optional (productDesc)= false /\ length(productDesc) =2000
  * 
@@ -36,7 +35,7 @@ public class Product {
 	protected String productName;
 	protected String productImg; 
 	protected long productPrice;
-	protected int categoryId;
+	private  Category category;
 	protected int instock;
 	protected String productDesc;
 	/**
@@ -45,14 +44,14 @@ public class Product {
 	public Product() {
 		super();
 	}
-	public Product(int productId, String productName, String productImg, long productPrice, int categoryId, int instock,
-			String productDesc) {
+	public Product(int productId, String productName, String productImg, long productPrice, Category category,
+			int instock, String productDesc) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productImg = productImg;
 		this.productPrice = productPrice;
-		this.categoryId = categoryId;
+		this.category = category;
 		this.instock = instock;
 		this.productDesc = productDesc;
 	}
@@ -105,16 +104,16 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 	/**
-	 * @return the categoryId
+	 * @return the category
 	 */
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 	/**
-	 * @param categoryId the categoryId to set
+	 * @param category the category to set
 	 */
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	/**
 	 * @return the instock
@@ -141,5 +140,4 @@ public class Product {
 		this.productDesc = productDesc;
 	}
 	
-
 }
