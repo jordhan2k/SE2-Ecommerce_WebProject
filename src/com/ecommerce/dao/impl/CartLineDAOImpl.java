@@ -31,7 +31,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 	 */
 	@Override
 	public void insertCartLine(CartLine cartLine) {
-		String sql = "INSERT INTO cartline(cart_id, produc_id, quantity, unit_price) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO cartline(cart_id, product_id, quantity, unit_price) VALUES (?,?,?,?)";
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);

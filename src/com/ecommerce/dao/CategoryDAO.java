@@ -15,7 +15,7 @@ public interface CategoryDAO {
 	 * 
 	 * @param category - a new category
 	 */
-	void inserCategory(Category category);
+	void insertCategory(Category category);
 	
 	/**
 	 * 	Update an existing Category in the database

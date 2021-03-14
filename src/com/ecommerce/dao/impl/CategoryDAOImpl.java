@@ -24,7 +24,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 * @param category - a new category
 	 */
 	@Override
-	public void inserCategory(Category category) {
+	public void insertCategory(Category category) {
 		String sql = "INSERT INTO category(category_name) VALUES (?)";
 		
 		try {
