@@ -63,6 +63,18 @@ public class Cart implements Serializable{
 		this.total = total;
 	}
 
+
+	public Cart( User user, Date orderDate, String status, String paymentMode, Voucher voucher, long total) {
+		super();
+		
+		this.user = user;
+		this.orderDate = orderDate;
+		this.status = status;
+		this.paymentMode = paymentMode;
+		this.voucher = voucher;
+		this.total = total;
+	}
+
 	public int getCartID() {
 		return cartID;
 	}
