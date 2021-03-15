@@ -7,7 +7,7 @@ package com.ecommerce.model;
  *   </pre>
  * @attributes
  * 	<pre>
- * 		productId   Integer int
+ * 		productID   Integer int
  * 		productName       String
  * 		productImg        String
  * 		price             long  
@@ -17,7 +17,7 @@ package com.ecommerce.model;
  * 	</pre>
  * @abstract_properties
  *   <pre> 
- *   mutable(productId)= false /\ optional(productId)= false /\ min(productId)= 100000/\length(productId) = 6
+ *   mutable(productID)= false /\ optional(productID)= false /\ min(productID)= 100000/\length(productID) = 6
  *	 mutable (productName)= false /\ optional(productName)= false /\ length(productName)= 25
  *	 mutable (productImg)= true/\ optional(productImg)=false /\ length(productImg)= 2000
  *	 mutable (productPrice)= true /\ optional(productPrice)= false
@@ -31,23 +31,37 @@ package com.ecommerce.model;
  */
 
 public class Product {
-	protected int productId; 
-	protected String productName;
-	protected String productImg; 
-	protected long productPrice;
+	private int productID; 
+	private String productName;
+	private String productImg; 
+	private long productPrice;
 	private  Category category;
-	protected int instock;
-	protected String productDesc;
+	private int instock;
+	private String productDesc;
 	/**
 	 * 
 	 */
 	public Product() {
 		super();
 	}
-	public Product(int productId, String productName, String productImg, long productPrice, Category category,
+	
+	
+	public Product(String productName, String productImg, long productPrice, Category category, int instock,
+			String productDesc) {
+		super();
+		this.productName = productName;
+		this.productImg = productImg;
+		this.productPrice = productPrice;
+		this.category = category;
+		this.instock = instock;
+		this.productDesc = productDesc;
+	}
+
+
+	public Product(int productID, String productName, String productImg, long productPrice, Category category,
 			int instock, String productDesc) {
 		super();
-		this.productId = productId;
+		this.productID = productID;
 		this.productName = productName;
 		this.productImg = productImg;
 		this.productPrice = productPrice;
@@ -58,14 +72,14 @@ public class Product {
 	/**
 	 * @return the productId
 	 */
-	public int getProductId() {
-		return productId;
+	public int getProductID() {
+		return productID;
 	}
 	/**
 	 * @param productId the productId to set
 	 */
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProductID(int productID) {
+		this.productID = productID;
 	}
 	/**
 	 * @return the productName
