@@ -56,6 +56,15 @@ public class CartLine implements Serializable {
 		this.cart = cart;
 	}
 
+	public CartLine( int quantity, long unitPrice, Product product, Cart cart) {
+		super();
+		
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.product = product;
+		this.cart = cart;
+	}
+
 	public int getCartLineID() {
 		return cartLineID;
 	}
