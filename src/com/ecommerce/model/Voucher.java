@@ -36,6 +36,13 @@ public class Voucher implements Serializable {
 		super();
 	}
 
+			public Voucher(String voucherCode, int discountPercentage, Date expireDate) {
+		super();
+		this.voucherCode = voucherCode;
+		this.discountPercentage = discountPercentage;
+		this.expireDate = expireDate;
+	}
+
 	public Voucher(int voucherID, String voucherCode, int discountPercentage, Date expireDate) {
 		super();
 		this.voucherID = voucherID;
