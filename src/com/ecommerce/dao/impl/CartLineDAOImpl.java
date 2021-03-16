@@ -88,7 +88,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 	 */
 	@Override
 	public boolean deleteCartLine(int cartLineID){
-		String sql = "DELETE FROM cartline WHERE id = ?";
+		String sql = "DELETE FROM cartline WHERE cartline_id = ?";
 		boolean isDeleted = false;
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -147,10 +147,11 @@ public class CartLineDAOImpl implements CartLineDAO {
 				long unitPrice = rs.getLong("unit_price");
 					
 				cartLine = new CartLine(cartLineID, quantity, unitPrice, product, cart);
-				
-				ps.close();
-				connection.close();
+					
 			}
+			
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -202,11 +203,10 @@ public class CartLineDAOImpl implements CartLineDAO {
 				cartLine = new CartLine(cartLineID, quantity, unitPrice, product, cart);
 				
 				list.add(cartLine);
-				
-				rs.close();
-				connection.close();
 			}
 			
+			rs.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
