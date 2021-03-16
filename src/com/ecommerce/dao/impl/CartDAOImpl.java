@@ -81,7 +81,7 @@ public class CartDAOImpl implements CartDAO{
 			ps.close();
 			connection.close();
 			
-			return isUpdated;
+			isUpdated = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
