@@ -37,7 +37,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			
 			ps.setInt(1, cartLine.getCart().getCartID());
-			ps.setInt(2, cartLine.getProduct().getProductId());
+			ps.setInt(2, cartLine.getProduct().getProductID());
 			ps.setInt(3, cartLine.getQuantity());
 			ps.setLong(4, cartLine.getUnitPrice());
 			
@@ -65,7 +65,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 			PreparedStatement ps  = connection.prepareStatement(sql);
 			
 			ps.setInt(1, cartLine.getCart().getCartID());
-			ps.setInt(2, cartLine.getProduct().getProductId());
+			ps.setInt(2, cartLine.getProduct().getProductID());
 			ps.setInt(3, cartLine.getQuantity());
 			ps.setLong(4, cartLine.getUnitPrice());
 			ps.setInt(5, cartLine.getCartLineID());
