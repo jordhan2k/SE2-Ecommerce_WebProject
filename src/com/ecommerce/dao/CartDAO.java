@@ -1,0 +1,68 @@
+package com.ecommerce.dao;
+
+import java.util.List;
+
+import com.ecommerce.model.Cart;
+
+/**
+ * @overview CartDAO is an interface which facilitates communication to database
+ * 
+ * @author HuuBang
+ *
+ */
+public interface CartDAO {
+	
+	/**
+	 * 	Insert a new cart record into Cart table  
+	 * @param cart
+	 */
+	void insertCart(Cart cart);
+	
+	
+	/**
+	 * Update cart in database 
+	 * 
+	 * @param cart
+	 */
+	boolean updateCart(Cart cart);
+	
+	
+	/**
+	 * Delete a cart in database by using it's id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	boolean deleteCart(int id);
+	
+	/**
+	 * Get Cart from database by using it's id
+	 * 
+	 * @param cartId
+	 * @return
+	 */
+	Cart getCartById(int cartId);
+	
+	
+	/**
+	 * Get all carts in database
+	 * @return
+	 */
+	List<Cart> getAllCarts();
+	
+	/**
+	 * Search all carts by using email
+	 * 
+	 * @param email
+	 * @return
+	 */
+	List<Cart> searchCartByEmail(String email);
+	
+	
+	/**
+	 * Search all carts by using phone
+	 * @param phone
+	 * @return
+	 */
+	List<Cart> searchCartByPhone(String phone);
+}
