@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
 	
-    private static String DB_URL = "jdbc:mysql://localhost:3306/userdb?useSSL=false";
+    private static String DB_URL = "jdbc:mysql://localhost:3306/fit_shop?useSSL=false";
     private static String USER_NAME = "root";
     private static String PASSWORD = "";
 	
