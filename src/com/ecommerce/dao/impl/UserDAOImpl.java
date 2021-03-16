@@ -159,6 +159,9 @@ public class UserDAOImpl implements UserDAO {
 				ps.close();
 				connection.close();
 			}
+			
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -205,9 +208,10 @@ public class UserDAOImpl implements UserDAO {
 
 				user = new User(userID, username, password, fullname, mobile, email, address, gender, dob, roleID);
 
-				ps.close();
-				connection.close();
+				
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -255,9 +259,10 @@ public class UserDAOImpl implements UserDAO {
 
 				list.add(user);
 
-				ps.close();
-				connection.close();
+				
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -309,9 +314,11 @@ public class UserDAOImpl implements UserDAO {
 
 				list.add(user);
 
-				ps.close();
-				connection.close();
+			
 			}
+			
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
