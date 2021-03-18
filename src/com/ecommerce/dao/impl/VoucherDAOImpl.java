@@ -62,11 +62,12 @@ public class VoucherDAOImpl implements VoucherDAO {
 			ps.setInt(2, voucher.getDiscountPercentage());
 			ps.setDate(3, voucher.getExpireDate());		
 			ps.setInt(4, voucher.getVoucherID());
-				
-			isUpdated = ps.executeUpdate() > 0;
-			
-			ps.close();
+			ps.close();	
 			connection.close();
+			
+			isUpdated = ps.executeUpdate() > 0;
+				
+			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -117,11 +118,12 @@ public class VoucherDAOImpl implements VoucherDAO {
 				int discountPercentage =rs.getInt("discount_percent");
 				java.sql.Date expireDate = rs.getDate("expire_date");
 				
-				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);
+				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);	
 				
-				ps.close();
-				connection.close();
 			}
+			ps.close();
+			connection.close();
+			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -146,11 +148,11 @@ public class VoucherDAOImpl implements VoucherDAO {
 				int voucherID = rs.getInt("voucher_id");
 				int discountPercentage =rs.getInt("discount_percent");
 				java.sql.Date expireDate = rs.getDate("expire_date");
-				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);
+				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);	
 				
-				ps.close();
-				connection.close();
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -178,11 +180,11 @@ public class VoucherDAOImpl implements VoucherDAO {
 				
 				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);
 				
-				list.add(voucher);
+				list.add(voucher);			
 				
-				ps.close();
-				connection.close();
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -214,9 +216,10 @@ public class VoucherDAOImpl implements VoucherDAO {
 				
 				list.add(voucher);
 				
-				ps.close();
-				connection.close();
+				
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
