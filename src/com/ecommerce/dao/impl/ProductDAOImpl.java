@@ -250,10 +250,10 @@ public class ProductDAOImpl implements ProductDAO {
 				String productName = rs.getString("product_name");
 				String productImg = rs.getString("product_img");
 				long productPrice = rs.getLong("product_price");
-				int productInstock = rs.getInt("instock");
+				int Instock = rs.getInt("instock");
 				String productDesc = rs.getString("product_description");
 
-				product = new Product(productid, productName, productImg, productPrice, category, productInstock,
+				product = new Product(productid, productName, productImg, productPrice, category, Instock,
 						productDesc);
 
 				list.add(product);
