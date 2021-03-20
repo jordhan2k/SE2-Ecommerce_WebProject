@@ -80,4 +80,10 @@ public interface UserDAO {
 	 */
 	boolean checkExistUsername(String username);
 
+	/**
+	 * Check if a phone exists in database
+	 * @param phone - the phone to be checked
+	 * @return
+	 */
+	boolean checkExistPhone(String phone);
 }

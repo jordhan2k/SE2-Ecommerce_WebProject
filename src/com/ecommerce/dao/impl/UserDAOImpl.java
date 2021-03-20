@@ -379,5 +379,33 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return isDuplicated;
 	}
+	
+	
+	/**
+	 * Check if a phone exists in database
+	 * @param phone - the phone to be checked
+	 * @return
+	 */
+	@Override
+	public boolean checkExistPhone(String phone) {
+		boolean isDuplicated = false;
+		String sql = "SELECT * FROM user WHERE user_phone = ?";
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, phone);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				isDuplicated = true;
+			}
+			
+			ps.close();
+			connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return isDuplicated;
+	}
+	
 
 }
