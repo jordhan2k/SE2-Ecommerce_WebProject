@@ -113,7 +113,7 @@ public class VoucherDAOImpl implements VoucherDAO {
 			ps.setInt(1, voucherID);
 			ResultSet rs = ps.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				String voucherCode= rs.getString("voucher_code");
 				int discountPercentage =rs.getInt("discount_percent");
 				java.sql.Date expireDate = rs.getDate("expire_date");
@@ -144,7 +144,7 @@ public class VoucherDAOImpl implements VoucherDAO {
 			ps.setString(1, voucherCode);
 			ResultSet rs = ps.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				int voucherID = rs.getInt("voucher_id");
 				int discountPercentage =rs.getInt("discount_percent");
 				java.sql.Date expireDate = rs.getDate("expire_date");
