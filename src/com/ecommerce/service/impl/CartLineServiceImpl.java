@@ -1,0 +1,66 @@
+package com.ecommerce.service.impl;
+
+import java.util.List;
+import com.ecommerce.dao.CartLineDAO;
+import com.ecommerce.dao.impl.CartLineDAOImpl;
+import com.ecommerce.model.CartLine;
+import com.ecommerce.service.CartLineService;
+
+/**
+ * 
+ * @author ThanhTra
+ *
+ */
+public class CartLineServiceImpl implements CartLineService {
+	private CartLineDAO cartLineDAO = new CartLineDAOImpl();
+
+	/**
+	 * Insert new cartline
+	 * @param cartline
+	 */
+	@Override
+	public void insertCartLine(CartLine cartLine) {
+		cartLineDAO.insertCartLine(cartLine);
+	}
+	
+	/**
+	 * Update cartline information
+	 * @param cartline 
+	 * @return
+	 */
+	@Override
+	public boolean updateCartLine(CartLine cartLine) {
+		return cartLineDAO.updateCartLine(cartLine);
+	}
+	
+	/**
+	 * Delete a cartline
+	 * @param cartline
+	 * @return
+	 */
+	@Override
+	public boolean deleteCartLine(int cartLineID) {
+		return cartLineDAO.deleteCartLine(cartLineID);
+	}
+	
+	/**
+	 * get cartline using id
+	 * @param cartLineID
+	 * @return
+	 */
+	@Override
+	public CartLine getCartLineByID(int cartLineID) {
+		return cartLineDAO.getCartLineByID(cartLineID);
+	}
+	/**
+	 * Retrieve all cartliness
+	 * @param all cartlines
+	 * @return
+	 */
+	@Override
+	public List<CartLine> getAllCartLines(){
+		return cartLineDAO.getAllCartLines();
+		
+	}
+	
+}
