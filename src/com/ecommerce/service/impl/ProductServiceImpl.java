@@ -6,6 +6,12 @@ import com.ecommerce.dao.ProductDAO;
 import com.ecommerce.dao.impl.ProductDAOImpl;
 import com.ecommerce.model.Product;
 
+/**
+ * @overview ProductServiceImpl implements all methods of ProductService interface.
+ * 
+ * @author DungHT
+ *
+ */
 public class ProductServiceImpl {
 	
 	ProductDAO productDAO = new ProductDAOImpl();

@@ -7,7 +7,7 @@ import com.ecommerce.model.Product;
 /**
  * @overview ProductService is a class providing a number of function to be
  *           implemented on Product.
- * @author Jordan's Dell
+ * @author Dung HT
  *
  */
 public interface ProductService {
