@@ -110,10 +110,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 			while(rs.next()) {
 				String categoryName = rs.getString("category_name");
 				category = new Category(categoryID, categoryName);
-				
-				ps.close();
-				connection.close();
+			
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -138,10 +138,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 			while(rs.next()) {
 				int categoryID = rs.getInt("category_id");
 				category = new Category(categoryID, categoryName);
-				
-				ps.close();
-				connection.close();
+					
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -169,9 +169,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 				
 				list.add(category);
 				
-				ps.close();
-				connection.close();
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -200,10 +200,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 				category = new Category(categoryID, categoryName);
 				
 				list.add(category);
-				
-				ps.close();
-				connection.close();
+					
 			}
+			ps.close();
+			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
