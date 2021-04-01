@@ -116,7 +116,7 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public Product getProductByID(int productID) {
-		String sql = "SELECT" + "product.product_id, " + "category.category_id, " + "product.product_name, "
+		String sql = "SELECT " + "product.product_id, " + "category.category_id, " + "product.product_name, "
 				+ "product.product_img, " + "product.product_price, " + "product.instock, "
 				+ "product.product_description " + "FROM product " + "INNER JOIN category "
 				+ "ON product.category_id = category.category_id " + "WHERE product.product_id = ?";
@@ -155,7 +155,7 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public List<Product> getAllProducts() {
-		String sql = "SELECT" + "product.product_id, " + "category.category_id, " + "product.product_name, "
+		String sql = "SELECT " + "product.product_id, " + "category.category_id, " + "product.product_name, "
 				+ "product.product_img, " + "product.product_price, " + "product.instock, "
 				+ "product.product_description " + "FROM product " + "INNER JOIN category "
 				+ "ON product.category_id = category.category_id; ";
@@ -177,6 +177,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 				product = new Product(productid, productName, productImg, productPrice, category, productInstock,
 						productDesc);
+				products.add(product);
 			}
 			ps.close();
 			connection.close();
