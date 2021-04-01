@@ -5,6 +5,7 @@ import java.util.List;
 import com.ecommerce.dao.ProductDAO;
 import com.ecommerce.dao.impl.ProductDAOImpl;
 import com.ecommerce.model.Product;
+import com.ecommerce.service.ProductService;
 
 /**
  * @overview ProductServiceImpl implements all methods of ProductService interface.
@@ -12,7 +13,7 @@ import com.ecommerce.model.Product;
  * @author DungHT
  *
  */
-public class ProductServiceImpl {
+public class ProductServiceImpl implements ProductService{
 	
 	ProductDAO productDAO = new ProductDAOImpl();
 	
@@ -21,6 +22,7 @@ public class ProductServiceImpl {
 	 * 
 	 * @param product - the product to be inserted to database
 	 */
+	@Override
 	public void insertProduct(Product product) {
 		productDAO.insertProduct(product);
 	}
@@ -31,6 +33,7 @@ public class ProductServiceImpl {
 	 * @param product - the product to be updated
 	 * @return true if the product is updated, or false if not
 	 */
+	@Override
 	public boolean updateProduct(Product product) {
 		return productDAO.updateProduct(product);
 	}
@@ -42,6 +45,7 @@ public class ProductServiceImpl {
 	 * @param productID - the id of the product to be deleted
 	 * @return true if the product is deleted, or false if not
 	 */
+	@Override
 	public boolean deleteProduct(int productID) {
 		return productDAO.deleteProduct(productID);
 	}
@@ -52,6 +56,7 @@ public class ProductServiceImpl {
 	 * @param productID - the id of the desired product
 	 * @return
 	 */
+	@Override
 	public Product getProductByID(int productID) {
 		return productDAO.getProductByID(productID);
 	}
@@ -61,6 +66,7 @@ public class ProductServiceImpl {
 	 * 
 	 * @return Either the list of all products or null if there is none
 	 */
+	@Override
 	public List<Product> getAllProducts(){
 		return productDAO.getAllProducts();
 	}
@@ -71,6 +77,7 @@ public class ProductServiceImpl {
 	 * @param productName - the name of the desired product
 	 * @return Either the list of all matching products or null if there is none
 	 */
+	@Override
 	public List<Product> searchProductByName(String productName){
 		return productDAO.searchProductByName(productName);
 	}
@@ -80,6 +87,7 @@ public class ProductServiceImpl {
 	 * @param categoryID - the id of the desired category
 	 * @return Either the list of all matching products or null if there is none
 	 */
+	@Override
 	public List<Product> searchProductByCategory(int categoryID){
 		return productDAO.searchProductByCategory(categoryID);
 	}
