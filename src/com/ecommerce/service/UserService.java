@@ -32,11 +32,6 @@ public interface UserService {
 	 */
 	boolean deleteUser(int userId);
 	
-	/**
-	 *get all user 
-	 * @return
-	 */
-	List<User> getAllUser(int userId);
 	
 	/**
 	 * Search user using id 
@@ -93,6 +88,12 @@ public interface UserService {
 	 * @return
 	 */
 	boolean register(String email, String username, String password, String phone);
+
+	/**
+	 *get all user 
+	 * @return
+	 */
+	List<User> getAllUsers();
 	
 	
 }
