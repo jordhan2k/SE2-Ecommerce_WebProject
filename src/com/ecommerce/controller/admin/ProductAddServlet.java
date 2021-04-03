@@ -30,7 +30,7 @@ import com.ecommerce.service.impl.ProductServiceImpl;
  * @author Dung HT
  *
  */
-@WebServlet("/admin/product/add")
+@WebServlet(urlPatterns = "/admin/product/add", name = "productAdd")
 public class ProductAddServlet extends HttpServlet {
 	ProductService productService = new ProductServiceImpl();
 	CategoryService categoryService = new CategoryServiceImpl();
@@ -38,8 +38,11 @@ public class ProductAddServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Category> categories = categoryService.getAllCategories();
+		System.out.println(categories.size());
 
 		req.setAttribute("categories", categories);
+		
+	
 
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-add.jsp");
 		requestDispatcher.forward(req, resp);
@@ -62,38 +65,43 @@ public class ProductAddServlet extends HttpServlet {
 
 				if (item.getFieldName().equals("productName")) {
 					product.setProductName(item.getString());
+					System.out.println(item.getFieldName() + " - " + item.getString());
 
 				} else if (item.getFieldName().equals("productPrice")) {
 					product.setProductPrice(Long.parseLong(item.getString()));
-				
+					System.out.println(item.getFieldName() + " - " + item.getString());
 				} else if (item.getFieldName().equals("instock")) {
 					product.setInstock(Integer.parseInt(item.getString()));
-					
+					System.out.println(item.getFieldName() + " - " + item.getString());
 				} else if (item.getFieldName().equals("productDesc")) {
 					product.setProductDesc(item.getString());
-					
+					System.out.println(item.getFieldName() + " - " + item.getString());
 				} else if (item.getFieldName().equals("category")) {
 					product.setCategory(categoryService.getCategoryByID(Integer.parseInt(item.getString())));
-					
+					System.out.println(item.getFieldName() + " - " + item.getString());
 				} else if (item.getFieldName().equals("productImg")) {
 					final String directory = "F:\\upload";
 					// get the original name of uploaded image file
 					String originalFileName = item.getName();	
 					// get extension of the file
 					int index = originalFileName.lastIndexOf(".");
-					String extension = originalFileName.substring(index);
+					String extension = originalFileName.substring(index+1);
 					// new file name
-					String fileName = System.currentTimeMillis() + "." + extension;
-					File file = new File(directory + "/" + fileName);
+					String fileName = directory + "\\" + System.currentTimeMillis() + "." + extension;
+					File file = new File(fileName);
 					item.write(file);
 					product.setProductImg(fileName);
+					
+					System.out.println(item.getFieldName() + " - " + fileName);
 	
 				}
-				productService.insertProduct(product);
 				
-				resp.sendRedirect(req.getContextPath() + "/admin/product/list");
-
 			}
+			productService.insertProduct(product);
+			
+			resp.sendRedirect(req.getContextPath() + "/admin/product/list");
+			
+//			req.getRequestDispatcher(req.getContextPath() + "/admin/product/list").forward(req, resp);
 
 		} catch (FileUploadException e) {
 			e.printStackTrace();
