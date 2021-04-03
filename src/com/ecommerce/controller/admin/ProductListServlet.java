@@ -19,7 +19,11 @@ import com.ecommerce.service.impl.ProductServiceImpl;
 
 
 
-
+/**
+ * @overview ProductListServlet is the servlet used to handle the use case of displaying the list of all 
+ * @author Dung HT
+ *
+ */
 @WebServlet("/admin/product/list")
 public class ProductListServlet extends HttpServlet{
 	ProductService productService = new ProductServiceImpl();
@@ -28,8 +32,9 @@ public class ProductListServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Product> productList = productService.getAllProducts();
-		req.setAttribute("product-list", productList);
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
+		req.setAttribute("products", productList);
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-list.jsp");
+		requestDispatcher.forward(req, resp);
 		
 	}
 		

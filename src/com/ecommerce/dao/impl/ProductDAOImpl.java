@@ -45,8 +45,7 @@ public class ProductDAOImpl implements ProductDAO {
 			ps.setString(6, product.getProductDesc());
 
 			ps.executeUpdate();
-			ps.close();
-			connection.close();
+
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -75,8 +74,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 			isUpdated = ps.executeUpdate() > 0;
 
-			ps.close();
-			connection.close();
+
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -100,8 +98,7 @@ public class ProductDAOImpl implements ProductDAO {
 			ps.setInt(1, productID);
 			isDeleted = ps.executeUpdate() > 0;
 
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -140,8 +137,7 @@ public class ProductDAOImpl implements ProductDAO {
 				product = new Product(productid, productName, productImg, productPrice, category, productInstock,
 						productDesc);
 			}
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -179,8 +175,7 @@ public class ProductDAOImpl implements ProductDAO {
 						productDesc);
 				products.add(product);
 			}
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -219,8 +214,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 				list.add(product);
 			}
-			ps.close();
-			connection.close();
+
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -259,8 +254,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 				list.add(product);
 			}
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
