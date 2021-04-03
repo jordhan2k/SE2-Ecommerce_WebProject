@@ -36,7 +36,12 @@
 					<div class="col-md-12">
 						<!-- Advanced Tables -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Advanced Tables</div>
+							<div class="panel-heading">
+<a class="btn btn-primary"
+														href="<c:url value='/admin/product/add'/>"
+														class="center">Add</a> 
+
+</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"
@@ -67,7 +72,7 @@
 												<tr>
 													<td>${product.productID}</td>
 
-													<td>${product.productImg}</td>
+													<td><img height="100"  src="${product.productImg}"/></td>
 													<td>${product.productName}</td>
 													<td>${product.productPrice}</td>
 													<td>${product.category.categoryName}</td>
@@ -77,9 +82,9 @@
 													
 													<!--  href="<c:url value='/product/detail?id=${product.productID}'/>"
 														class="center">Detail</a> | -->
-														<a
+														<a class="btn btn-success"
 														href="<c:url value='/admin/product/edit?id=${product.productID}'/>"
-														class="center">Edit</a> | <a
+														class="center">Edit</a> | <a class="btn btn-danger"
 														href="<c:url value='/admin/product/delete?id=${product.productID}'/>"
 														class="center">Delete</a></td>
 
