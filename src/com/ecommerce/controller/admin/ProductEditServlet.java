@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,13 +29,14 @@ import com.ecommerce.service.impl.ProductServiceImpl;
  * @author Dung HT
  *
  */
+@WebServlet("/admin/product/edit")
 public class ProductEditServlet extends HttpServlet {
 	ProductService productService = new ProductServiceImpl();
 	CategoryService categoryService = new CategoryServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int productID = Integer.parseInt(req.getParameter("productID"));
+		int productID = Integer.parseInt(req.getParameter("id"));
 
 		Product product = productService.getProductByID(productID);
 
@@ -44,7 +46,7 @@ public class ProductEditServlet extends HttpServlet {
 		req.setAttribute("categories", categories);
 
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-edit.jsp");
-
+		requestDispatcher.forward(req, resp);
 	}
 
 	@Override
