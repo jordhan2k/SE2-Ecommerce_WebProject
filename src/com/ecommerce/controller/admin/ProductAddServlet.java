@@ -99,6 +99,7 @@ public class ProductAddServlet extends HttpServlet {
 			}
 			productService.insertProduct(product);
 			
+			
 			resp.sendRedirect(req.getContextPath() + "/admin/product/list");
 			
 //			req.getRequestDispatcher(req.getContextPath() + "/admin/product/list").forward(req, resp);
