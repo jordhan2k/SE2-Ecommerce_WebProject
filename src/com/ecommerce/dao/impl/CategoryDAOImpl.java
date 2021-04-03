@@ -32,8 +32,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 			ps.setString(1, category.getCategoryName());
 			ps.executeUpdate();
 			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -58,8 +56,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 			
 			isUpdated = ps.executeUpdate() > 0;
 			
-			ps.close();
-			connection.close();
 			
  		} catch (Exception e) {
  			System.err.println(e.getMessage());
@@ -84,8 +80,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 			
 			isDeleted = ps.executeUpdate() > 0;
 			
-			ps.close();
-			connection.close();
  		} catch (Exception e) {
  			System.err.println(e.getMessage());
  		}
@@ -112,8 +106,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 				category = new Category(categoryID, categoryName);
 			
 			}
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -140,8 +133,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 				category = new Category(categoryID, categoryName);
 					
 			}
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -170,8 +162,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 				list.add(category);
 				
 			}
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -202,8 +193,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 				list.add(category);
 					
 			}
-			ps.close();
-			connection.close();
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
