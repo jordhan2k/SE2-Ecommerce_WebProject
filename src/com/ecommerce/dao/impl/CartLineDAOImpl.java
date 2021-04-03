@@ -43,8 +43,6 @@ public class CartLineDAOImpl implements CartLineDAO {
 			
 			ps.executeUpdate();
 			
-			ps.close();
-			connection.close();
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -72,8 +70,6 @@ public class CartLineDAOImpl implements CartLineDAO {
 			
 			isUpdated = ps.executeUpdate() > 0;
 			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -96,8 +92,6 @@ public class CartLineDAOImpl implements CartLineDAO {
 			ps.setInt(1, cartLineID);
 			isDeleted = ps.executeUpdate() > 0;
 			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,8 +144,6 @@ public class CartLineDAOImpl implements CartLineDAO {
 					
 			}
 			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -205,8 +197,6 @@ public class CartLineDAOImpl implements CartLineDAO {
 				list.add(cartLine);
 			}
 			
-			rs.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}

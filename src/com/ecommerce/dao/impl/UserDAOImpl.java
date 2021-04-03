@@ -44,8 +44,6 @@ public class UserDAOImpl implements UserDAO {
 			ps.setInt(9, user.getRoleID());
 			ps.executeUpdate();
 
-			ps.close();
-			connection.close();
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -81,8 +79,6 @@ public class UserDAOImpl implements UserDAO {
 
 			ps.executeUpdate();
 
-			ps.close();
-			connection.close();
 			isUpdated = true;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -108,8 +104,6 @@ public class UserDAOImpl implements UserDAO {
 			ps.executeUpdate();
 			isDeleted = true;
 
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
@@ -156,12 +150,8 @@ public class UserDAOImpl implements UserDAO {
 
 				user = new User(userID, username, password, fullname, mobile, email, address, gender, dob, roleID);
 
-				ps.close();
-				connection.close();
 			}
 			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -210,8 +200,6 @@ public class UserDAOImpl implements UserDAO {
 
 				
 			}
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -261,8 +249,6 @@ public class UserDAOImpl implements UserDAO {
 
 				
 			}
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -317,8 +303,6 @@ public class UserDAOImpl implements UserDAO {
 			
 			}
 			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -345,8 +329,6 @@ public class UserDAOImpl implements UserDAO {
 				isDuplicated = true;
 			}
 
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -371,9 +353,6 @@ public class UserDAOImpl implements UserDAO {
 			if (rs.next()) {
 				isDuplicated = true;
 			}
-			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -399,8 +378,6 @@ public class UserDAOImpl implements UserDAO {
 				isDuplicated = true;
 			}
 			
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
