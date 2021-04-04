@@ -38,8 +38,6 @@ public class VoucherDAOImpl implements VoucherDAO {
 			
 			ps.executeUpdate();
 			
-			ps.close();
-			connection.close();
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -62,8 +60,7 @@ public class VoucherDAOImpl implements VoucherDAO {
 			ps.setInt(2, voucher.getDiscountPercentage());
 			ps.setDate(3, voucher.getExpireDate());		
 			ps.setInt(4, voucher.getVoucherID());
-			ps.close();	
-			connection.close();
+			
 			
 			isUpdated = ps.executeUpdate() > 0;
 				
@@ -90,8 +87,6 @@ public class VoucherDAOImpl implements VoucherDAO {
 			
 			isDeleted = ps.executeUpdate() > 0;
 			
-			ps.close();
-			connection.close();
  		} catch (Exception e) {
  			System.err.println(e.getMessage());
  		}
@@ -121,8 +116,6 @@ public class VoucherDAOImpl implements VoucherDAO {
 				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);	
 				
 			}
-			ps.close();
-			connection.close();
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -151,8 +144,6 @@ public class VoucherDAOImpl implements VoucherDAO {
 				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);	
 				
 			}
-			ps.close();
-			connection.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -183,8 +174,7 @@ public class VoucherDAOImpl implements VoucherDAO {
 				list.add(voucher);			
 				
 			}
-			ps.close();
-			connection.close();
+		
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
@@ -218,8 +208,7 @@ public class VoucherDAOImpl implements VoucherDAO {
 				
 				
 			}
-			ps.close();
-			connection.close();
+		
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
