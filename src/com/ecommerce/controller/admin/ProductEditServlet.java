@@ -80,17 +80,19 @@ public class ProductEditServlet extends HttpServlet {
 					product.setCategory(categoryService.getCategoryByID(Integer.parseInt(item.getString())));
 
 				} else if (item.getFieldName().equals("productImg")) {
-					final String directory = "F:\\upload";
-					// get the original name of uploaded image file
-					String originalFileName = item.getName();
-					// get extension of the file
-					int index = originalFileName.lastIndexOf(".");
-					String extension = originalFileName.substring(index);
-					// new file name
-					String fileName = System.currentTimeMillis() + "." + extension;
-					File file = new File(directory + "/" + fileName);
-					item.write(file);
-					product.setProductImg(fileName);
+//					final String directory = "F:\\upload";
+//					// get the original name of uploaded image file
+//					String originalFileName = item.getName();
+//					// get extension of the file
+//					int index = originalFileName.lastIndexOf(".");
+//					String extension = originalFileName.substring(index);
+//					// new file name
+//					String fileName = System.currentTimeMillis() + "." + extension;
+//					File file = new File(directory + "/" + fileName);
+//					item.write(file);
+//					product.setProductImg(fileName);
+					
+					product.setProductImg(item.getString());
 
 				}
 				productService.updateProduct(product);

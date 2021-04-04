@@ -30,7 +30,7 @@ import com.ecommerce.service.impl.ProductServiceImpl;
  * @author Dung HT
  *
  */
-@WebServlet(urlPatterns = "/admin/product/add", name = "productAdd")
+@WebServlet(urlPatterns = "/admin/product/add")
 public class ProductAddServlet extends HttpServlet {
 	ProductService productService = new ProductServiceImpl();
 	CategoryService categoryService = new CategoryServiceImpl();
@@ -80,19 +80,22 @@ public class ProductAddServlet extends HttpServlet {
 					product.setCategory(categoryService.getCategoryByID(Integer.parseInt(item.getString())));
 					System.out.println(item.getFieldName() + " - " + item.getString());
 				} else if (item.getFieldName().equals("productImg")) {
-					final String directory = "F:\\upload";
-					// get the original name of uploaded image file
-					String originalFileName = item.getName();	
-					// get extension of the file
-					int index = originalFileName.lastIndexOf(".");
-					String extension = originalFileName.substring(index+1);
-					// new file name
-					String fileName = directory + "\\" + System.currentTimeMillis() + "." + extension;
-					File file = new File(fileName);
-					item.write(file);
-					product.setProductImg(fileName);
+//					final String directory = "F:\\upload";
+//					// get the original name of uploaded image file
+//					String originalFileName = item.getName();	
+//					// get extension of the file
+//					int index = originalFileName.lastIndexOf(".");
+//					String extension = originalFileName.substring(index+1);
+//					// new file name
+//					String fileName = directory + "\\" + System.currentTimeMillis() + "." + extension;
+//					File file = new File(fileName);
+//					item.write(file);
+//					product.setProductImg(fileName);
+//					
+//					System.out.println(item.getFieldName() + " - " + fileName);
 					
-					System.out.println(item.getFieldName() + " - " + fileName);
+					product.setProductImg(item.getString());
+					System.out.println(item.getFieldName() + " - " + item.getString());
 	
 				}
 				
@@ -100,9 +103,9 @@ public class ProductAddServlet extends HttpServlet {
 			productService.insertProduct(product);
 			
 			
-			resp.sendRedirect(req.getContextPath() + "/admin/product/list");
+//			resp.sendRedirect(req.getContextPath() + "/admin/product/list");
 			
-//			req.getRequestDispatcher(req.getContextPath() + "/admin/product/list").forward(req, resp);
+			req.getRequestDispatcher(req.getContextPath() + "/admin/product/list").forward(req, resp);
 
 		} catch (FileUploadException e) {
 			e.printStackTrace();

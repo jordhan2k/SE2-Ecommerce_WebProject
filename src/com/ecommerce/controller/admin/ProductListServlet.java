@@ -33,6 +33,8 @@ public class ProductListServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<Product> productList = productService.getAllProducts();
 		req.setAttribute("products", productList);
+		
+		resp.setContentType("text/html");
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-list.jsp");
 		requestDispatcher.forward(req, resp);
 		
