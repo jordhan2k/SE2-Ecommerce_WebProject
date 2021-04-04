@@ -128,9 +128,13 @@ The above copyright notice and this permission notice shall be included in all c
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header card-header-primary">
-									<h4 class="card-title ">Simple Table</h4>
-									<p class="card-category">Here is a subtitle for this table</p>
+									<h4 class="card-title ">All products</h4>
+									
+									<p class="card-category">Manage all products to be sold</p>
+									
 								</div>
+								<div class="container-fluid"><a  class="btn btn-info" href="/admin/product/add">ADD</a></div>
+								
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-striped table-hover">
@@ -156,12 +160,12 @@ The above copyright notice and this permission notice shall be included in all c
 														<td>${product.category.categoryName}</td>
 														<td>${product.productDesc}</td>
 														<td>${product.instock}</td>
-														<td><a class="btn btn-success"
+														<td><a class="btn btn-success btn-fab btn-fab-mini btn-round" 
 															href="<c:url value='/admin/product/edit?id=${product.productID}'/>"
-															class="center">Edit</a> <br> <a
-															class="btn btn-danger"
+															class="center"><i class="material-icons">edit</i></a>  <a  
+															class="btn btn-danger btn-fab btn-fab-mini btn-round"
 															href="<c:url value='/admin/product/delete?id=${product.productID}'/>"
-															class="center">Delete</a></td>
+															class="center"><i class="material-icons">delete</i></a></td>
 
 													</tr>
 												</c:forEach>
@@ -242,9 +246,7 @@ The above copyright notice and this permission notice shall be included in all c
 		</div>
 	</div>
 
-	<!-- FIXED PLUGIN  -->
-	<jsp:include page="../admin/fixed-plugin.jsp"></jsp:include>
-	<!--FIXED PLUGIN ends -->
+
 
 
 	<!-- LOAD SCRIPTS -->
@@ -297,6 +299,20 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').DataTable();
+		});
+	</script>
 	<script type="text/javascript">
 		const activeSidebarItem = document.querySelector("#product-management");
 		activeSidebarItem.classList.add("active");

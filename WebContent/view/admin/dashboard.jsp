@@ -521,9 +521,7 @@ The above copyright notice and this permission notice shall be included in all c
 			</footer>
 		</div>
 	</div>
-	<!-- FIXED PLUGIN -->
-	<jsp:include page="../admin/fixed-plugin.jsp"></jsp:include>
-	<!-- FIXED PLUGIN ends --
+	
 	<!--   Core JS Files   -->
 	<jsp:include page="../admin/core-libraries.jsp"></jsp:include>
 	<script>
