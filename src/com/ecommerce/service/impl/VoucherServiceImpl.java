@@ -5,6 +5,7 @@ import java.util.List;
 import com.ecommerce.dao.VoucherDAO;
 import com.ecommerce.dao.impl.VoucherDAOImpl;
 import com.ecommerce.model.Voucher;
+import com.ecommerce.service.VoucherService;
 
 /**
  * @overview VoucherServiceImpl implements all methods of VoucherService
@@ -13,7 +14,7 @@ import com.ecommerce.model.Voucher;
  * @author TMDuong
  *
  */
-public class VoucherServiceImpl {
+public class VoucherServiceImpl implements VoucherService {
 	VoucherDAO voucherDAO = new VoucherDAOImpl();
 
 	/**
@@ -51,7 +52,7 @@ public class VoucherServiceImpl {
 	 * @param voucherID - the id of the desired voucher
 	 * @return
 	 */
-	Voucher getVoucherByID(int voucherID) {
+	public Voucher getVoucherByID(int voucherID) {
 		return voucherDAO.getVoucherByID(voucherID);
 	}
 
@@ -61,7 +62,7 @@ public class VoucherServiceImpl {
 	 * @param voucherCode - the code of the desired voucher
 	 * @return
 	 */
-	Voucher getVoucherByCode(String voucherCode) {
+	public Voucher getVoucherByCode(String voucherCode) {
 		return voucherDAO.getVoucherByCode(voucherCode);
 	}
 
@@ -70,7 +71,7 @@ public class VoucherServiceImpl {
 	 * 
 	 * @return Either the list of all vouchers or null if there is none
 	 */
-	List<Voucher> getAllVouchers() {
+	public List<Voucher> getAllVouchers() {
 		return voucherDAO.getAllVouchers();
 	}
 
@@ -80,7 +81,7 @@ public class VoucherServiceImpl {
 	 * @param voucherCode - the code of the desired voucher
 	 * @return Either the list of all matching vouchers or null if there is none
 	 */
-	List<Voucher> searchVoucherByCode(String voucherCode) {
+	public List<Voucher> searchVoucherByCode(String voucherCode) {
 		return voucherDAO.searchVoucherByCode(voucherCode);
 	}
 }
