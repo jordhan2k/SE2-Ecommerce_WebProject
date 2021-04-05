@@ -20,25 +20,25 @@
 					<p>User Profile</p>
 			</a></li>
 			<li class="nav-item " id="user-management"><a class="nav-link"
-				href="./tables.html"> <i class="material-icons">groups</i>
+				href="../user/list"> <i class="material-icons">groups</i>
 					<p>User Management</p>
 			</a></li>
 			<li class="nav-item " id="product-management"><a
-				class="nav-link" href="./typography.html"> <i
+				class="nav-link" href="../product/list"> <i
 					class="material-icons">library_books</i>
 					<p>Product Management</p>
 			</a></li>
 			<li class="nav-item " id="order-management"><a class="nav-link"
-				href="./icons.html"> <i class="material-icons">receipt_long</i>
+				href="../order/list"> <i class="material-icons">receipt_long</i>
 					<p>Order Management</p>
 			</a></li>
 			<li class="nav-item " id="category-management"><a
-				class="nav-link" href="./map.html"> <i class="material-icons"><span
+				class="nav-link" href="../category/list"> <i class="material-icons"><span
 						class="material-icons"> category </span></i>
 					<p>Category Management</p>
 			</a></li>
 			<li class="nav-item " id="voucher-management"><a
-				class="nav-link" href="./notifications.html"> <i
+				class="nav-link" href="../voucher/list"> <i
 					class="material-icons">local_offer</i>
 					<p>Voucher Management</p>
 			</a></li>
