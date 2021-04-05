@@ -258,7 +258,6 @@ The above copyright notice and this permission notice shall be included in all c
 	</div>
 
 	<!-- FIXED PLUGIN  -->
-	<jsp:include page="../admin/fixed-plugin.jsp"></jsp:include>
 	<!--FIXED PLUGIN ends -->
 
 
