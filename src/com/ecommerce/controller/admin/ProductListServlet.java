@@ -24,7 +24,7 @@ import com.ecommerce.service.impl.ProductServiceImpl;
  * @author Dung HT
  *
  */
-@WebServlet("/admin/product/list")
+@WebServlet("/admin/product/all")
 public class ProductListServlet extends HttpServlet{
 	ProductService productService = new ProductServiceImpl();
 		CategoryService cateService = new CategoryServiceImpl();
@@ -35,7 +35,7 @@ public class ProductListServlet extends HttpServlet{
 		req.setAttribute("products", productList);
 		
 		resp.setContentType("text/html");
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-list.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-list-demo.jsp");
 		requestDispatcher.forward(req, resp);
 		
 	}

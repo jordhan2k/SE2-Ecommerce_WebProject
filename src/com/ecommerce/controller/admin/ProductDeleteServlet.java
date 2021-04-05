@@ -28,7 +28,7 @@ public class ProductDeleteServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		productService.deleteProduct(Integer.parseInt(id));
 		
-		resp.sendRedirect(req.getContextPath() + "/admin/product/list");
+		resp.sendRedirect(req.getContextPath() + "/admin/product/all");
 		
 		
 	}

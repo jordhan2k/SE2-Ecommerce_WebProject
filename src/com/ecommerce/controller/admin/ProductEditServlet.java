@@ -97,7 +97,7 @@ public class ProductEditServlet extends HttpServlet {
 				}
 				productService.updateProduct(product);
 
-				resp.sendRedirect(req.getContextPath() + "/admin/product/list");
+				resp.sendRedirect(req.getContextPath() + "/admin/product/all");
 
 			}
 
