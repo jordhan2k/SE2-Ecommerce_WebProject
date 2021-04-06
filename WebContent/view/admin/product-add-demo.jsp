@@ -56,134 +56,113 @@ The above copyright notice and this permission notice shall be included in all c
 			<!-- MAIN CONTENT -->
 			<div class="content">
 				<div class="container-fluid">
-					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-warning card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">content_copy</i>
-									</div>
-									<p class="card-category">Used Space</p>
-									<h3 class="card-title">
-										49/50 <small>GB</small>
-									</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i> <a
-											href="javascript:;">Get More Space...</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-success card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">store</i>
-									</div>
-									<p class="card-category">Product</p>
-									<h3 class="card-title">${fn:length(products)}</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">date_range</i> Last 24 Hours
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-danger card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">info_outline</i>
-									</div>
-									<p class="card-category">Fixed Issues</p>
-									<h3 class="card-title">75</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">local_offer</i> Tracked from Github
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-info card-header-icon">
-									<div class="card-icon">
-										<i class="fa fa-twitter"></i>
-									</div>
-									<p class="card-category">Followers</p>
-									<h3 class="card-title">+245</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">update</i> Just Updated
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header card-header-primary">
-									<h4 class="card-title ">All products</h4>
-									
-									<p class="card-category">Manage all products to be sold</p>
-									
-								</div>
-								<div class="container-fluid"><a  class="btn btn-info" href="/admin/product/add">ADD</a></div>
-								
-								<div class="card-body">
-									<div class="table-responsive">
-										<table class="table table-striped table-hover">
-											<thead class=" text-primary">
-												<th>ID</th>
-												<th>Image</th>
-												<th>Name</th>
-												<th>Price(VND)</th>
-												<th>Category</th>
-												<th>Description</th>
-												<th>In-stock</th>
-												<th>Action</th>
-											</thead>
-											<tbody>
-
-												<c:forEach items="${products}" var="product">
-													<tr>
-														<td>${product.productID}</td>
-
-														<td><img height="100" src="${product.productImg}" /></td>
-														<td>${product.productName}</td>
-														<td>${product.productPrice}</td>
-														<td>${product.category.categoryName}</td>
-														<td>${product.productDesc}</td>
-														<td>${product.instock}</td>
-														<td><a class="btn btn-success btn-fab btn-fab-mini btn-round" 
-															href="<c:url value='/admin/product/edit?id=${product.productID}'/>"
-															class="center"><i class="material-icons">edit</i></a>  <a  
-															class="btn btn-danger btn-fab btn-fab-mini btn-round"
-															href="<c:url value='/admin/product/delete?id=${product.productID}'/>"
-															class="center"><i class="material-icons">delete</i></a></td>
-
-													</tr>
-												</c:forEach>
-
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-
-
-					</div>
-
+ <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Edit Profile</h4>
+                  <p class="card-category">Complete your profile</p>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Company (disabled)</label>
+                          <input type="text" class="form-control" disabled>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Username</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Email address</label>
+                          <input type="email" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Fist Name</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Last Name</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Adress</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">City</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Country</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Postal Code</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>About Me</label>
+                          <div class="form-group">
+                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                            <textarea class="form-control" rows="5"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-avatar">
+                  <a href="javascript:;">
+                    <img class="img" src="${url }/img/faces/marc.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                  <h4 class="card-title">Alec Thompson</h4>
+                  <p class="card-description">
+                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                  </p>
+                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
+                </div>
+              </div>
+            </div>
+          </div>
+       
 
 				</div>
 			</div>
@@ -242,8 +221,8 @@ The above copyright notice and this permission notice shall be included in all c
 	<script src="${url}/js/material-dashboard.js?v=2.1.2"
 		type="text/javascript"></script>
 
-
 <!--  
+
 <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
@@ -263,7 +242,7 @@ The above copyright notice and this permission notice shall be included in all c
 		activeSidebarItem.classList.add("active");
 
 		const pageName = document.querySelector("#page-name");
-		pageName.textContent = "Product Management";
+		pageName.textContent = "Edit product";
 
 		$(document)
 				.ready(
