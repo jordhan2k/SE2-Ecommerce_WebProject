@@ -45,7 +45,7 @@ public class ProductEditServlet extends HttpServlet {
 		req.setAttribute("product", product);
 		req.setAttribute("categories", categories);
 
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-edit.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-edit-demo.jsp");
 		requestDispatcher.forward(req, resp);
 	}
 
