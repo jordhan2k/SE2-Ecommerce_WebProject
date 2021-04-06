@@ -1,5 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:url value="/view/assets" var="url"></c:url>
 <div class="sidebar" data-color="green" data-background-color="white"
-	data-image="../assets/img/sidebar-1.jpg">
+	data-image="${url}/img/sidebar-1.jpg">
 
 	<!--   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
