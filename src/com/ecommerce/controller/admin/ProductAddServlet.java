@@ -44,7 +44,7 @@ public class ProductAddServlet extends HttpServlet {
 		
 	
 
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-add.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-add-demo.jsp");
 		requestDispatcher.forward(req, resp);
 	}
 
@@ -105,7 +105,8 @@ public class ProductAddServlet extends HttpServlet {
 			
 //			resp.sendRedirect(req.getContextPath() + "/admin/product/list");
 			
-			req.getRequestDispatcher(req.getContextPath() + "/admin/product/all").forward(req, resp);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher(req.getContextPath() + "/admin/product/all");
+			requestDispatcher.forward(req, resp);
 
 		} catch (FileUploadException e) {
 			e.printStackTrace();
