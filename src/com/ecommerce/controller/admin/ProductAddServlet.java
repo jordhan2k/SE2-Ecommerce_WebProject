@@ -44,7 +44,7 @@ public class ProductAddServlet extends HttpServlet {
 		
 	
 
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-add-demo.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-add.jsp");
 		requestDispatcher.forward(req, resp);
 	}
 
