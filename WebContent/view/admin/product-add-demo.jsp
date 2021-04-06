@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/assets" var="url"></c:url>
 
 <!--
@@ -24,18 +24,18 @@ The above copyright notice and this permission notice shall be included in all c
 	href="${url}/img/apple-icon.png">
 <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Product Management</title>
+<title>Add a product</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
-	
-	<!-- CSS Files -->
-<link rel="stylesheet" 
-	href="${url}/css/material-dashboard.css" />
+
+<!-- CSS Files -->
+<link rel="stylesheet" href="${url}/css/material-dashboard.css" />
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
 
 
 </head>
@@ -56,113 +56,136 @@ The above copyright notice and this permission notice shall be included in all c
 			<!-- MAIN CONTENT -->
 			<div class="content">
 				<div class="container-fluid">
- <div class="row">
-            <div class="col-md-8">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Edit Profile</h4>
-                  <p class="card-category">Complete your profile</p>
-                </div>
-                <div class="card-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Company (disabled)</label>
-                          <input type="text" class="form-control" disabled>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Fist Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Last Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Adress</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">City</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Country</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Postal Code</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>About Me</label>
-                          <div class="form-group">
-                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                            <textarea class="form-control" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
-                    <div class="clearfix"></div>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-profile">
-                <div class="card-avatar">
-                  <a href="javascript:;">
-                    <img class="img" src="${url }/img/faces/marc.jpg" />
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                  <h4 class="card-title">Alec Thompson</h4>
-                  <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                  </p>
-                  <a href="javascript:;" class="btn btn-primary btn-round">Follow</a>
-                </div>
-              </div>
-            </div>
-          </div>
-       
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title">Add a product</h4>
+									<p class="card-category">Complete product details here</p>
+								</div>
+								<div class="card-body">
+									<!-- Form start -->
+									<form role="form" action="<c:url value='/admin/product/add'/>"
+										method="post" enctype="multipart/form-data">
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Product name</label> <input
+														type="text" name="productName" class="form-control"
+														required="required">
+												</div>
+											</div>
+
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Price (VND)</label> <input
+														type="number" min="0" name="productPrice"
+														class="form-control" required="required">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Instock</label> <input
+														type="number" min="0" name="instock" class="form-control"
+														required="required">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Product Description</label>
+													<div class="form-group">
+
+														<textarea class="col-md-12 form-control" id="editor"
+															rows="6" required="required" name="productDesc"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="card">
+													<div
+														class="card-header card-header-text card-header-primary">
+														<div class="btn-group">
+															<button type="button" class="btn btn-primary">Category</button>
+															<button type="button"
+																class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">
+																<span class="sr-only">Toggle Dropdown</span>
+															</button>
+															<div class="dropdown-menu">
+																<c:forEach items="${categories}" var="c">
+																	<span id="${c.categoryID}"
+																		onclick="onCategoryClick(event)" class="dropdown-item">${c.categoryName}</span>
+																</c:forEach>
+															</div>
+														</div>
+													</div>
+													<div class="card-body">
+														<p id="category-text"></p>
+														<input type="hidden" id="category-id" name="category">
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Product Image URL</label>
+													<input type="text" name="productImg" class="form-control"
+														required="required">
+												</div>
+											</div>
+										</div>
+										<!--  <div class="row">
+											<div class="col-md-12">
+												<label>Product Images</label>-->
+
+										<!-- Image div template -->
+										<!--<div class="col-md-3">
+													<div class="card " style="width: 13rem;">
+														<img class="card-img-top"
+															src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
+															rel="nofollow" alt="Card image cap">
+
+													</div>
+												</div>-->
+
+										<!-- Image div template ends -->
+
+										<!--
+											</div>
+										</div>
+										-->
+
+
+
+										<!-- ADD button -->
+										<button type="reset" class="btn btn-warning pull-right">Reset</button>
+										<button type="submit" class="btn btn-success pull-right">Add</button>
+
+										<!-- ADD button -->
+										<div class="clearfix"></div>
+									</form>
+
+									<!-- Form ends -->
+								</div>
+							</div>
+						</div>
+
+					</div>
+
 
 				</div>
 			</div>
@@ -177,9 +200,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
-	
+
 	<!--   Core JS Files   -->
-		<script src="${url}/js/core/jquery.min.js"></script>
+	<script src="${url}/js/core/jquery.min.js"></script>
 	<script src="${url}/js/core/popper.min.js"></script>
 	<script src="${url}/js/core/bootstrap-material-design.min.js"></script>
 	<script src="${url}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -221,7 +244,7 @@ The above copyright notice and this permission notice shall be included in all c
 	<script src="${url}/js/material-dashboard.js?v=2.1.2"
 		type="text/javascript"></script>
 
-<!--  
+	<!--  
 
 <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -232,17 +255,40 @@ The above copyright notice and this permission notice shall be included in all c
 	<script type="text/javascript"
 		src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 -->
+
+
+	<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 	<script>
+		window.onload = function() {
+			CKEDITOR.replace('editor', {
+				width : '700px',
+				height : '300px'
+			});
+		};
+	</script>
+	<!-- 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').DataTable();
 		});
-	</script>
+	</script> -->
 	<script type="text/javascript">
 		const activeSidebarItem = document.querySelector("#product-management");
 		activeSidebarItem.classList.add("active");
 
 		const pageName = document.querySelector("#page-name");
-		pageName.textContent = "Edit product";
+		pageName.textContent = "Add a product";
+
+		function onCategoryClick(event) {
+			const span = event.currentTarget;
+			const id = span.id;
+
+			const text = span.textContent;
+			const cateInput = document.querySelector("#category-text");
+			cateInput.textContent = text;
+			const valueID = document.querySelector("#category-id");
+			valueID.value = id;
+
+		}
 
 		$(document)
 				.ready(

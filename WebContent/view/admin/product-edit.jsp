@@ -27,7 +27,7 @@
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Add Product</h2>
+						<h2>Edit Product</h2>
 
 					</div>
 				</div>

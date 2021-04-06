@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/assets" var="url"></c:url>
 
 <!--
@@ -27,10 +27,9 @@ The above copyright notice and this permission notice shall be included in all c
 <title>Product Management</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
-	
-	<!-- CSS Files -->
-<link rel="stylesheet" 
-	href="${url}/css/material-dashboard.css" />
+
+<!-- CSS Files -->
+<link rel="stylesheet" href="${url}/css/material-dashboard.css" />
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -131,15 +130,18 @@ The above copyright notice and this permission notice shall be included in all c
 							<div class="card">
 								<div class="card-header card-header-primary">
 									<h4 class="card-title ">All products</h4>
-									
+
 									<p class="card-category">Manage all products to be sold</p>
-									
+
 								</div>
-								<div class="container-fluid"><a  class="btn btn-info" href="/admin/product/add">ADD</a></div>
-								
+								<div class="container-fluid">
+									<a class="btn btn-info"
+										href="<c:url value='/admin/product/add'/>">ADD</a>
+								</div>
+
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-striped table-hover">
+										<table class="table table-striped table-hover" id="table">
 											<thead class=" text-primary">
 												<th>ID</th>
 												<th>Image</th>
@@ -147,7 +149,7 @@ The above copyright notice and this permission notice shall be included in all c
 												<th>Price(VND)</th>
 												<th>Category</th>
 												<th>Description</th>
-												<th>In-stock</th>
+												<th>Instock</th>
 												<th>Action</th>
 											</thead>
 											<tbody>
@@ -162,10 +164,13 @@ The above copyright notice and this permission notice shall be included in all c
 														<td>${product.category.categoryName}</td>
 														<td>${product.productDesc}</td>
 														<td>${product.instock}</td>
-														<td><a class="btn btn-success btn-fab btn-fab-mini btn-round" 
+														<td><a
+															class="btn btn-success btn-fab btn-fab-mini btn-round"
+															title="Edit"
 															href="<c:url value='/admin/product/edit?id=${product.productID}'/>"
-															class="center"><i class="material-icons">edit</i></a>  <a  
+															class="center"><i class="material-icons">edit</i></a> <a
 															class="btn btn-danger btn-fab btn-fab-mini btn-round"
+															title="Delete"
 															href="<c:url value='/admin/product/delete?id=${product.productID}'/>"
 															class="center"><i class="material-icons">delete</i></a></td>
 
@@ -198,9 +203,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
-	
+
 	<!--   Core JS Files   -->
-		<script src="${url}/js/core/jquery.min.js"></script>
+	<script src="${url}/js/core/jquery.min.js"></script>
 	<script src="${url}/js/core/popper.min.js"></script>
 	<script src="${url}/js/core/bootstrap-material-design.min.js"></script>
 	<script src="${url}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -243,7 +248,7 @@ The above copyright notice and this permission notice shall be included in all c
 		type="text/javascript"></script>
 
 
-<!--  
+	<!--  
 <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript"
@@ -255,15 +260,14 @@ The above copyright notice and this permission notice shall be included in all c
 -->
 	<script>
 		$(document).ready(function() {
-			$('#dataTables-example').DataTable();
+			$('#table').DataTable();
 		});
 	</script>
 	<script type="text/javascript">
 		const activeSidebarItem = document.querySelector("#product-management");
 		activeSidebarItem.classList.add("active");
-
-		const pageName = document.querySelector("#page-name");
-		pageName.textContent = "Product Management";
+		$("#page-name").text("Product Management");
+		
 
 		$(document)
 				.ready(
