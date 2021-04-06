@@ -1,127 +1,208 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/assets" var="url"></c:url>
+
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Add a new product</title>
-<link rel="stylesheet" 
-	href="${url}/css/material-dashboard.css" />
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<meta charset="utf-8" />
+<link rel="apple-touch-icon" sizes="76x76"
+	href="${url}/img/apple-icon.png">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>Add a product</title>
+<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
+	name='viewport' />
 
-<!-- jQuery library -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- CSS Files -->
+<link rel="stylesheet" href="${url}/css/material-dashboard.css" />
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
 </head>
-<body>
-	<div id="wrapper">
 
-		<!-- /. NAV SIDE  -->
-		<div id="page-wrapper">
-			<div id="page-inner">
-				<div class="row">
-					<div class="col-md-12">
-						<h2>Add Product</h2>
+<body class="">
+	<div class="wrapper ">
 
-					</div>
-				</div>
-				<!-- /. ROW  -->
-				<hr />
-				<div class="row">
-					<div class="col-md-12">
-						<!-- Form Elements -->
-						<div class="panel panel-default">
-							<div class="panel-heading">Add Product</div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-6">
-										<h3>Product Details:</h3>
+		<!-- SIDE-BAR -->
+		<jsp:include page="../admin/side-bar.jsp"></jsp:include>
+		<!-- SIDE-BAR ends -->
 
-										<form role="form" action="/admin/product/add" method="post"
-											enctype="multipart/form-data">
-											<div class="form-group">
-												<label >Name:</label> <input class="form-control"
-													placeholder="Enter product name" name="productName"
-													required="required" />
-											</div>
-											<div class="form-group">
-												<label>Price (VND)</label> <input class="form-control"
-													placeholder="Please enter price" type="number" min="0"
-													name="productPrice" required="required" />
-											</div>
+		<div class="main-panel">
+			<!-- Navbar -->
+			<jsp:include page="../admin/nav-bar.jsp"></jsp:include>
+			<!-- End Navbar -->
 
-											<div class="form-group">
-												<label >Instock</label> <input class="form-control"
-													placeholder="Please enter instock number" type="number"
-													min="0" name="instock" required="required" />
-											</div>
-											<div class="form-group">
-												<label>Description </label> <br>
-												<textarea rows="4" cols="50" id="editor" name="productDesc"
-													required="required"></textarea>
 
-											</div>
+			<!-- MAIN CONTENT -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title">Add a product</h4>
+									<p class="card-category">Complete product details here</p>
+								</div>
+								<div class="card-body">
+									<!-- Form start -->
+									<form role="form" action="<c:url value='/admin/product/add'/>"
+										method="post" enctype="multipart/form-data">
+										<div class="row">
 
-											<div class="form-group">
-												<label >Category</label>
-												<div class="checkbox">
-													<!--<input list="pr" name="category" required="required">
-													  <datalist id="pr">
-														<c:forEach items="${categories}" var="c">
-															<option value="${c.categoryID}">${c.categoryName}</option>
-														</c:forEach>
-
-													</datalist>-->
-
-													<select name="category" required="required">
-													<option value="">--Select a category--</option>
-														<c:forEach items="${categories}" var="c">
-															<option value="${c.categoryID}">${c.categoryName}</option>
-														</c:forEach>
-													</select>
-
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Product name</label> <input
+														type="text" name="productName" class="form-control"
+														required="required">
 												</div>
-
 											</div>
-											<div class="form-group">
-												<label >Product image</label> <label>Product image</label> <input type="text" class="form-control"
-													placeholder="Paste image url here"
-													name="productImg"  />
+
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Price (VND)</label> <input
+														type="number" min="0" name="productPrice"
+														class="form-control" required="required">
+												</div>
 											</div>
-											<button type="submit" class="btn btn-success">Add</button>
-											<button type="reset" class="btn btn-danger">Reset</button>
-										</form>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Instock</label> <input
+														type="number" min="0" name="instock" class="form-control"
+														required="required">
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Product Description</label>
+													<div class="form-group">
+
+														<textarea class="col-md-12 form-control" id="editor"
+															rows="6" required="required" name="productDesc"></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="card">
+													<div
+														class="card-header card-header-text card-header-primary">
+														<div class="btn-group">
+															<button type="button" class="btn btn-primary">Category</button>
+															<button type="button"
+																class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">
+																<span class="sr-only">Toggle Dropdown</span>
+															</button>
+															<div class="dropdown-menu">
+																<c:forEach items="${categories}" var="c">
+																	<span id="${c.categoryID}"
+																		onclick="onCategoryClick(event)" class="dropdown-item">${c.categoryName}</span>
+																</c:forEach>
+															</div>
+														</div>
+													</div>
+													<div class="card-body">
+														<p id="category-text"></p>
+														<input type="hidden" id="category-id" name="category">
+													</div>
+												</div>
+											</div>
+										</div>
 
 
-									</div>
+
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Product Image URL</label>
+													<input type="text" name="productImg" class="form-control"
+														required="required">
+												</div>
+											</div>
+										</div>
+										<!--  <div class="row">
+											<div class="col-md-12">
+												<label>Product Images</label>-->
+
+										<!-- Image div template -->
+										<!--<div class="col-md-3">
+													<div class="card " style="width: 13rem;">
+														<img class="card-img-top"
+															src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
+															rel="nofollow" alt="Card image cap">
+
+													</div>
+												</div>-->
+
+										<!-- Image div template ends -->
+
+										<!--
+											</div>
+										</div>
+										-->
+
+
+
+										<!-- ADD button -->
+										<button type="reset" class="btn btn-warning pull-right">Reset</button>
+										<button type="submit" class="btn btn-success pull-right">Add</button>
+
+										<!-- ADD button -->
+										<div class="clearfix"></div>
+									</form>
+
+									<!-- Form ends -->
 								</div>
 							</div>
 						</div>
-						<!-- End Form Elements -->
-					</div>
-				</div>
-				<!-- /. ROW  -->
-				<div class="row">
-					<div class="col-md-12"></div>
-				</div>
-				<!-- /. ROW  -->
-			</div>
-			<!-- /. PAGE INNER  -->
-		</div>
-		<!-- /. PAGE WRAPPER  -->
-	</div>
-	<!-- /. WRAPPER  -->
 
-	
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+	<!-- LOAD SCRIPTS -->
+
+
+
+
 	<!--   Core JS Files   -->
-		<script src="${url}/js/core/jquery.min.js"></script>
+	<script src="${url}/js/core/jquery.min.js"></script>
 	<script src="${url}/js/core/popper.min.js"></script>
 	<script src="${url}/js/core/bootstrap-material-design.min.js"></script>
 	<script src="${url}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -163,6 +244,19 @@
 	<script src="${url}/js/material-dashboard.js?v=2.1.2"
 		type="text/javascript"></script>
 
+	<!--  
+
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+-->
+
+
 	<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 	<script>
 		window.onload = function() {
@@ -172,5 +266,354 @@
 			});
 		};
 	</script>
+	<!-- 	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').DataTable();
+		});
+	</script> -->
+	<script type="text/javascript">
+		$("#product-management").addClass("active");
+		$("#page-name").text("Add a new product");
+
+		function onCategoryClick(event) {
+			const span = event.currentTarget;
+			const id = span.id;
+
+			const text = span.textContent;
+			const cateInput = document.querySelector("#category-text");
+			cateInput.textContent = text;
+			const valueID = document.querySelector("#category-id");
+			valueID.value = id;
+
+		}
+
+		$(document)
+				.ready(
+						function() {
+							$()
+									.ready(
+											function() {
+												$sidebar = $('.sidebar');
+
+												$sidebar_img_container = $sidebar
+														.find('.sidebar-background');
+
+												$full_page = $('.full-page');
+
+												$sidebar_responsive = $('body > .navbar-collapse');
+
+												window_width = $(window)
+														.width();
+
+												fixed_plugin_open = $(
+														'.sidebar .sidebar-wrapper .nav li.active a p')
+														.html();
+
+												if (window_width > 767
+														&& fixed_plugin_open == 'Dashboard') {
+													if ($(
+															'.fixed-plugin .dropdown')
+															.hasClass(
+																	'show-dropdown')) {
+														$(
+																'.fixed-plugin .dropdown')
+																.addClass(
+																		'open');
+													}
+
+												}
+
+												$('.fixed-plugin a')
+														.click(
+																function(event) {
+																	// Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+																	if ($(this)
+																			.hasClass(
+																					'switch-trigger')) {
+																		if (event.stopPropagation) {
+																			event
+																					.stopPropagation();
+																		} else if (window.event) {
+																			window.event.cancelBubble = true;
+																		}
+																	}
+																});
+
+												$(
+														'.fixed-plugin .active-color span')
+														.click(
+																function() {
+																	$full_page_background = $('.full-page-background');
+
+																	$(this)
+																			.siblings()
+																			.removeClass(
+																					'active');
+																	$(this)
+																			.addClass(
+																					'active');
+
+																	var new_color = $(
+																			this)
+																			.data(
+																					'color');
+
+																	if ($sidebar.length != 0) {
+																		$sidebar
+																				.attr(
+																						'data-color',
+																						new_color);
+																	}
+
+																	if ($full_page.length != 0) {
+																		$full_page
+																				.attr(
+																						'filter-color',
+																						new_color);
+																	}
+
+																	if ($sidebar_responsive.length != 0) {
+																		$sidebar_responsive
+																				.attr(
+																						'data-color',
+																						new_color);
+																	}
+																});
+
+												$(
+														'.fixed-plugin .background-color .badge')
+														.click(
+																function() {
+																	$(this)
+																			.siblings()
+																			.removeClass(
+																					'active');
+																	$(this)
+																			.addClass(
+																					'active');
+
+																	var new_color = $(
+																			this)
+																			.data(
+																					'background-color');
+
+																	if ($sidebar.length != 0) {
+																		$sidebar
+																				.attr(
+																						'data-background-color',
+																						new_color);
+																	}
+																});
+
+												$('.fixed-plugin .img-holder')
+														.click(
+																function() {
+																	$full_page_background = $('.full-page-background');
+
+																	$(this)
+																			.parent(
+																					'li')
+																			.siblings()
+																			.removeClass(
+																					'active');
+																	$(this)
+																			.parent(
+																					'li')
+																			.addClass(
+																					'active');
+
+																	var new_image = $(
+																			this)
+																			.find(
+																					"img")
+																			.attr(
+																					'src');
+
+																	if ($sidebar_img_container.length != 0
+																			&& $('.switch-sidebar-image input:checked').length != 0) {
+																		$sidebar_img_container
+																				.fadeOut(
+																						'fast',
+																						function() {
+																							$sidebar_img_container
+																									.css(
+																											'background-image',
+																											'url("'
+																													+ new_image
+																													+ '")');
+																							$sidebar_img_container
+																									.fadeIn('fast');
+																						});
+																	}
+
+																	if ($full_page_background.length != 0
+																			&& $('.switch-sidebar-image input:checked').length != 0) {
+																		var new_image_full_page = $(
+																				'.fixed-plugin li.active .img-holder')
+																				.find(
+																						'img')
+																				.data(
+																						'src');
+
+																		$full_page_background
+																				.fadeOut(
+																						'fast',
+																						function() {
+																							$full_page_background
+																									.css(
+																											'background-image',
+																											'url("'
+																													+ new_image_full_page
+																													+ '")');
+																							$full_page_background
+																									.fadeIn('fast');
+																						});
+																	}
+
+																	if ($('.switch-sidebar-image input:checked').length == 0) {
+																		var new_image = $(
+																				'.fixed-plugin li.active .img-holder')
+																				.find(
+																						"img")
+																				.attr(
+																						'src');
+																		var new_image_full_page = $(
+																				'.fixed-plugin li.active .img-holder')
+																				.find(
+																						'img')
+																				.data(
+																						'src');
+
+																		$sidebar_img_container
+																				.css(
+																						'background-image',
+																						'url("'
+																								+ new_image
+																								+ '")');
+																		$full_page_background
+																				.css(
+																						'background-image',
+																						'url("'
+																								+ new_image_full_page
+																								+ '")');
+																	}
+
+																	if ($sidebar_responsive.length != 0) {
+																		$sidebar_responsive
+																				.css(
+																						'background-image',
+																						'url("'
+																								+ new_image
+																								+ '")');
+																	}
+																});
+
+												$('.switch-sidebar-image input')
+														.change(
+																function() {
+																	$full_page_background = $('.full-page-background');
+
+																	$input = $(this);
+
+																	if ($input
+																			.is(':checked')) {
+																		if ($sidebar_img_container.length != 0) {
+																			$sidebar_img_container
+																					.fadeIn('fast');
+																			$sidebar
+																					.attr(
+																							'data-image',
+																							'#');
+																		}
+
+																		if ($full_page_background.length != 0) {
+																			$full_page_background
+																					.fadeIn('fast');
+																			$full_page
+																					.attr(
+																							'data-image',
+																							'#');
+																		}
+
+																		background_image = true;
+																	} else {
+																		if ($sidebar_img_container.length != 0) {
+																			$sidebar
+																					.removeAttr('data-image');
+																			$sidebar_img_container
+																					.fadeOut('fast');
+																		}
+
+																		if ($full_page_background.length != 0) {
+																			$full_page
+																					.removeAttr(
+																							'data-image',
+																							'#');
+																			$full_page_background
+																					.fadeOut('fast');
+																		}
+
+																		background_image = false;
+																	}
+																});
+
+												$('.switch-sidebar-mini input')
+														.change(
+																function() {
+																	$body = $('body');
+
+																	$input = $(this);
+
+																	if (md.misc.sidebar_mini_active == true) {
+																		$(
+																				'body')
+																				.removeClass(
+																						'sidebar-mini');
+																		md.misc.sidebar_mini_active = false;
+
+																		$(
+																				'.sidebar .sidebar-wrapper, .main-panel')
+																				.perfectScrollbar();
+
+																	} else {
+
+																		$(
+																				'.sidebar .sidebar-wrapper, .main-panel')
+																				.perfectScrollbar(
+																						'destroy');
+
+																		setTimeout(
+																				function() {
+																					$(
+																							'body')
+																							.addClass(
+																									'sidebar-mini');
+
+																					md.misc.sidebar_mini_active = true;
+																				},
+																				300);
+																	}
+
+																	// we simulate the window Resize so the charts will get updated in realtime.
+																	var simulateWindowResize = setInterval(
+																			function() {
+																				window
+																						.dispatchEvent(new Event(
+																								'resize'));
+																			},
+																			180);
+
+																	// we stop the simulation of Window Resize after the animations are completed
+																	setTimeout(
+																			function() {
+																				clearInterval(simulateWindowResize);
+																			},
+																			1000);
+
+																});
+											});
+						});
+	</script>
 </body>
+
 </html>
