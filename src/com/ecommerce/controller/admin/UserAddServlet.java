@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.processing.FilerException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +30,7 @@ import com.ecommerce.service.impl.UserServiceImpl;
  */
 @WebServlet("/admin/user/add")
 public class UserAddServlet extends HttpServlet{
+	private static final long serialVersionUID = 1L;
 	UserService userService = new UserServiceImpl();
 	
 	@Override
@@ -39,12 +41,13 @@ public class UserAddServlet extends HttpServlet{
 				req.setAttribute("errMsg", "Username existed");
 			}
 		}
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/admin/user-add.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/admin/user-add-demo.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String gender = null;
 		User user = new User();
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
 		ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
@@ -53,38 +56,55 @@ public class UserAddServlet extends HttpServlet{
 			List<FileItem> items = servletFileUpload.parseRequest(req);
 			for(FileItem item : items) {
 				if(item.getFieldName().equals("email")) {
+					System.out.println(item.getString());
 					user.setEmail(item.getString());
 				}else if (item.getFieldName().equals("username")) {
+					System.out.println(item.getString());
 					user.setUsername(item.getString());
 				}else if (item.getFieldName().equals("fullname")) {
+					System.out.println(item.getString());
 					user.setFullname(item.getString());
 				}else if (item.getFieldName().equals("password")) {
+					System.out.println(item.getString());
 					user.setPassword(item.getString());
 				}else if (item.getFieldName().equals("mobile")) {
+					System.out.println(item.getString());
 					user.setMobile(item.getString());
 				}else if (item.getFieldName().equals("address")) {
+					System.out.println(item.getString());
 					user.setAddress(item.getString());
 				}else if (item.getFieldName().equals("gender")) {
-					user.setGender(item.getString());
+					String tmp = item.getString();
+					int genderID = Integer.parseInt(tmp);
+					if(genderID==1) {
+						gender = "Male";
+					}else if (genderID==2) {
+						gender = "Female";
+					}else {
+						gender = "Other";
+					}
+					System.out.println(gender);
+					user.setGender(gender);
 				}else if (item.getFieldName().equals("dob")) {
+					System.out.println(item.getString());
 					user.setDob(Date.valueOf(item.getString()));
 				}else if (item.getFieldName().equals("roleID")) {
-					user.setRoleID(Integer.parseInt(item.getString()));
+					System.out.println(item.getString());
+					String tmp = item.getString();
+					int roleID = Integer.parseInt(tmp);
+					user.setRoleID(roleID);
 				}
 			}
 			
 			userService.insertUser(user);
 			
 			resp.sendRedirect(req.getContextPath() + "/admin/user/list");
-		}catch (FileUploadException e) {
+		} catch (FilerException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
+			e.printStackTrace();
 			resp.sendRedirect(req.getContextPath() + "/admin/user/add?e=1");
 		}
-		
 	}
 	
-	
-	
-
 }
