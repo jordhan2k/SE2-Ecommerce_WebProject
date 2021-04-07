@@ -7,8 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Product list</title>
-<link rel="stylesheet" 
-	href="${url}/css/material-dashboard.css" />
+<link rel="stylesheet" href="${url}/css/material-dashboard.css" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -35,11 +34,10 @@
 						<!-- Advanced Tables -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
-<a class="btn btn-primary"
-														href="<c:url value='/admin/product/add'/>"
-														class="center">Add</a> 
+								<a class="btn btn-primary"
+									href="<c:url value='/admin/product/add'/>" class="center">Add</a>
 
-</div>
+							</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"
@@ -70,21 +68,20 @@
 												<tr>
 													<td>${product.productID}</td>
 
-													<td><img height="100"  src="${product.productImg}"/></td>
+													<td><img height="100" src="${product.productImg}" /></td>
 													<td>${product.productName}</td>
 													<td>${product.productPrice}</td>
 													<td>${product.category.categoryName}</td>
 													<td>${product.productDesc}</td>
 													<td>${product.instock}</td>
 													<td>
-													
-													<!--  href="<c:url value='/product/detail?id=${product.productID}'/>"
-														class="center">Detail</a> | -->
-														<a class="btn btn-success"
+														<!--  href="<c:url value='/product/detail?id=${product.productID}'/>"
+														class="center">Detail</a> | --> <a class="btn btn-success"
 														href="<c:url value='/admin/product/edit?id=${product.productID}'/>"
 														class="center">Edit</a> | <a class="btn btn-danger"
 														href="<c:url value='/admin/product/delete?id=${product.productID}'/>"
-														class="center">Delete</a></td>
+														class="center">Delete</a>
+													</td>
 
 												</tr>
 											</c:forEach>
