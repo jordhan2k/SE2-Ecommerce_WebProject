@@ -108,7 +108,7 @@ The above copyright notice and this permission notice shall be included in all c
 											</div>
 										</div>
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<div class="card">
 													<div
 														class="card-header card-header-text card-header-primary">
@@ -129,8 +129,9 @@ The above copyright notice and this permission notice shall be included in all c
 														</div>
 													</div>
 													<div class="card-body">
-														<p id="category-text"></p>
-														<input type="hidden" id="category-id" name="category">
+														<input style="border: none" type="text" id="category-text"
+															readonly="readonly"> <input type="hidden"
+															id="category-id" name="category">
 													</div>
 												</div>
 											</div>
@@ -140,34 +141,92 @@ The above copyright notice and this permission notice shall be included in all c
 
 										<div class="row">
 
-											<div class="col-md-12">
+											<div class="col-lg-10">
 												<div class="form-group">
 													<label class="bmd-label-floating">Product Image URL</label>
 													<input type="text" name="productImg" class="form-control"
 														required="required">
+
 												</div>
 											</div>
+											<div class="col-lg-2">
+													<button onclick="onDeleteImgBtn(event)"
+														class="btn btn-success pull-right btn-fab btn-fab-mini btn-round">
+														<i class="material-icons">add</i>
+													</button>
+												</div>
+											
+
 										</div>
-										<!--  <div class="row">
-											<div class="col-md-12">
-												<label>Product Images</label>-->
+										<div class="row">
 
-										<!-- Image div template -->
-										<!--<div class="col-md-3">
-													<div class="card " style="width: 13rem;">
-														<img class="card-img-top"
-															src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
-															rel="nofollow" alt="Card image cap">
 
+
+											<!-- Image div template -->
+											<div class="col-lg-3 col-md-6 col-sm-6">
+												<div class="card style="width: 12rem;">
+													<img class="card-img-top"
+														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
+														rel="nofollow" alt="Card image cap">
+													<div class="card-body">
+														<button onclick="onDeleteImgBtn(event)"
+															class="btn btn-danger centered btn-fab btn-fab-mini btn-round">
+															<i class="material-icons">delete</i>
+														</button>
 													</div>
-												</div>-->
-
-										<!-- Image div template ends -->
-
-										<!--
+												</div>
 											</div>
+
+											<!-- Image div template -->
+											<div class="col-lg-3 col-md-6 col-sm-6">
+												<div class="card style="width: 12rem;">
+													<img class="card-img-top"
+														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
+														rel="nofollow" alt="Card image cap">
+													<div class="card-body">
+														<button onclick="onDeleteImgBtn(event)"
+															class="btn btn-danger center-block btn-fab btn-fab-mini btn-round">
+															<i class="material-icons">delete</i>
+														</button>
+													</div>
+												</div>
+											</div>
+											<!-- Image div template -->
+											<div class="col-lg-3 col-md-6 col-sm-6">
+												<div class="card style="width: 12rem;">
+													<img class="card-img-top"
+														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
+														rel="nofollow" alt="Card image cap">
+													<div class="card-body">
+														<button onclick="onDeleteImgBtn(event)"
+															class="btn btn-danger center-block btn-fab btn-fab-mini btn-round">
+															<i class="material-icons">delete</i>
+														</button>
+													</div>
+												</div>
+											</div>
+
+
+
+
+											<!-- Image div template ends -->
+
+											<div class="col-lg-3 col-md-6 col-sm-6">
+												<div class="card style="width: 12rem;">
+													<img class="card-img-top"
+														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
+														rel="nofollow" alt="Card image cap">
+													<div class="card-body">
+														<button onclick="onDeleteImgBtn(event)"
+															class="btn btn-danger center-block btn-fab btn-fab-mini btn-round">
+															<i class="material-icons">delete</i>
+														</button>
+													</div>
+												</div>
+											</div>
+
 										</div>
-										-->
+
 
 
 
@@ -278,13 +337,19 @@ The above copyright notice and this permission notice shall be included in all c
 		function onCategoryClick(event) {
 			const span = event.currentTarget;
 			const id = span.id;
-
+			console.log(id);
 			const text = span.textContent;
 			const cateInput = document.querySelector("#category-text");
-			cateInput.textContent = text;
+			cateInput.value = text;
 			const valueID = document.querySelector("#category-id");
 			valueID.value = id;
+			console.log(valueID.value);
 
+		}
+		function onDeleteImgBtn(event) {
+			if (confirm("Delete this image?")) {
+				alert("Whao");
+			}
 		}
 
 		$(document)
