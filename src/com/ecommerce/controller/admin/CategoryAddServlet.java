@@ -55,11 +55,10 @@ public class CategoryAddServlet extends HttpServlet {
 					category.setCategoryName(item.getString());
 					System.out.println(item.getFieldName() + "-" + item.getString());
 				}
-				
-				categoryService.insertCategory(category);
-				
-				req.getRequestDispatcher(req.getContextPath() + "/admin/category/list").forward(req, resp);		
 			}
+			categoryService.insertCategory(category);
+			
+			resp.sendRedirect("list");	
 		}catch(FileUploadException e){
 			e.printStackTrace();
 			

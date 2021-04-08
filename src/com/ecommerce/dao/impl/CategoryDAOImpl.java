@@ -33,7 +33,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 			ps.executeUpdate();
 			
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 	}
