@@ -41,7 +41,6 @@ public class CartDAOImpl implements CartDAO{
 			ps.setString(5, cart.getPaymentMode());
 			ps.setLong(6, cart.getTotal());
 			ps.executeUpdate();
-			System.out.println("Inserted");
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -77,7 +76,7 @@ public class CartDAOImpl implements CartDAO{
 			ps.setLong(6, cart.getTotal());
 			ps.setInt(7, cart.getCartID());
 			
-			isUpdated = true;
+			isUpdated = ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -100,14 +99,14 @@ public class CartDAOImpl implements CartDAO{
 	public boolean updateCartStatus(int cartID, String cartStatus) {
 		String sql = "UPDATE cart SET status =? WHERE cart_id = ?";
 		boolean isUpdated = false;
-		
+		System.out.println(cartID + "" + cartStatus);
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			
 			ps.setString(1, cartStatus);
 			ps.setInt(2, cartID);
 			
-			isUpdated = true;
+			isUpdated = ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
