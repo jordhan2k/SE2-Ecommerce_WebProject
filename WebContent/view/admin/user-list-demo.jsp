@@ -174,11 +174,12 @@ The above copyright notice and this permission notice shall be included in all c
 															<c:otherwise>Customer</c:otherwise>
 														</c:choose></td>
 
-													<td><a class="btn btn-success"
-														href="<c:url value='/admin/user/edit?id=${user.userID}'/>"
-														class="center">Edit</a> | <a class="btn btn-danger"
-														href="<c:url value='/admin/user/delete?id=${user.userID}'/>"
-														class="center">Delete</a></td>
+													<td><a class="btn btn-success btn-fab btn-fab-mini btn-round" 
+															href="<c:url value='/admin/user/edit?id=${user.userID}'/>"
+															class="center"><i class="material-icons">edit</i></a>  <a  
+															class="btn btn-danger btn-fab btn-fab-mini btn-round"
+															href="<c:url value='/admin/user/delete?id=${user.userID}'/>"
+															class="center"><i class="material-icons">delete</i></a></td>
 
 												</tr>
 											</c:forEach>

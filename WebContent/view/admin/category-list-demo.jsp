@@ -24,7 +24,7 @@ The above copyright notice and this permission notice shall be included in all c
 	href="${url}/img/apple-icon.png">
 <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Product Management</title>
+<title>Category Management</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
 
@@ -81,8 +81,8 @@ The above copyright notice and this permission notice shall be included in all c
 									<div class="card-icon">
 										<i class="material-icons">store</i>
 									</div>
-									<p class="card-category">Product</p>
-									<h3 class="card-title">${fn:length(products)}</h3>
+									<p class="card-category">Category</p>
+									<h3 class="card-title">${fn:length(categories)}</h3>
 								</div>
 								<div class="card-footer">
 									<div class="stats">
@@ -129,14 +129,14 @@ The above copyright notice and this permission notice shall be included in all c
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header card-header-primary">
-									<h4 class="card-title ">All products</h4>
+									<h4 class="card-title ">All Categories</h4>
 
-									<p class="card-category">Manage all products to be sold</p>
+									<p class="card-category">Manage all categories </p>
 
 								</div>
 								<div class="container-fluid">
 									<a class="btn btn-info"
-										href="<c:url value='/admin/product/add'/>">ADD</a>
+										href="<c:url value='/admin/category/add'/>">ADD</a>
 								</div>
 
 								<div class="card-body">
@@ -144,34 +144,23 @@ The above copyright notice and this permission notice shall be included in all c
 										<table class="table table-striped table-hover" id="table">
 											<thead class=" text-primary">
 												<th>ID</th>
-												<th>Image</th>
 												<th>Name</th>
-												<th>Price(VND)</th>
-												<th>Category</th>
-												<th>Description</th>
-												<th>Instock</th>
-												<th>Action</th>
+												
 											</thead>
 											<tbody>
 
-												<c:forEach items="${products}" var="product">
+												<c:forEach items="${categories}" var="category">
 													<tr>
-														<td>${product.productID}</td>
-
-														<td><img height="100" src="${product.productImg}" /></td>
-														<td>${product.productName}</td>
-														<td>${product.productPrice}</td>
-														<td>${product.category.categoryName}</td>
-														<td>${product.productDesc}</td>
-														<td>${product.instock}</td>
+														<td>${category.categoryID}</td>
+														<td>${category.categoryName}</td>
 														<td><a
 															class="btn btn-success btn-fab btn-fab-mini btn-round"
 															title="Edit"
-															href="<c:url value='/admin/product/edit?id=${product.productID}'/>"
+															href="<c:url value='/admin/category/edit?id=${category.categoryID}'/>"
 															class="center"><i class="material-icons">edit</i></a> <a
 															class="btn btn-danger btn-fab btn-fab-mini btn-round"
 															title="Delete"
-															href="<c:url value='/admin/product/delete?id=${product.productID}'/>"
+															href="<c:url value='/admin/category/delete?id=${category.categoryID}'/>"
 															class="center"><i class="material-icons">delete</i></a></td>
 
 													</tr>
@@ -255,9 +244,9 @@ The above copyright notice and this permission notice shall be included in all c
 		});
 	</script>
 	<script type="text/javascript">
-		const activeSidebarItem = document.querySelector("#product-management");
+		const activeSidebarItem = document.querySelector("#category-management");
 		activeSidebarItem.classList.add("active");
-		$("#page-name").text("Product Management");
+		$("#page-name").text("Category Management");
 		
 
 		$(document)

@@ -24,7 +24,7 @@ The above copyright notice and this permission notice shall be included in all c
 	href="${url}/img/apple-icon.png">
 <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Product Management</title>
+<title>Update a user</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
 
@@ -35,6 +35,7 @@ The above copyright notice and this permission notice shall be included in all c
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
 
 
 </head>
@@ -56,136 +57,149 @@ The above copyright notice and this permission notice shall be included in all c
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-warning card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">content_copy</i>
-									</div>
-									<p class="card-category">Used Space</p>
-									<h3 class="card-title">
-										49/50 <small>GB</small>
-									</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i> <a
-											href="javascript:;">Get More Space...</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-success card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">store</i>
-									</div>
-									<p class="card-category">Product</p>
-									<h3 class="card-title">${fn:length(products)}</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">date_range</i> Last 24 Hours
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-danger card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">info_outline</i>
-									</div>
-									<p class="card-category">Fixed Issues</p>
-									<h3 class="card-title">75</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">local_offer</i> Tracked from Github
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-info card-header-icon">
-									<div class="card-icon">
-										<i class="fa fa-twitter"></i>
-									</div>
-									<p class="card-category">Followers</p>
-									<h3 class="card-title">+245</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">update</i> Just Updated
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header card-header-primary">
-									<h4 class="card-title ">All products</h4>
-
-									<p class="card-category">Manage all products to be sold</p>
-
+									<h4 class="card-title">Update a user</h4>
+									<p class="card-category">Update user details here</p>
 								</div>
-								<div class="container-fluid">
-									<a class="btn btn-info"
-										href="<c:url value='/admin/product/add'/>">ADD</a>
-								</div>
-
 								<div class="card-body">
-									<div class="table-responsive">
-										<table class="table table-striped table-hover" id="table">
-											<thead class=" text-primary">
-												<th>ID</th>
-												<th>Image</th>
-												<th>Name</th>
-												<th>Price(VND)</th>
-												<th>Category</th>
-												<th>Description</th>
-												<th>Instock</th>
-												<th>Action</th>
-											</thead>
-											<tbody>
+									<!-- Form start -->
+									<form role="form" action="<c:url value='/admin/user/edit'/>"
+										method="post" enctype="multipart/form-data">
+										<input name="userID" value="${user.userID }" type="text" hidden="">
+										<div class="row">
 
-												<c:forEach items="${products}" var="product">
-													<tr>
-														<td>${product.productID}</td>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">User name</label> <input class="form-control"
+													value="${user.username }" name="username" />
+												</div>
+											</div>
 
-														<td><img height="100" src="${product.productImg}" /></td>
-														<td>${product.productName}</td>
-														<td>${product.productPrice}</td>
-														<td>${product.category.categoryName}</td>
-														<td>${product.productDesc}</td>
-														<td>${product.instock}</td>
-														<td><a
-															class="btn btn-success btn-fab btn-fab-mini btn-round"
-															title="Edit"
-															href="<c:url value='/admin/product/edit?id=${product.productID}'/>"
-															class="center"><i class="material-icons">edit</i></a> <a
-															class="btn btn-danger btn-fab btn-fab-mini btn-round"
-															title="Delete"
-															href="<c:url value='/admin/product/delete?id=${product.productID}'/>"
-															class="center"><i class="material-icons">delete</i></a></td>
+										</div>
+										
+										<div class="row">
 
-													</tr>
-												</c:forEach>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Password</label> <input class="form-control"
+													value="${user.password }" type="password" name="password" />
+												</div>
+											</div>
 
-											</tbody>
-										</table>
-									</div>
+										</div>
+										
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Full Name</label> <input class="form-control"
+													value="${user.fullname }" name="fullname" />
+												</div>
+											</div>
+
+										</div>
+										
+										
+										
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Email</label> <input class="form-control"
+													value="${user.email }" name="email" />
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Mobile</label> <input class="form-control"
+													value="${user.mobile }" name="mobile" />
+												</div>
+											</div>
+										</div>
+
+										
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Address </label> <input class="form-control"
+													value="${user.address }" name="address" />
+												</div>
+											</div>
+
+										</div>
+										
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label style="margin-top: 25px">DOB </label> <input
+														type="date" name="dob" style="margin-left: 40px;" class="form-control"
+														value=${user.dob }>
+												</div>
+											</div>
+											
+										</div>
+
+										<div class="row" style="margin-top: 20px;">
+											<div class="col-md-6">
+												<div class="form-check">
+													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
+														<input class="form-check-input" type="radio" value="1"
+														name="gender" checked="checked">Male <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> <label class="form-check-label" style="margin:0 10px;"> <input
+														class="form-check-input" type="radio" value="2"
+														name="gender" >Female <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> <label class="form-check-label" style="margin:0 10px;"> <input
+														class="form-check-input" type="radio" value="3"
+														name="gender" >Other <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label>
+												</div>
+											</div>
+
+
+											<div class="col-md-6">
+												<div class="form-check">
+													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
+														<input class="form-check-input" type="radio" value="1"
+														name="roleID" checked="checked">Admin <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> <label class="form-check-label" style="margin:0 10px;"> <input
+														class="form-check-input" type="radio" value="2"
+														name="roleID">Client <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> 
+												</div>
+											</div>
+
+										</div>
+
+
+
+
+
+
+
+										<!-- ADD button -->
+										<button type="reset" class="btn btn-warning pull-right">Reset</button>
+										<button type="submit" class="btn btn-success pull-right">Update</button>
+
+										<!-- ADD button -->
+										<div class="clearfix"></div>
+									</form>
+
+									<!-- Form ends -->
 								</div>
 							</div>
 						</div>
-
-
-
 
 					</div>
 
@@ -247,18 +261,28 @@ The above copyright notice and this permission notice shall be included in all c
 	<script src="${url}/js/material-dashboard.js?v=2.1.2"
 		type="text/javascript"></script>
 
+	<!--  
+
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+-->
 
 
-	<script>
+	<!-- 	<script>
 		$(document).ready(function() {
-			$('#table').DataTable();
+			$('#dataTables-example').DataTable();
 		});
-	</script>
+	</script> -->
 	<script type="text/javascript">
-		const activeSidebarItem = document.querySelector("#product-management");
-		activeSidebarItem.classList.add("active");
-		$("#page-name").text("Product Management");
-		
+		$("#user-management").addClass("active");
+		$("#page-name").text("Update a user");
+
 
 		$(document)
 				.ready(

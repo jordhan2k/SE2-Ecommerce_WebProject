@@ -26,6 +26,8 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public void insertUser(User user) {
+		int roleID = 0;
+		String gender = null;
 		String sql = "INSERT INTO user(user_name, user_password, user_fullname, user_phone, user_email, user_address, gender, user_dob, role_id) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -41,7 +43,16 @@ public class UserDAOImpl implements UserDAO {
 
 			// TODO: wait for User to have dob modified
 			ps.setDate(8, user.getDob());
-			ps.setInt(9, user.getRoleID());
+			try {
+				if(user.getRoleID() == 1) {
+					roleID = 1;
+				}else {
+					roleID = 0;
+				}
+			}catch (Exception e) {
+				roleID = 0;
+			}
+			ps.setInt(9, roleID);
 			ps.executeUpdate();
 
 

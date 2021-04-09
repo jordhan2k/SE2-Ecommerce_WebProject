@@ -32,12 +32,11 @@ public class CategoryEditServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int categoryID = Integer.parseInt(req.getParameter("categoryID"));
-		
+		int categoryID = Integer.parseInt(req.getParameter("id"));
 		Category category = categoryService.getCategoryByID(categoryID);
 		List<Category> categories = categoryService.getAllCategories();
-		
 		req.setAttribute("categories", categories);
+		req.setAttribute("category", category);
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/category-edit.jsp");
 		requestDispatcher.forward(req, resp);
 		
@@ -56,11 +55,14 @@ public class CategoryEditServlet extends HttpServlet {
 			List<FileItem> items = servletFileUpload.parseRequest(req);
 			
 			for(FileItem item : items) {
-				if (item.getFieldName().equals("categoryID")) {
-					category.setCategoryID(Integer.parseInt("categoryID"));
-				}else if(item.getFieldName().equals("categoryName")){
-					category.setCategoryName(item.getString());
-					
+				if(item.getFieldName().equals("categoryName")) {
+					System.out.println(item.getString());
+					category.setCategoryName(item.getString());				
+				}else if (item.getFieldName().equals("categoryID")) {
+					System.out.println(item.getString());
+					String tmp = item.getString();
+					int categoryID = Integer.parseInt(tmp);
+					category.setCategoryID(categoryID);
 				}
 				categoryService.updateCategory(category);
 				resp.sendRedirect(req.getContextPath() + "/admin/category/list");

@@ -67,13 +67,20 @@ The above copyright notice and this permission notice shall be included in all c
 									<!-- Form start -->
 									<form role="form" action="<c:url value='/admin/product/edit'/>"
 										method="post" enctype="multipart/form-data">
+										
 										<div class="row">
-
-											<div class="col-md-12">
+										<div class="col-md-6">
+												<div class="form-group">
+												 <input
+														type="text" name="productName" class="form-control" value="ProductID: ${product.productID }"
+														readonly="readonly">
+												</div>
+											</div>
+											<div class="col-md-6">
 												<div class="form-group">
 													<label class="bmd-label-floating">Product name</label> <input
 														type="text" name="productName" class="form-control"
-														required="required">
+														required="required" value="${product.productName }">
 												</div>
 											</div>
 
@@ -83,14 +90,14 @@ The above copyright notice and this permission notice shall be included in all c
 												<div class="form-group">
 													<label class="bmd-label-floating">Price (VND)</label> <input
 														type="number" min="0" name="productPrice"
-														class="form-control" required="required">
+														class="form-control" required="required" value="${product.productPrice }">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="bmd-label-floating">Instock</label> <input
 														type="number" min="0" name="instock" class="form-control"
-														required="required">
+														required="required" value="${product.instock }">
 												</div>
 											</div>
 										</div>
@@ -102,7 +109,7 @@ The above copyright notice and this permission notice shall be included in all c
 													<div class="form-group">
 
 														<textarea class="col-md-12 form-control" id="editor"
-															rows="6" required="required" name="productDesc"></textarea>
+															rows="6" required="required" name="productDesc">${product.productDesc}</textarea>
 													</div>
 												</div>
 											</div>
@@ -129,8 +136,8 @@ The above copyright notice and this permission notice shall be included in all c
 														</div>
 													</div>
 													<div class="card-body">
-														<p id="category-text"></p>
-														<input type="hidden" id="category-id" name="category">
+														<input style="border: none" type="text" id="category-text" value="${product.category.categoryName}" readonly="readonly">
+														<input type="hidden" id="category-id" name="category" value="${product.category.categoryID}">
 													</div>
 												</div>
 											</div>
@@ -144,7 +151,7 @@ The above copyright notice and this permission notice shall be included in all c
 												<div class="form-group">
 													<label class="bmd-label-floating">Product Image URL</label>
 													<input type="text" name="productImg" class="form-control"
-														required="required">
+														required="required" value="${product.productImg}">
 												</div>
 											</div>
 										</div>
@@ -281,7 +288,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 			const text = span.textContent;
 			const cateInput = document.querySelector("#category-text");
-			cateInput.textContent = text;
+			cateInput.value = text;
 			const valueID = document.querySelector("#category-id");
 			valueID.value = id;
 
