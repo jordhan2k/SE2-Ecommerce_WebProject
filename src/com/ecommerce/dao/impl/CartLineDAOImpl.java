@@ -150,6 +150,44 @@ public class CartLineDAOImpl implements CartLineDAO {
 		return cartLine;
 	}
 	
+	@Override
+	public List<CartLine> getCartLineByCartID(int cartID) {
+		List<CartLine> cartLines = new ArrayList<>();
+		CartLine cartLine = null;
+		String sql ="SELECT cl.cartline_id, cl.cart_id, cl.quantity,cl.product_id, cl.unit_price, p.product_name, p.product_img, product_price " + 
+				"FROM cartline cl " + 
+				"INNER JOIN product p " + 
+				"ON cl.product_id = p.product_id " + 
+				"WHERE cl.cart_id = ?";
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, cartID);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				int cartLineID = rs.getInt("cartline_id");
+				
+				Cart cart = new Cart();
+				
+				Product product = new Product();
+				product.setProductName(rs.getString("product_name"));
+				product.setProductPrice(rs.getLong("product_price"));
+				product.setProductImg(rs.getString("product_img"));
+				
+				int quantity = rs.getInt("quantity");
+				long unitPrice = rs.getLong("unit_price");
+					
+				cartLine = new CartLine(cartLineID, quantity, unitPrice, product, cart);
+				cartLines.add(cartLine);
+			}
+			
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		
+		return cartLines;
+	}
+	
 	/**
 	 * 	Get all CartLines that exist in the database 
 	 * 	@return Either the list of CartLines or null if there is no CartLine

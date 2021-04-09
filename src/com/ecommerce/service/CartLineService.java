@@ -33,14 +33,22 @@ public interface CartLineService {
 	boolean deleteCartLine(int cartLineID);
 	
 	/**
-	 * Retreive a cartline by its id
+	 * Retrieve a cartline by its id
 	 * 
 	 * @param cartLineID - the id of the desired cartline
 	 * @return
 	 */
 	
 	CartLine getCartLineByID(int cartLineID);
-
+	
+	/**
+	 * Retrieve all cartLine belong to the desired cart
+	 * 
+	 * @param cartID the id of cartID
+	 * @return
+	 */
+	List<CartLine> getCartLineByCartID(int cartID);
+	
 	/**
 	 * Retrieve all cartlines
 	 * 

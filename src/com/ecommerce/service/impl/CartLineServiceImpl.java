@@ -62,5 +62,16 @@ public class CartLineServiceImpl implements CartLineService {
 		return cartLineDAO.getAllCartLines();
 		
 	}
+
+	/**
+	 * Retrieve all cartLine belong to the desired cart
+	 * 
+	 * @param cartID the id of cartID
+	 * @return
+	 */
+	@Override
+	public List<CartLine> getCartLineByCartID(int cartID) {
+		return cartLineDAO.getCartLineByCartID(cartID);
+	}
 	
 }
