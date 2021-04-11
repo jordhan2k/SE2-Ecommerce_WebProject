@@ -33,6 +33,16 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	/**
+	 * Update cart information
+	 * @param cart 
+	 * @return
+	 */
+	@Override
+	public boolean updateCartStatus(int cartID, String cartStatus) {
+		return cartDAO.updateCartStatus(cartID, cartStatus);
+	}
+	
+	/**
 	 * Delete a cart
 	 * @param cart
 	 * @return

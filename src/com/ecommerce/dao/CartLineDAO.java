@@ -42,6 +42,14 @@ public interface CartLineDAO {
 	CartLine getCartLineByID(int cartLineID);
 	
 	/**
+	 * 	Get an CartLine from database by its cartLineID
+	 * 
+	 * @param cartLineID - the id of desired CartLine
+	 * @return Either the desired CartLine if found or null if not 
+	 */
+	List<CartLine> getCartLineByCartID(int cartID);
+	
+	/**
 	 * 	Get all CartLines that exist in the database 
 	 * 	@return Either the list of CartLines or null if there is no CartLine
 	 */

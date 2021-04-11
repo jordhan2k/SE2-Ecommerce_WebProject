@@ -26,6 +26,14 @@ public interface CartDAO {
 	 */
 	boolean updateCart(Cart cart);
 	
+	/**
+	 * Update cart status in database
+	 * 
+	 * @param cartID
+	 * @param cartStatus
+	 * @return
+	 */
+	boolean updateCartStatus(int cartID, String cartStatus);
 	
 	/**
 	 * Delete a cart in database by using it's id

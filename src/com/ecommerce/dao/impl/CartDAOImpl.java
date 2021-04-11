@@ -41,9 +41,6 @@ public class CartDAOImpl implements CartDAO{
 			ps.setString(5, cart.getPaymentMode());
 			ps.setLong(6, cart.getTotal());
 			ps.executeUpdate();
-			System.out.println("Inserted");
-			ps.close();
-			connection.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -78,10 +75,38 @@ public class CartDAOImpl implements CartDAO{
 			ps.setString(5, cart.getPaymentMode());
 			ps.setLong(6, cart.getTotal());
 			ps.setInt(7, cart.getCartID());
-			ps.close();
-			connection.close();
 			
-			isUpdated = true;
+			isUpdated = ps.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isUpdated;
+	}
+	
+	/**
+	 * Update cart status in database 
+	 * 
+	 * @effects<pre>
+	 *	if the update is successful
+	 * 		return true
+	 * 	else
+	 * 		return false
+	 * </pre>
+	 * 
+	 * @param cart
+	 */
+	@Override
+	public boolean updateCartStatus(int cartID, String cartStatus) {
+		String sql = "UPDATE cart SET status =? WHERE cart_id = ?";
+		boolean isUpdated = false;
+		System.out.println(cartID + "" + cartStatus);
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			
+			ps.setString(1, cartStatus);
+			ps.setInt(2, cartID);
+			
+			isUpdated = ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -110,8 +135,6 @@ public class CartDAOImpl implements CartDAO{
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, cartId);
 			ps.executeUpdate();
-			ps.close();
-			connection.close();
 			isDeleted = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -137,7 +160,7 @@ public class CartDAOImpl implements CartDAO{
 	 */
 	@Override
 	public Cart getCartById(int cartId) {
-		String sql = "SELECT c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date" + 
+		String sql = "SELECT c.order_date, c.status, c.payment_mode, c.total,u.user_email,u.user_id, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date" + 
 				"	FROM cart c INNER JOIN user u" + 
 				"    ON c.user_id = u.user_id" + 
 				"    INNER JOIN voucher v" + 
@@ -154,9 +177,11 @@ public class CartDAOImpl implements CartDAO{
 			if(rs.next()) {
 				//create user object with  required data
 				User user = new User();
+				user.setUserID(Integer.parseInt(rs.getString("user_id")));
 				user.setFullname(rs.getString("user_fullname"));
 				user.setMobile(rs.getString("user_phone"));
 				user.setAddress(rs.getString("user_address"));
+				user.setEmail(rs.getString("user_email"));
 				
 				
 				//create voucher object with required data
@@ -173,9 +198,6 @@ public class CartDAOImpl implements CartDAO{
 				long total = rs.getLong("total");
 				cart = new Cart(cartId, user, orderDate, status, paymentMode, voucher, total);
 				
-				//close
-				ps.close();
-				connection.close();
 			}
 			
 		} catch (SQLException e) {
@@ -191,7 +213,7 @@ public class CartDAOImpl implements CartDAO{
 	@Override
 	public List<Cart> getAllCarts() {
 		
-		String sql = "SELECT c.cart_id, c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date\r\n" + 
+		String sql = "SELECT c.cart_id, c.order_date, c.status,c.user_id, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date\r\n" + 
 				"				FROM cart c INNER JOIN user u" + 
 				"				ON c.user_id = u.user_id" + 
 				"				INNER JOIN voucher v " + 
@@ -206,6 +228,7 @@ public class CartDAOImpl implements CartDAO{
 			while(rs.next()) {
 				//create user object with  required data
 				User user = new User();
+				user.setUserID(Integer.parseInt(rs.getString("user_id")));
 				user.setFullname(rs.getString("user_fullname"));
 				user.setMobile(rs.getString("user_phone"));
 				user.setAddress(rs.getString("user_address"));
@@ -227,9 +250,6 @@ public class CartDAOImpl implements CartDAO{
 				Cart cart = new Cart(id, user, orderDate, status, paymentMode, voucher, total);
 				carts.add(cart);
 			}
-			//close
-			ps.close();
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -285,8 +305,6 @@ public class CartDAOImpl implements CartDAO{
 				carts.add(cart);
 			}
 			
-			ps.close();
-			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -347,9 +365,6 @@ List<Cart> carts = new ArrayList<>();
 				Cart cart = new Cart(id, user, orderDate, status, paymentMode, voucher, total);
 				carts.add(cart);
 			}
-			
-			ps.close();
-			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

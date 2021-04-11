@@ -23,8 +23,14 @@ public interface CartService {
 	 * @param cart
 	 * @return
 	 */
-	
 	boolean updateCart(Cart cart);
+	
+	/**
+	 * Update cart information
+	 * @param cart
+	 * @return
+	 */
+	boolean updateCartStatus(int cartID, String cartStatus);
 	
 	/**
 	 * Delete a cart
