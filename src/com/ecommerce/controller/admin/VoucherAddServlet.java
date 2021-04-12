@@ -49,7 +49,9 @@ public class VoucherAddServlet extends HttpServlet {
 		try {
 			// parse the request to fileItems
 			List<FileItem> items = servletFileUpload.parseRequest(req);
+			
 			for (FileItem item : items) {
+				System.out.println(item.getFieldName());
 				if (item.getFieldName().equals("voucherCode")) {
 					voucher.setVoucherCode(item.getString());
 					System.out.println(item.getFieldName() + " - " + item.getString());
@@ -60,12 +62,11 @@ public class VoucherAddServlet extends HttpServlet {
 					voucher.setExpireDate(Date.valueOf(item.getString()));
 					System.out.println(item.getFieldName() + " - " + item.getString());
 				}
-				voucherService.insertVoucher(voucher);
-				req.getRequestDispatcher(req.getContextPath() + "/admin/voucher/list").forward(req, resp);
 			}
+			voucherService.insertVoucher(voucher);
+			resp.sendRedirect("list");	
 		} catch (FileUploadException e) {
 			e.printStackTrace();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

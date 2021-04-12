@@ -168,7 +168,7 @@ public class VoucherDAOImpl implements VoucherDAO {
 				String voucherCode = rs.getString("voucher_code");
 				int discountPercentage =rs.getInt("discount_percent");
 				java.sql.Date expireDate = rs.getDate("expire_date");
-				
+							
 				voucher = new Voucher(voucherID, voucherCode, discountPercentage, expireDate);
 				
 				list.add(voucher);			

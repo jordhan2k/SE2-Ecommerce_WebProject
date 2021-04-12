@@ -38,6 +38,8 @@ public class VoucherEditServlet extends HttpServlet {
 		List<Voucher> vouchers = voucherService.getAllVouchers();
 
 		req.setAttribute("vouchers", vouchers);
+		req.setAttribute("voucher", voucher);
+
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/voucher-edit.jsp");
 		requestDispatcher.forward(req, resp);
 	}
@@ -56,7 +58,7 @@ public class VoucherEditServlet extends HttpServlet {
 
 			for (FileItem item : items) {
 				if (item.getFieldName().equals("voucherID")) {
-					voucher.setVoucherID(Integer.parseInt("voucherID"));
+					voucher.setVoucherID(Integer.parseInt(item.getString()));
 				} else if (item.getFieldName().equals("voucherCode")) {
 					voucher.setVoucherCode(item.getString());
 				} else if (item.getFieldName().equals("discountPercent")) {
@@ -66,7 +68,7 @@ public class VoucherEditServlet extends HttpServlet {
 				}
 			}
 			voucherService.updateVoucher(voucher);
-			resp.sendRedirect(req.getContextPath() + "/admin/voucher/list");
+			resp.sendRedirect("list");	
 		} catch (FilerException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
