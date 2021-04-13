@@ -16,33 +16,33 @@
 	<div class="sidebar-wrapper">
 		<ul class="nav">
 			<li class="nav-item" id="dashboard"><a class="nav-link"
-				href="./dashboard.html"> <i class="material-icons">dashboard</i>
+				href="${pageContext.request.contextPath }/admin/dashboard"> <i class="material-icons">dashboard</i>
 					<p>Dashboard</p>
 			</a></li>
 			<li class="nav-item " id="profile"><a class="nav-link"
-				href="./user.html"> <i class="material-icons">person</i>
+				href="${pageContext.request.contextPath }/admin/user"> <i class="material-icons">person</i>
 					<p>User Profile</p>
 			</a></li>
 			<li class="nav-item " id="user-management"><a class="nav-link"
-				href="../user/list"> <i class="material-icons">groups</i>
+				href="${pageContext.request.contextPath }/admin/user/list"> <i class="material-icons">groups</i>
 					<p>User Management</p>
 			</a></li>
 			<li class="nav-item " id="product-management"><a
-				class="nav-link" href="../product/all"> <i
+				class="nav-link" href="${pageContext.request.contextPath }/admin/product/all"> <i
 					class="material-icons">library_books</i>
 					<p>Product Management</p>
 			</a></li>
 			<li class="nav-item " id="order-management"><a class="nav-link"
-				href="../order/list"> <i class="material-icons">receipt_long</i>
+				href="${pageContext.request.contextPath }/admin/cart/list"> <i class="material-icons">receipt_long</i>
 					<p>Order Management</p>
 			</a></li>
 			<li class="nav-item " id="category-management"><a
-				class="nav-link" href="../category/list"> <i class="material-icons"><span
+				class="nav-link" href="${pageContext.request.contextPath }/admin/category/list"> <i class="material-icons"><span
 						class="material-icons"> category </span></i>
 					<p>Category Management</p>
 			</a></li>
 			<li class="nav-item " id="voucher-management"><a
-				class="nav-link" href="../voucher/list"> <i
+				class="nav-link" href="${pageContext.request.contextPath }/admin/voucher/list"> <i
 					class="material-icons">local_offer</i>
 					<p>Voucher Management</p>
 			</a></li>
