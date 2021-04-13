@@ -105,8 +105,10 @@ public class ProductAddServlet extends HttpServlet {
 			
 //			resp.sendRedirect(req.getContextPath() + "/admin/product/list");
 			
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher(req.getContextPath() + "/admin/product/all");
-			requestDispatcher.forward(req, resp);
+//			RequestDispatcher requestDispatcher = req.getRequestDispatcher(req.getContextPath() + "/admin/product/all");
+//			requestDispatcher.forward(req, resp);
+			
+			resp.sendRedirect("all");
 
 		} catch (FileUploadException e) {
 			e.printStackTrace();
