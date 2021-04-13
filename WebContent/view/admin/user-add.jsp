@@ -171,14 +171,14 @@ The above copyright notice and this permission notice shall be included in all c
 
 											<div class="col-md-6">
 												<div class="form-check">
-													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
+													<label>Role: </label> <label class="form-check-label" style="margin:0 10px;">
 														<input class="form-check-input" type="radio" value="1"
 														name="roleID">Admin <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label> <label class="form-check-label" style="margin:0 10px;"> <input
 														class="form-check-input" type="radio" value="0"
-														name="roleID">Client <span class="form-check-sign">
+														name="roleID">Customer <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label> 

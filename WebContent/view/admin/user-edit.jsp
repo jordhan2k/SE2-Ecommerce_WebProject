@@ -172,7 +172,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 											<div class="col-md-6">
 												<div class="form-check">
-													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
+													<label>Role: </label> <label class="form-check-label" style="margin:0 10px;">
 														<input class="form-check-input" type="radio" value="1"
 														name="roleID" <c:if test ="${user.roleID == 1}">
 																		 checked="checked"
@@ -183,7 +183,7 @@ The above copyright notice and this permission notice shall be included in all c
 														class="form-check-input" type="radio" value="0"
 														name="roleID" <c:if test ="${user.roleID == 0}">
 																		 checked="checked"
-																		</c:if>>Client <span class="form-check-sign">
+																		</c:if>>Customer <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label> 
