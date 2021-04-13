@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/assets" var="url"></c:url>
+
 <!--
 =========================================================
 Material Dashboard - v2.1.2
@@ -22,18 +24,18 @@ The above copyright notice and this permission notice shall be included in all c
 	href="${url}/img/apple-icon.png">
 <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>User Management</title>
+<title>Add a user</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
 	name='viewport' />
-	
-	<!-- CSS Files -->
-<link rel="stylesheet" 
-	href="${url}/css/material-dashboard.css" />
+
+<!-- CSS Files -->
+<link rel="stylesheet" href="${url}/css/material-dashboard.css" />
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css"
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
 
 
 </head>
@@ -55,200 +57,155 @@ The above copyright notice and this permission notice shall be included in all c
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-warning card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">content_copy</i>
-									</div>
-									<p class="card-category">Used Space</p>
-									<h3 class="card-title">
-										49/50 <small>GB</small>
-									</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i> <a
-											href="javascript:;">Get More Space...</a>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-success card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">store</i>
-									</div>
-									<p class="card-category">Revenue</p>
-									<h3 class="card-title">$34,245</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">date_range</i> Last 24 Hours
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-danger card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">info_outline</i>
-									</div>
-									<p class="card-category">Fixed Issues</p>
-									<h3 class="card-title">75</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">local_offer</i> Tracked from Github
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="card card-stats">
-								<div class="card-header card-header-info card-header-icon">
-									<div class="card-icon">
-										<i class="fa fa-twitter"></i>
-									</div>
-									<p class="card-category">Followers</p>
-									<h3 class="card-title">+245</h3>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">update</i> Just Updated
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
-					<div class="col-md-12">
-						<!-- Advanced Tables -->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-							<a class="btn btn-primary" href="<c:url value='/admin/user/add'/>"class="center">Add</a> 
-							</div>
-							<div class="panel-body">
-								<div class="table-responsive">
-									<table class="table table-striped table-bordered table-hover"
-										id="dataTables-example">
-										<thead>
-											<tr>
-												<th>ID</th>
-												<th>Email</th>
-												<th>User Name</th>
-												<th>Full Name</th>
-												<th>Password</th>
-												<th>Status</th>
-												<th>Mobile</th>
-												<th>Address</th>
-												<th>Gender</th>
-												<th>DOB</th>
-												<th> Role </th>
-												<th>Action</th>
-												
-
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach items="${userList }" var="user">
-												<tr>
-													<td>${user.userID }</td>
-													<td>${user.email }</td>
-													<td>${user.username }</td>
-													<td>${user.fullname }</td>
-													<td>${user.password }</td>
-													<td class="center">Active</td>
-													<td>${user.mobile }</td>
-													<td>${user.address }</td>
-													<td>${user.gender }</td>
-													<td>${user.dob }</td>
-
-													<td class="center"><c:choose>
-															<c:when test="${user.roleID ==1 }">
-													Admin
-													</c:when>
-															<c:otherwise>Customer</c:otherwise>
-														</c:choose></td>
-
-													<td><a class="btn btn-success btn-fab btn-fab-mini btn-round" 
-															href="<c:url value='/admin/user/edit?id=${user.userID}'/>"
-															class="center"><i class="material-icons">edit</i></a>  <a  
-															class="btn btn-danger btn-fab btn-fab-mini btn-round"
-															href="<c:url value='/admin/user/delete?id=${user.userID}'/>"
-															class="center"><i class="material-icons">delete</i></a></td>
-
-												</tr>
-											</c:forEach>
-
-										</tbody>
-									</table>
-								</div>
-
-							</div>
-						</div>
-						<!--End Advanced Tables -->
-					</div>
-				</div>
-					<div class="row">
-						<div class="col-md-4">
-							<div class="card card-chart">
-								<div class="card-header card-header-success">
-									<div class="ct-chart" id="dailySalesChart"></div>
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title">Add a user</h4>
+									<p class="card-category">Complete user details here</p>
 								</div>
 								<div class="card-body">
-									<h4 class="card-title">Daily Sales</h4>
-									<p class="card-category">
-										<span class="text-success"><i
-											class="fa fa-long-arrow-up"></i> 55% </span> increase in today
-										sales.
-									</p>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">access_time</i> updated 4 minutes
-										ago
-									</div>
+									<!-- Form start -->
+									<form role="form" action="<c:url value='/admin/user/add'/>"
+										method="post" enctype="multipart/form-data">
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">User name</label> <input
+														type="text" name="username" class="form-control"
+														required="required">
+												</div>
+											</div>
+
+										</div>
+										
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Password</label> <input
+														type="password" name="password" class="form-control"
+														required="required">
+												</div>
+											</div>
+
+										</div>
+										
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Full Name</label> <input
+														type="text" name="fullname" class="form-control"
+														required="required">
+												</div>
+											</div>
+
+										</div>
+										
+										
+										
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Email</label> <input
+														type="email" name="email"
+														class="form-control" required="required">
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="bmd-label-floating">Mobile</label> <input
+														type="tel" name="mobile" class="form-control"
+														required="required">
+												</div>
+											</div>
+										</div>
+
+										
+										<div class="row">
+
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="bmd-label-floating">Address </label> <input
+														type="text" name="address" class="form-control"
+														required="required">
+												</div>
+											</div>
+
+										</div>
+										
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label style="margin-top: 25px">DOB </label> <input
+														type="date" name="dob" style="margin-left: 40px;" class="form-control"
+														required="required">
+												</div>
+											</div>
+											
+										</div>
+
+										<div class="row" style="margin-top: 20px;">
+											<div class="col-md-6">
+												<div class="form-check">
+													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
+														<input class="form-check-input" type="radio" value="1"
+														name="gender">Male <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> <label class="form-check-label" style="margin:0 10px;"> <input
+														class="form-check-input" type="radio" value="2"
+														name="gender" >Female <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> <label class="form-check-label" style="margin:0 10px;"> <input
+														class="form-check-input" type="radio" value="3"
+														name="gender" >Other <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label>
+												</div>
+											</div>
+
+
+											<div class="col-md-6">
+												<div class="form-check">
+													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
+														<input class="form-check-input" type="radio" value="1"
+														name="roleID">Admin <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> <label class="form-check-label" style="margin:0 10px;"> <input
+														class="form-check-input" type="radio" value="0"
+														name="roleID">Client <span class="form-check-sign">
+															<span class="check"></span>
+													</span>
+													</label> 
+												</div>
+											</div>
+
+										</div>
+
+
+
+
+
+
+
+										<!-- ADD button -->
+										<button type="reset" class="btn btn-warning pull-right">Reset</button>
+										<button type="submit" class="btn btn-success pull-right">Add</button>
+
+										<!-- ADD button -->
+										<div class="clearfix"></div>
+									</form>
+
+									<!-- Form ends -->
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div class="card card-chart">
-								<div class="card-header card-header-warning">
-									<div class="ct-chart" id="websiteViewsChart"></div>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">Email Subscriptions</h4>
-									<p class="card-category">Last Campaign Performance</p>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">access_time</i> campaign sent 2 days
-										ago
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="card card-chart">
-								<div class="card-header card-header-danger">
-									<div class="ct-chart" id="completedTasksChart"></div>
-								</div>
-								<div class="card-body">
-									<h4 class="card-title">Completed Tasks</h4>
-									<p class="card-category">Last Campaign Performance</p>
-								</div>
-								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons">access_time</i> campaign sent 2 days
-										ago
-									</div>
-								</div>
-							</div>
-						</div>
+
 					</div>
 
 
@@ -258,17 +215,16 @@ The above copyright notice and this permission notice shall be included in all c
 		</div>
 	</div>
 
-	<!-- FIXED PLUGIN  -->
-	<!--FIXED PLUGIN ends -->
+
 
 
 	<!-- LOAD SCRIPTS -->
 
 
 
-	
+
 	<!--   Core JS Files   -->
-		<script src="${url}/js/core/jquery.min.js"></script>
+	<script src="${url}/js/core/jquery.min.js"></script>
 	<script src="${url}/js/core/popper.min.js"></script>
 	<script src="${url}/js/core/bootstrap-material-design.min.js"></script>
 	<script src="${url}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -310,14 +266,28 @@ The above copyright notice and this permission notice shall be included in all c
 	<script src="${url}/js/material-dashboard.js?v=2.1.2"
 		type="text/javascript"></script>
 
+	<!--  
+
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+-->
 
 
+	<!-- 	<script>
+		$(document).ready(function() {
+			$('#dataTables-example').DataTable();
+		});
+	</script> -->
 	<script type="text/javascript">
-		const activeSidebarItem = document.querySelector("#user-management");
-		activeSidebarItem.classList.add("active");
+		$("#user-management").addClass("active");
+		$("#page-name").text("Add a new user");
 
-		const pageName = document.querySelector("#page-name");
-		pageName.textContent = "User Management";
 
 		$(document)
 				.ready(

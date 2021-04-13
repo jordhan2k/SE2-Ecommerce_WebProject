@@ -34,7 +34,7 @@ public class UserEditServlet extends HttpServlet{
 		int id = Integer.parseInt(req.getParameter("id"));
 		User user = userService.getUserById(id);
 		req.setAttribute("user", user);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/admin/user-edit-demo.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/admin/user-edit.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

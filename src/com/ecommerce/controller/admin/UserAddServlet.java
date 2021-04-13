@@ -41,7 +41,7 @@ public class UserAddServlet extends HttpServlet{
 				req.setAttribute("errMsg", "Username existed");
 			}
 		}
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/admin/user-add-demo.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/admin/user-add.jsp");
 		dispatcher.forward(req, resp);
 	}
 

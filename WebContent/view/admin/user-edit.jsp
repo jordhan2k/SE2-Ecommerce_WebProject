@@ -146,17 +146,23 @@ The above copyright notice and this permission notice shall be included in all c
 												<div class="form-check">
 													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
 														<input class="form-check-input" type="radio" value="1"
-														name="gender" checked="checked">Male <span class="form-check-sign">
+														name="gender" <c:if test ="${user.gender == 'Male'}">
+																		 checked="checked"
+																		</c:if>>Male <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label> <label class="form-check-label" style="margin:0 10px;"> <input
 														class="form-check-input" type="radio" value="2"
-														name="gender" >Female <span class="form-check-sign">
+														name="gender" <c:if test ="${user.gender == 'Female'}">
+																		 checked="checked"
+																		</c:if>>Female <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label> <label class="form-check-label" style="margin:0 10px;"> <input
 														class="form-check-input" type="radio" value="3"
-														name="gender" >Other <span class="form-check-sign">
+														name="gender" <c:if test ="${user.gender == 'Other'}">
+																		 checked="checked"
+																		</c:if>>Other <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label>
@@ -168,12 +174,16 @@ The above copyright notice and this permission notice shall be included in all c
 												<div class="form-check">
 													<label>Gender: </label> <label class="form-check-label" style="margin:0 10px;">
 														<input class="form-check-input" type="radio" value="1"
-														name="roleID" checked="checked">Admin <span class="form-check-sign">
+														name="roleID" <c:if test ="${user.roleID == 1}">
+																		 checked="checked"
+																		</c:if>>Admin <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label> <label class="form-check-label" style="margin:0 10px;"> <input
-														class="form-check-input" type="radio" value="2"
-														name="roleID">Client <span class="form-check-sign">
+														class="form-check-input" type="radio" value="0"
+														name="roleID" <c:if test ="${user.roleID == 0}">
+																		 checked="checked"
+																		</c:if>>Client <span class="form-check-sign">
 															<span class="check"></span>
 													</span>
 													</label> 
