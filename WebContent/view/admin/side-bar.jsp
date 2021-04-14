@@ -28,7 +28,7 @@
 					<p>User Management</p>
 			</a></li>
 			<li class="nav-item " id="product-management"><a
-				class="nav-link" href="${pageContext.request.contextPath }/admin/product/all"> <i
+				class="nav-link" href="${pageContext.request.contextPath }/admin/product/list"> <i
 					class="material-icons">library_books</i>
 					<p>Product Management</p>
 			</a></li>

@@ -144,86 +144,24 @@ The above copyright notice and this permission notice shall be included in all c
 											<div class="col-lg-10">
 												<div class="form-group">
 													<label class="bmd-label-floating">Product Image URL</label>
-													<input type="text" name="productImg" class="form-control"
-														required="required">
-
+													<input type="text" id="productImgAdd" name="productImgAdd" class="form-control">
+													<input type="hidden" id="productImg" name="productImg">
 												</div>
 											</div>
 											<div class="col-lg-2">
-													<button onclick="onDeleteImgBtn(event)"
-														class="btn btn-success pull-right btn-fab btn-fab-mini btn-round">
-														<i class="material-icons">add</i>
-													</button>
+												<div onclick="onAddImgBtn(event)"
+													class="btn btn-success pull-right btn-fab btn-fab-mini btn-round">
+													<i class="material-icons">add</i>
 												</div>
-											
+											</div>
+
 
 										</div>
-										<div class="row">
+										<div class="row" id="all-image-container">
 
 
 
-											<!-- Image div template -->
-											<div class="col-lg-3 col-md-6 col-sm-6">
-												<div class="card style="width: 12rem;">
-													<img class="card-img-top"
-														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
-														rel="nofollow" alt="Card image cap">
-													<div class="card-body">
-														<button onclick="onDeleteImgBtn(event)"
-															class="btn btn-danger centered btn-fab btn-fab-mini btn-round">
-															<i class="material-icons">delete</i>
-														</button>
-													</div>
-												</div>
-											</div>
-
-											<!-- Image div template -->
-											<div class="col-lg-3 col-md-6 col-sm-6">
-												<div class="card style="width: 12rem;">
-													<img class="card-img-top"
-														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
-														rel="nofollow" alt="Card image cap">
-													<div class="card-body">
-														<button onclick="onDeleteImgBtn(event)"
-															class="btn btn-danger center-block btn-fab btn-fab-mini btn-round">
-															<i class="material-icons">delete</i>
-														</button>
-													</div>
-												</div>
-											</div>
-											<!-- Image div template -->
-											<div class="col-lg-3 col-md-6 col-sm-6">
-												<div class="card style="width: 12rem;">
-													<img class="card-img-top"
-														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
-														rel="nofollow" alt="Card image cap">
-													<div class="card-body">
-														<button onclick="onDeleteImgBtn(event)"
-															class="btn btn-danger center-block btn-fab btn-fab-mini btn-round">
-															<i class="material-icons">delete</i>
-														</button>
-													</div>
-												</div>
-											</div>
-
-
-
-
-											<!-- Image div template ends -->
-
-											<div class="col-lg-3 col-md-6 col-sm-6">
-												<div class="card style="width: 12rem;">
-													<img class="card-img-top"
-														src="https://salt.tikicdn.com/cache/w444/ts/product/a3/6e/18/b2ae7db87c303e55a7e89424362fd851.jpg"
-														rel="nofollow" alt="Card image cap">
-													<div class="card-body">
-														<button onclick="onDeleteImgBtn(event)"
-															class="btn btn-danger center-block btn-fab btn-fab-mini btn-round">
-															<i class="material-icons">delete</i>
-														</button>
-													</div>
-												</div>
-											</div>
+											<!-- IMAGES GO HERE -->
 
 										</div>
 
@@ -331,6 +269,7 @@ The above copyright notice and this permission notice shall be included in all c
 		});
 	</script> -->
 	<script type="text/javascript">
+		
 		$("#product-management").addClass("active");
 		$("#page-name").text("Add a new product");
 
@@ -348,9 +287,73 @@ The above copyright notice and this permission notice shall be included in all c
 		}
 		function onDeleteImgBtn(event) {
 			if (confirm("Delete this image?")) {
-				alert("Whao");
+				const btn = event.currentTarget;
+				const divID = "imgDiv-" + btn.id;
+				const container = document.querySelector('#'+divID);
+				container.remove();
+				const productImg = document.querySelector('#productImg');
+				const imgList = container.querySelectorAll('img');
+				for (const img of imgList){
+					productImg.value = productImg.value + "," + img.src;
+				}
+				
 			}
 		}
+		
+		function onAddImgBtn(event){
+			const container = document.querySelector('#all-image-container')
+			const num = container.childNodes.length;
+			const imgInput = document.querySelector('#productImgAdd');
+			const url = imgInput.value;
+			if (url.length > 0) {
+				getImageCard(url, (num+1));
+				imgInput.value = "";
+			}
+			
+			const productImg = document.querySelector('#productImg');
+			const imgList = container.querySelectorAll('img');
+			for (const img of imgList){
+				productImg.value = productImg.value + "," + img.src;
+			}
+			
+			console.log(productImg.value);
+			
+			
+		}
+		
+		
+		function getImageCard(link, imageNum){
+			const imgContainer = document.querySelector('#all-image-container');
+			const singleContainerDiv = document.createElement('div');
+			const divID = "imgDiv-" + imageNum;
+			const imgID = "img-" + imageNum;
+			singleContainerDiv.id = divID;
+			singleContainerDiv.classList.add('col-lg-3', 'col-md-6', 'col-sm-6');
+			singleContainerDiv.innerHTML = `<div class="card" style="width: 12rem;">
+				<img class="card-img-top"
+			
+				rel="nofollow" alt="Card image cap">
+			<div class="card-body">
+				<div onclick="onDeleteImgBtn(event)"
+					class="btn btn-danger centered btn-fab btn-fab-mini btn-round">
+					<i class="material-icons">delete</i>
+				</div>
+			</div>
+		</div>`;
+			const img = singleContainerDiv.querySelector('img');
+			const btn = singleContainerDiv.querySelector('.btn');
+			btn.id = imageNum;
+			img.src = link;
+			img.id = imgID;
+			
+			imgContainer.appendChild(singleContainerDiv);
+			
+		}
+		
+		
+		
+		
+		
 
 		$(document)
 				.ready(
