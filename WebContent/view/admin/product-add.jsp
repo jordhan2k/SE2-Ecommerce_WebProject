@@ -291,8 +291,11 @@ The above copyright notice and this permission notice shall be included in all c
 				const divID = "imgDiv-" + btn.id;
 				const container = document.querySelector('#'+divID);
 				container.remove();
+				
+				const containerAll = document.querySelector('#all-image-container');
 				const productImg = document.querySelector('#productImg');
-				const imgList = container.querySelectorAll('img');
+				productImg.value="";
+				const imgList = containerAll.querySelectorAll('img');
 				for (const img of imgList){
 					productImg.value = productImg.value + "," + img.src;
 				}
@@ -301,7 +304,7 @@ The above copyright notice and this permission notice shall be included in all c
 		}
 		
 		function onAddImgBtn(event){
-			const container = document.querySelector('#all-image-container')
+			const container = document.querySelector('#all-image-container');
 			const num = container.childNodes.length;
 			const imgInput = document.querySelector('#productImgAdd');
 			const url = imgInput.value;
@@ -312,6 +315,7 @@ The above copyright notice and this permission notice shall be included in all c
 			
 			const productImg = document.querySelector('#productImg');
 			const imgList = container.querySelectorAll('img');
+			productImg.value="";
 			for (const img of imgList){
 				productImg.value = productImg.value + "," + img.src;
 			}

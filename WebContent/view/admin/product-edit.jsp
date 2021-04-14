@@ -67,12 +67,12 @@ The above copyright notice and this permission notice shall be included in all c
 									<!-- Form start -->
 									<form role="form" action="<c:url value='/admin/product/edit'/>"
 										method="post" enctype="multipart/form-data">
-										
+
 										<div class="row">
-										<div class="col-md-6">
+											<div class="col-md-6">
 												<div class="form-group">
-												 <input
-														type="text" name="productID" class="form-control" value="ProductID: ${product.productID }"
+													<input type="text" name="productID" class="form-control"
+														value="ProductID: ${product.productID }"
 														readonly="readonly">
 												</div>
 											</div>
@@ -90,7 +90,8 @@ The above copyright notice and this permission notice shall be included in all c
 												<div class="form-group">
 													<label class="bmd-label-floating">Price (VND)</label> <input
 														type="number" min="0" name="productPrice"
-														class="form-control" required="required" value="${product.productPrice }">
+														class="form-control" required="required"
+														value="${product.productPrice }">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -136,8 +137,11 @@ The above copyright notice and this permission notice shall be included in all c
 														</div>
 													</div>
 													<div class="card-body">
-														<input style="border: none" type="text" id="category-text" value="${product.category.categoryName}" readonly="readonly">
-														<input type="hidden" id="category-id" name="category" value="${product.category.categoryID}">
+														<input style="border: none" type="text" id="category-text"
+															value="${product.category.categoryName}"
+															readonly="readonly"> <input type="hidden"
+															id="category-id" name="category"
+															value="${product.category.categoryID}">
 													</div>
 												</div>
 											</div>
@@ -150,8 +154,10 @@ The above copyright notice and this permission notice shall be included in all c
 											<div class="col-lg-10">
 												<div class="form-group">
 													<label class="bmd-label-floating">Product Image URL</label>
-													<input type="text" id="productImgAdd" name="productImgAdd" class="form-control">
-													<input type="hidden" id="productImg" name="productImg" value="${product.productImg}">
+													<input type="text" id="productImgAdd" name="productImgAdd"
+														class="form-control"> <input type="hidden"
+														id="productImg" name="productImg"
+														value="${product.productImg}">
 												</div>
 											</div>
 											<div class="col-lg-2">
@@ -174,7 +180,8 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 										<!-- ADD button -->
-										<button type="reset" class="btn btn-warning pull-right">Reset</button>
+										<div onClick="window.location.reload();"
+											class="btn btn-warning pull-right">Reset</div>
 										<button type="submit" class="btn btn-success pull-right">Update</button>
 
 										<!-- ADD button -->
@@ -277,6 +284,30 @@ The above copyright notice and this permission notice shall be included in all c
 		$("#product-management").addClass("active");
 		$("#page-name").text("Edit product");
 
+		function loadImages(){
+		const container = document.querySelector('#all-image-container');
+		const productImg = document.querySelector('#productImg');
+		if (productImg.value.includes(',')){
+			const imgs = productImg.value.split(',');
+			imgs.shift('');
+			
+			for (const img of imgs){
+				const num = container.childNodes.length;
+				getImageCard(img, (num+1));
+			}
+		}
+		
+		const num = container.childNodes.length;
+		getImageCard(productImg.value, (num+1));
+		console.log(imgs);
+		
+		
+		
+		}
+		
+		loadImages();
+		
+		
 		function onCategoryClick(event) {
 			const span = event.currentTarget;
 			const id = span.id;
@@ -296,14 +327,18 @@ The above copyright notice and this permission notice shall be included in all c
 				const divID = "imgDiv-" + btn.id;
 				const container = document.querySelector('#'+divID);
 				container.remove();
+				
+				const containerAll = document.querySelector('#all-image-container');
 				const productImg = document.querySelector('#productImg');
-				const imgList = container.querySelectorAll('img');
+				productImg.value="";
+				const imgList = containerAll.querySelectorAll('img');
 				for (const img of imgList){
 					productImg.value = productImg.value + "," + img.src;
 				}
 				
 			}
 		}
+		
 		
 		function onAddImgBtn(event){
 			const container = document.querySelector('#all-image-container')
@@ -316,14 +351,13 @@ The above copyright notice and this permission notice shall be included in all c
 			}
 			
 			const productImg = document.querySelector('#productImg');
+			productImg.value="";
 			const imgList = container.querySelectorAll('img');
 			for (const img of imgList){
 				productImg.value = productImg.value + "," + img.src;
 			}
 			
 			console.log(productImg.value);
-			
-			
 		}
 		
 		
