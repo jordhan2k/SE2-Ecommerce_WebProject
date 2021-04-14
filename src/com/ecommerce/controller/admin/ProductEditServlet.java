@@ -45,7 +45,7 @@ public class ProductEditServlet extends HttpServlet {
 		req.setAttribute("product", product);
 		req.setAttribute("categories", categories);
 
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-edit-demo.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/product-edit.jsp");
 		requestDispatcher.forward(req, resp);
 	}
 
@@ -63,43 +63,34 @@ public class ProductEditServlet extends HttpServlet {
 
 			for (FileItem item : items) {
 				if (item.getFieldName().equals("productID")) {
-					product.setProductID(Integer.parseInt("productID"));
+					product.setProductID(Integer.parseInt(item.getString().substring(11)));
+					System.out.println(item.getString());
 				} else if (item.getFieldName().equals("productName")) {
 					product.setProductName(item.getString());
-
+					System.out.println(item.getString());
 				} else if (item.getFieldName().equals("productPrice")) {
 					product.setProductPrice(Long.parseLong(item.getString()));
-
+					System.out.println(item.getString());
 				} else if (item.getFieldName().equals("instock")) {
 					product.setInstock(Integer.parseInt(item.getString()));
-
+					System.out.println(item.getString());
 				} else if (item.getFieldName().equals("productDesc")) {
 					product.setProductDesc(item.getString());
-
+					System.out.println(item.getString());
 				} else if (item.getFieldName().equals("category")) {
 					product.setCategory(categoryService.getCategoryByID(Integer.parseInt(item.getString())));
-
+					System.out.println(item.getString());
 				} else if (item.getFieldName().equals("productImg")) {
-//					final String directory = "F:\\upload";
-//					// get the original name of uploaded image file
-//					String originalFileName = item.getName();
-//					// get extension of the file
-//					int index = originalFileName.lastIndexOf(".");
-//					String extension = originalFileName.substring(index);
-//					// new file name
-//					String fileName = System.currentTimeMillis() + "." + extension;
-//					File file = new File(directory + "/" + fileName);
-//					item.write(file);
-//					product.setProductImg(fileName);
-					
+
+					System.out.println(item.getString());
 					product.setProductImg(item.getString());
 
 				}
-				productService.updateProduct(product);
-
-				resp.sendRedirect(req.getContextPath() + "/admin/product/all");
-
+//				System.out.println(product.toString());
 			}
+			productService.updateProduct(product);
+
+			resp.sendRedirect(req.getContextPath() + "/admin/product/list");
 
 		} catch (FileUploadException e) {
 			e.printStackTrace();

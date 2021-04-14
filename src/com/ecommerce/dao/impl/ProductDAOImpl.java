@@ -60,7 +60,7 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public boolean updateProduct(Product product) {
-		String sql = "UPDATE product SET category_id = ?, product_name = ?, product_img = ?, product_price = ?, instock = ?, product_description = ? WHERE product_id = ?)";
+		String sql = "UPDATE product SET category_id = ?, product_name = ?, product_img = ?, product_price = ?, instock = ?, product_description = ? WHERE product_id = ?";
 		boolean isUpdated = false;
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
@@ -72,7 +72,7 @@ public class ProductDAOImpl implements ProductDAO {
 			ps.setString(6, product.getProductDesc());
 			ps.setInt(7, product.getProductID());
 
-			isUpdated = ps.executeUpdate() > 0;
+			ps.executeUpdate();
 
 
 
