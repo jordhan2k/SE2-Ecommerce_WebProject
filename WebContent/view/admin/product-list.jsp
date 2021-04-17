@@ -128,10 +128,10 @@ The above copyright notice and this permission notice shall be included in all c
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
-								<div class="card-header card-header-primary">
+								<div class="card-header">
 									<h4 class="card-title ">All products</h4>
 
-									<p class="card-category">Manage all products to be sold</p>
+								
 
 								</div>
 								<div class="container-fluid">
@@ -141,14 +141,14 @@ The above copyright notice and this permission notice shall be included in all c
 
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-striped table-hover" id="table">
+										<table class="table table-striped table-hover table-shopping" id="table">
 											<thead class=" text-primary">
 												<th>ID</th>
 												<th>Image</th>
 												<th>Name</th>
 												<th>Price(VND)</th>
 												<th>Category</th>
-												<th>Description</th>
+											
 												<th>Instock</th>
 												<th>Action</th>
 											</thead>
@@ -164,7 +164,7 @@ The above copyright notice and this permission notice shall be included in all c
 														<td>${product.productName}</td>
 														<td>${product.productPrice}</td>
 														<td>${product.category.categoryName}</td>
-														<td>${product.productDesc}</td>
+													
 														<td>${product.instock}</td>
 														<td><a
 															class="btn btn-success btn-fab btn-fab-mini btn-round"
