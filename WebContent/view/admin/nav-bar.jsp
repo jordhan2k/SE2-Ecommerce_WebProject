@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <nav
 	class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
 	<div class="container-fluid">
@@ -54,7 +55,10 @@
 						<a class="dropdown-item" href="#">Profile</a> <a
 							class="dropdown-item" href="#">Settings</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Log out</a>
+						<c:url value="/logout" var="logout"></c:url>
+						<form action="${logout}" method="get">
+							<input class="dropdown-item" type="submit" value="Log out">
+						</form>
 					</div></li>
 			</ul>
 		</div>
