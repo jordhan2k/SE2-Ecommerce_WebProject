@@ -1,5 +1,6 @@
 package com.ecommerce.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.ecommerce.model.User;
@@ -81,13 +82,18 @@ public interface UserService {
 	
 	/**
 	 * Sign up a new account
-	 * @param email
 	 * @param username
 	 * @param password
-	 * @param phone
+	 * @param fullname
+	 * @param mobile
+	 * @param email
+	 * @param address
+	 * @param gender
+	 * @param dob
 	 * @return
 	 */
-	boolean register(String email, String username, String password, String phone);
+	boolean register(String username, String password, String fullname, String mobile, String email,
+			String address, String gender, Date dob);
 
 	/**
 	 *get all user 

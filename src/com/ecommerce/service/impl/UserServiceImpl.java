@@ -1,5 +1,6 @@
 package com.ecommerce.service.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.ecommerce.dao.UserDAO;
@@ -132,10 +133,13 @@ public class UserServiceImpl implements UserService{
 	 * @return
 	 */
 	@Override
-	public boolean register(String email, String username, String password, String phone) {
-		if(userDAO.checkExistEmail(email) || userDAO.checkExistUsername(username) || userDAO.checkExistPhone(phone)) {
+	public boolean register(String username, String password, String fullname, String mobile, String email,
+			String address, String gender, Date dob) {
+		if(userDAO.checkExistEmail(email) || userDAO.checkExistUsername(username) || userDAO.checkExistPhone(mobile)) {
 			return false;
 		}
+		
+		userDAO.insertUser(new User(username, password, fullname, mobile, email, address, gender, dob));
 		return true;
 	}
 
