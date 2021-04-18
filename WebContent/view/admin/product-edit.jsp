@@ -287,18 +287,18 @@ The above copyright notice and this permission notice shall be included in all c
 		function loadImages(){
 		const container = document.querySelector('#all-image-container');
 		const productImg = document.querySelector('#productImg');
-		if (productImg.value.includes(',')){
-			const imgs = productImg.value.split(',');
-			imgs.shift('');
+		
+		const imgs = productImg.value.split(',');
+		imgs.shift('');
 			
-			for (const img of imgs){
-				const num = container.childNodes.length;
-				getImageCard(img, (num+1));
-			}
+			
+		for (const img of imgs){
+			const num = container.childNodes.length;
+			getImageCard(img, (num+1));
 		}
 		
-		const num = container.childNodes.length;
-		getImageCard(productImg.value, (num+1));
+		
+	
 		console.log(imgs);
 		
 		
@@ -335,6 +335,8 @@ The above copyright notice and this permission notice shall be included in all c
 				for (const img of imgList){
 					productImg.value = productImg.value + "," + img.src;
 				}
+				
+				console.log(productImg.value);
 				
 			}
 		}
