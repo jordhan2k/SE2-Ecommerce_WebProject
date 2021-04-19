@@ -83,6 +83,20 @@ public class User implements Serializable{
 		this.roleID = roleID;
 	}
 	
+	//for register
+	public User( String username, String password, String fullname, String mobile, String email,
+			String address, String gender, Date dob) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.fullname = fullname;
+		this.mobile = mobile;
+		this.email = email;
+		this.address = address;
+		this.gender = gender;
+		this.dob = dob;
+	}
+	
 	public User(int userID, String username, String password, String fullname, String mobile, String email,
 			String address, String gender, Date dob, int roleID) {
 		super();

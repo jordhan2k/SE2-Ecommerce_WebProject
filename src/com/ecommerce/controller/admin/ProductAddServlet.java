@@ -80,21 +80,13 @@ public class ProductAddServlet extends HttpServlet {
 					product.setCategory(categoryService.getCategoryByID(Integer.parseInt(item.getString())));
 					System.out.println(item.getFieldName() + " - " + item.getString());
 				} else if (item.getFieldName().equals("productImg")) {
-//					final String directory = "F:\\upload";
-//					// get the original name of uploaded image file
-//					String originalFileName = item.getName();	
-//					// get extension of the file
-//					int index = originalFileName.lastIndexOf(".");
-//					String extension = originalFileName.substring(index+1);
-//					// new file name
-//					String fileName = directory + "\\" + System.currentTimeMillis() + "." + extension;
-//					File file = new File(fileName);
-//					item.write(file);
-//					product.setProductImg(fileName);
-//					
-//					System.out.println(item.getFieldName() + " - " + fileName);
+
 					
 					product.setProductImg(item.getString());
+					String imgs[] = item.getString().split(",");
+					for (String img : imgs) {
+						System.out.println(img);
+					}
 					System.out.println(item.getFieldName() + " - " + item.getString());
 	
 				}
@@ -108,7 +100,7 @@ public class ProductAddServlet extends HttpServlet {
 //			RequestDispatcher requestDispatcher = req.getRequestDispatcher(req.getContextPath() + "/admin/product/all");
 //			requestDispatcher.forward(req, resp);
 			
-			resp.sendRedirect("all");
+			resp.sendRedirect("list");
 
 		} catch (FileUploadException e) {
 			e.printStackTrace();

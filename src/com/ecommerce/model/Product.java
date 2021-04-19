@@ -153,5 +153,16 @@ public class Product {
 	public void setProductDesc(String productDesc) {
 		this.productDesc = productDesc;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Product [productID=" + productID + ", productName=" + productName + ", productImg=" + productImg
+				+ ", productPrice=" + productPrice + 
+				", category=" + category.getCategoryID() + 
+				", instock=" + instock
+				+ ", productDesc=" + productDesc + "]";
+	}
+	
 	
 }

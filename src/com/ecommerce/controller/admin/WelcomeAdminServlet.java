@@ -11,14 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import com.ecommerce.model.User;
 
-@WebServlet(urlPatterns = "/admin")
-public class WelcomeServlet extends HttpServlet{
+@WebServlet("/admin")
+public class WelcomeAdminServlet extends HttpServlet{
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Object obj=session.getAttribute("account");
 		User user=(User) obj;
 		req.setAttribute("username", user.getUsername());
-		req.getRequestDispatcher("/view/admin/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/admin/dashboard").forward(req, resp);
 	}
 }

@@ -9,11 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin/dashboard")
-public class DashboardServlet extends HttpServlet{
+@WebServlet("/admin/user")
+public class UserProfileServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/dashboard.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/admin/profile.jsp");
 		requestDispatcher.forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPost(req, resp);
 	}
 }
