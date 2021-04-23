@@ -255,13 +255,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 	<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+
 	<script>
 		window.onload = function() {
-			CKEDITOR.replace('editor', {
-				width : '700px',
-				height : '300px'
-			});
+			CKEDITOR.replace('editor');
 		};
+		
+	
 	</script>
 	<!-- 	<script>
 		$(document).ready(function() {
