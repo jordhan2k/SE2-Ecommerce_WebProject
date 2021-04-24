@@ -73,7 +73,7 @@ The above copyright notice and this permission notice shall be included in all c
 											<div class="col-md-12">
 												<div class="form-group">
 													<label class="bmd-label-floating">User name</label> <input class="form-control"
-													value="${user.username }" name="username" />
+													value="${user.username }" name="username" required="required"/>
 												</div>
 											</div>
 
@@ -84,7 +84,7 @@ The above copyright notice and this permission notice shall be included in all c
 											<div class="col-md-12">
 												<div class="form-group">
 													<label class="bmd-label-floating">Password</label> <input class="form-control"
-													value="${user.password }" type="password" name="password" />
+													value="${user.password }" type="password" name="password" required="required"/>
 												</div>
 											</div>
 
@@ -95,7 +95,7 @@ The above copyright notice and this permission notice shall be included in all c
 											<div class="col-md-12">
 												<div class="form-group">
 													<label class="bmd-label-floating">Full Name</label> <input class="form-control"
-													value="${user.fullname }" name="fullname" />
+													value="${user.fullname }" name="fullname" required="required" />
 												</div>
 											</div>
 
@@ -107,13 +107,13 @@ The above copyright notice and this permission notice shall be included in all c
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="bmd-label-floating">Email</label> <input class="form-control"
-													value="${user.email }" name="email" />
+													value="${user.email }" name="email" required="required"/>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="bmd-label-floating">Mobile</label> <input class="form-control"
-													value="${user.mobile }" name="mobile" />
+													value="${user.mobile }" name="mobile" required="required"/>
 												</div>
 											</div>
 										</div>
@@ -124,7 +124,7 @@ The above copyright notice and this permission notice shall be included in all c
 											<div class="col-md-12">
 												<div class="form-group">
 													<label class="bmd-label-floating">Address </label> <input class="form-control"
-													value="${user.address }" name="address" />
+													value="${user.address }" name="address" required="required"/>
 												</div>
 											</div>
 
@@ -135,7 +135,7 @@ The above copyright notice and this permission notice shall be included in all c
 												<div class="form-group">
 													<label style="margin-top: 25px">DOB </label> <input
 														type="date" name="dob" style="margin-left: 40px;" class="form-control"
-														value=${user.dob }>
+														value=${user.dob } required="required">
 												</div>
 											</div>
 											
