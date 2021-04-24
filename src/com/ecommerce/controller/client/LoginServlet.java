@@ -79,8 +79,6 @@ public class LoginServlet extends HttpServlet{
 		if (user != null) {
 			HttpSession session = req.getSession(true);
 			session.setAttribute("account", user);
-			System.out.println("doPost: Session");
-			System.out.println("doPost: "+ isRememberMe);
 			if(isRememberMe) {
 				saveRememberMe(resp, username);
 			}
@@ -96,7 +94,6 @@ public class LoginServlet extends HttpServlet{
 	
 	private void saveRememberMe(HttpServletResponse resp, String username) {
 		Cookie cookie = new Cookie("username", username);
-		System.out.println("saveRememberMe: " + cookie.getName());
 		cookie.setMaxAge(60*60);
 		resp.addCookie(cookie);
 	}
