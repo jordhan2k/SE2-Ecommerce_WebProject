@@ -149,8 +149,6 @@ The above copyright notice and this permission notice shall be included in all c
 												<th>Email</th>
 												<th>User Name</th>
 												<th>Full Name</th>
-												<th>Password</th>
-												<th>Status</th>
 												<th>Mobile</th>
 												<th>Address</th>
 												<th>Gender</th>
@@ -166,8 +164,6 @@ The above copyright notice and this permission notice shall be included in all c
 														<td>${user.email }</td>
 														<td>${user.username }</td>
 														<td>${user.fullname }</td>
-														<td>${user.password }</td>
-														<td class="center">Active</td>
 														<td>${user.mobile }</td>
 														<td>${user.address }</td>
 														<td>${user.gender }</td>

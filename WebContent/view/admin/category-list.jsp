@@ -53,12 +53,13 @@
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"
-										id="dataTables-example">
+										id="table">
 
 										<thead>
 											<tr>
 												<th>ID</th>
 												<th>Name</th>
+												<th>Action</th>
 												
 										</thead>
 
@@ -149,6 +150,11 @@
   <script src="${url}/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="${url}/demo/demo.js"></script>
+  <script>
+		$(document).ready(function() {
+			$('#table').DataTable();
+		});
+	</script>
   <script>
   	const activeSidebarItem = document.querySelector("#category-management");
 	activeSidebarItem.classList.add("active");
