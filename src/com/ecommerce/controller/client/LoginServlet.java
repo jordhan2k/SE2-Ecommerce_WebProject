@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet{
 		}
 		
 		//if session and cookies do not exist, redirect to login page
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/client/login.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/customer/login.jsp");
 		requestDispatcher.forward(req, resp);
 	}
 	

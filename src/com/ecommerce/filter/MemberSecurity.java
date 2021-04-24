@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.ecommerce.model.User;
 
 
-@WebFilter("/member/*")
+@WebFilter("/customer/*")
 public class MemberSecurity implements Filter {
 
 

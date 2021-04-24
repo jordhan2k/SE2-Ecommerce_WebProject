@@ -24,6 +24,7 @@ public class CustomerVoucherServlet extends HttpServlet{
 		
 		
 		List<Voucher> list = voucherService.getAllVouchers();
+		System.out.println(list.size());
 		req.setAttribute("vouchers", list);
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/view/customer/account-voucher.jsp");
