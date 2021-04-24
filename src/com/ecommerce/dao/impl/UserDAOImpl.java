@@ -351,7 +351,7 @@ public class UserDAOImpl implements UserDAO {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return isDuplicated;
 	}
@@ -375,7 +375,7 @@ public class UserDAOImpl implements UserDAO {
 				isDuplicated = true;
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return isDuplicated;
 	}
@@ -400,7 +400,7 @@ public class UserDAOImpl implements UserDAO {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return isDuplicated;
 	}
