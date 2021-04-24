@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.ecommerce.model.User;
 import com.ecommerce.service.UserService;
 import com.ecommerce.service.impl.UserServiceImpl;
+import com.ecommerce.tools.MailTools;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet{
@@ -58,9 +59,44 @@ public class RegisterServlet extends HttpServlet{
 			String email = req.getParameter("email");
 			String address = req.getParameter("address");
 			String gender = req.getParameter("gender");
-			String dobparam = req.getParameter("dob");
-			Date dob = Date.valueOf(dobparam);
-			User user = new User(username, password, fullname, mobile, email, address, gender, dob);
+			Date dob = Date.valueOf(req.getParameter("dob"));
 			
+			UserService service = new UserServiceImpl();
+			String alertMsg = "";
+			
+			if(service.checkExistUsername(username)) {
+				alertMsg = "Username alredy exist!";
+				req.setAttribute("alerrt", alertMsg);
+				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+			}
+			
+			if(service.checkExistEmail(email)) {
+				alertMsg = "Email alredy exist!";
+				req.setAttribute("alerrt", alertMsg);
+				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+			}
+			
+			if(service.checkExistMobile(mobile)) {
+				alertMsg = "Phone number alredy exist!";
+				req.setAttribute("alerrt", alertMsg);
+				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+			}
+			
+			boolean isSuccess = service.register(username, password, fullname, mobile, email, address, gender, dob);
+			
+			if(isSuccess) {
+				MailTools mail = new MailTools();
+				String text = "<h4>Dear "+ fullname+ ",</h4>"
+							+ "<p>Thank you for joining Lapeki Store. Wish you have nice time with us</p>"
+							+ "<p>Our best, <br>"
+							+ "Lapeki Team</p>";
+				mail.sendMail(email, "Lapeka Shop", text);
+				req.setAttribute("alert", alertMsg);
+				resp.sendRedirect(req.getContextPath() + "/login");
+			}else {
+				alertMsg = "System error";
+				req.setAttribute("alerrt", alertMsg);
+				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+			}
 	}
 }
