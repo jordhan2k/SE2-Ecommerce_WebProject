@@ -20,8 +20,8 @@
 					<p>Dashboard</p>
 			</a></li>
 			<li class="nav-item " id="profile"><a class="nav-link"
-				href="${pageContext.request.contextPath }/admin/user"> <i class="material-icons">person</i>
-					<p>User Profile</p>
+				href="${pageContext.request.contextPath }/admin/profile"> <i class="material-icons">person</i>
+					<p>Profile</p>
 			</a></li>
 			<li class="nav-item " id="user-management"><a class="nav-link"
 				href="${pageContext.request.contextPath }/admin/user/list"> <i class="material-icons">groups</i>
