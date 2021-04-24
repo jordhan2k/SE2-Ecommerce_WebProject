@@ -61,7 +61,6 @@ public class LoginServlet extends HttpServlet{
 		boolean isRememberMe = false;
 		String remember = req.getParameter("remember");
   
-		System.out.println(remember);
 		if(remember != null && remember.equals("on")) {
 			isRememberMe = true;
 		}
@@ -69,7 +68,7 @@ public class LoginServlet extends HttpServlet{
 		if(username.isEmpty() || password.isEmpty()) {
 			alertMsg ="Username and password can't be empty!";
 			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("/view/client/login.jsp").forward(req, resp);
+			req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
 		}
 		
 		UserService userService = new UserServiceImpl();
@@ -86,7 +85,7 @@ public class LoginServlet extends HttpServlet{
 		} else {
 			alertMsg = "Wrong username or password";
 			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("/view/client/login.jsp").forward(req, resp);
+			req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
 			
 		}
 		

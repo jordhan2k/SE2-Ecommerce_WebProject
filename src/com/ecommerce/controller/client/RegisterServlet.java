@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet{
 		}
 		
 		///Redirect to register page
-		req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+		req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
 		
 		
 	}
@@ -67,19 +67,19 @@ public class RegisterServlet extends HttpServlet{
 			if(service.checkExistUsername(username)) {
 				alertMsg = "Username alredy exist!";
 				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
 			}
 			
 			if(service.checkExistEmail(email)) {
 				alertMsg = "Email alredy exist!";
 				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
 			}
 			
 			if(service.checkExistMobile(mobile)) {
 				alertMsg = "Phone number alredy exist!";
 				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
 			}
 			
 			boolean isSuccess = service.register(username, password, fullname, mobile, email, address, gender, dob);
@@ -96,7 +96,7 @@ public class RegisterServlet extends HttpServlet{
 			}else {
 				alertMsg = "System error";
 				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/client/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
 			}
 	}
 }
