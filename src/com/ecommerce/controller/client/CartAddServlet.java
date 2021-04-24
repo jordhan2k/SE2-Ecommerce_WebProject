@@ -16,7 +16,7 @@ import com.ecommerce.model.Product;
 import com.ecommerce.service.ProductService;
 import com.ecommerce.service.impl.ProductServiceImpl;
 
-@WebServlet("/client/cart/add")
+@WebServlet("/customer/cart/add")
 public class CartAddServlet extends HttpServlet {
 	ProductService productService = new ProductServiceImpl();
 	
@@ -53,6 +53,6 @@ public class CartAddServlet extends HttpServlet {
 			httpSession.setAttribute("cart", map);
 		}
 		
-		resp.sendRedirect(req.getContextPath() + "/client/cart");				
+		resp.sendRedirect(req.getContextPath() + "/customer/cart");				
 	}
 }

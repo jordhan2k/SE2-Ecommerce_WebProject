@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ecommerce.model.CartLine;
 
-@WebServlet("/client/cart/remove")
+@WebServlet("/customer/cart/remove")
 public class CartItemRemove extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,6 +28,6 @@ public class CartItemRemove extends HttpServlet{
 			httpSession.setAttribute("cart", map);
 		}
 		
-		resp.sendRedirect(req.getContextPath() + "/client/cart");
+		resp.sendRedirect(req.getContextPath() + "/customer/cart");
 	}
 }
