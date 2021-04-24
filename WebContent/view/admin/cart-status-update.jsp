@@ -42,14 +42,14 @@
 									<p class="card-category">Update Order Status</p>
 								</div>
 								<div class="card-body">
-								<c:url value="/admin/order/status/update" var="statusUpdate"></c:url>
+									<c:url value="/admin/order/status/update" var="statusUpdate"></c:url>
 									<form action="${statusUpdate}" method="post">
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
 													<label class="bmd-label-floating">Cart ID</label> <input
-														type="text" class="form-control" name= "cartID" value="${cart.cartID}"
-														readonly>
+														type="text" class="form-control" name="cartID"
+														value="${cart.cartID}" readonly>
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -120,45 +120,46 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class="bmd-label-floating">Discount Percentage</label> <input
-														type="text" class="form-control" value="${cart.voucher.discountPercentage}%"
-														disabled>
+													<label class="bmd-label-floating">Discount
+														Percentage</label> <input type="text" class="form-control"
+														value="${cart.voucher.discountPercentage}%" disabled>
 												</div>
 											</div>
 										</div>
 										<div class="table-responsive">
-										<table class="table table-striped table-hover" id="table">
-											<thead class=" text-primary">
-												<th>ID</th>
-												<th>Image</th>
-												<th>Name</th>
-												<th>Unit Price</th>
-												<th>Quantity</th>
-												<th>Sub total(VND)</th>
-											</thead>
-											<tbody>
-												<c:set var="total" value="${0}"/>
-												<c:forEach items="${cartLines}" var="cl">
-													<c:set var="subtotal" value="${cl.quantity * cl.product.productPrice}"/>
-													<c:set var="total" value="${total + subtotal}" />
-													<tr>
-														<td>${cl.cartLineID}</td>
-														<td><img height="100" src="${cl.product.productImg}" /></td>
-														<td>${cl.product.productName}</td>
-														<td>${cl.product.productPrice}</td>
-														<td>${cl.quantity}</td>
-														<td>${cl.quantity * cl.product.productPrice}</td>
-													</tr>
-												</c:forEach>
+											<table class="table table-striped table-hover" id="table">
+												<thead class=" text-primary">
+													<th>ID</th>
+													<th>Image</th>
+													<th>Name</th>
+													<th>Unit Price</th>
+													<th>Quantity</th>
+													<th>Sub total(VND)</th>
+												</thead>
+												<tbody>
+													<c:set var="total" value="${0}" />
+													<c:forEach items="${cartLines}" var="cl">
+														<c:set var="subtotal"
+															value="${cl.quantity * cl.product.productPrice}" />
+														<c:set var="total" value="${total + subtotal}" />
+														<tr>
+															<td>${cl.cartLineID}</td>
+															<td><img height="100" src="${cl.product.productImg}" /></td>
+															<td>${cl.product.productName}</td>
+															<td>${cl.product.productPrice}</td>
+															<td>${cl.quantity}</td>
+															<td>${cl.quantity * cl.product.productPrice}</td>
+														</tr>
+													</c:forEach>
 
-											</tbody>
-										</table>
-									</div>
+												</tbody>
+											</table>
+										</div>
 										<div class="d-flex justify-content-between">
 											<div class="col-md-3 dropdown">
 												<div class="form-group">
-												<label class="bmd-label-floating">Status</label>
-													<select name="cartStatus" class="browser-default custom-select">
+													<label class="bmd-label-floating">Status</label> <select
+														name="cartStatus" class="browser-default custom-select">
 														<option ${cart.status == "Pending" ? "selected": ""}>Pending</option>
 														<option ${cart.status == "Rejected" ? "selected": ""}>Rejected</option>
 														<option ${cart.status == "Delivering" ? "selected": ""}>Delivering</option>
@@ -166,10 +167,11 @@
 													</select>
 												</div>
 											</div>
-											
+
 											<div class="col-md-3">
 												<h2 class="text-danger">Total</h2>
-												<h3>${total -(total * cart.voucher.discountPercentage)/100} VND</h3>
+												<h3>${total -(total * cart.voucher.discountPercentage)/100}
+													VND</h3>
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary pull-right">Save
@@ -184,25 +186,13 @@
 			</div>
 			<footer class="footer">
 				<div class="container-fluid">
-					<nav class="float-left">
-						<ul>
-							<li><a href="https://www.creative-tim.com"> Creative Tim
-							</a></li>
-							<li><a href="https://creative-tim.com/presentation">
-									About Us </a></li>
-							<li><a href="http://blog.creative-tim.com"> Blog </a></li>
-							<li><a href="https://www.creative-tim.com/license">
-									Licenses </a></li>
-						</ul>
-					</nav>
-					<div class="copyright float-right">
+
+					<div class="copyright float-center">
 						&copy;
 						<script>
 							document.write(new Date().getFullYear())
 						</script>
-						, made with <i class="material-icons">favorite</i> by <a
-							href="https://www.creative-tim.com" target="_blank">Creative
-							Tim</a> for a better web.
+						, Lapeki Shop
 					</div>
 				</div>
 			</footer>
@@ -321,11 +311,11 @@
 	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
 	<script src="${url}/demo/demo.js"></script>
 	<script>
-	const activeSidebarItem = document.querySelector("#order-management");
-	activeSidebarItem.classList.add("active");
+		const activeSidebarItem = document.querySelector("#order-management");
+		activeSidebarItem.classList.add("active");
 
-	const pageName = document.querySelector("#page-name");
-	pageName.textContent = "Order Management";
+		const pageName = document.querySelector("#page-name");
+		pageName.textContent = "Order Management";
 		$(document)
 				.ready(
 						function() {
