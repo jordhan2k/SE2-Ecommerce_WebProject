@@ -45,7 +45,29 @@
 				<h3>Choose a voucher</h3>
 				<p>All vouchers will be offered to you on this page.</p>
 				<hr>
+
+				<div class="row">
+
+					
+						<c:forEach items="${vouchers}" var="vou">
+							<div class="col-md-5 voucher-item">
+								<img alt="voucher-img" src="${url }images/voucher-img.png">
+								<div>
+									<h5>${vou.discountPercentage}% off per order</h5>
+									<p>Code: ${vou.voucherCode }ABCXYZ</p>
+									<p>Expire date: ${vou.expireDate }</p>
+									<a class="btn btn-primary" href="#">Use now</a>
+								</div>
+							</div>
+						</c:forEach>
+					
+				</div>
 			</div>
+
+
+
+
+		</div>
 
 
 
@@ -82,7 +104,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript">
 		$("#acc-voucher").addClass("active");
 	</script>
 
