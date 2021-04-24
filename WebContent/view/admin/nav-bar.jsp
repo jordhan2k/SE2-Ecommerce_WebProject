@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <nav
 	class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
@@ -25,7 +27,7 @@
 				</div>
 			</form>
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="javascript:;">
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/admin/dashboard">
 						<i class="material-icons">dashboard</i>
 						<p class="d-lg-none d-md-block">Stats</p>
 				</a></li>
@@ -52,7 +54,7 @@
 				</a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownProfile">
-						<a class="dropdown-item" href="#">Profile</a> <a
+						<a class="dropdown-item" href="${pageContext.request.contextPath }/admin/user">Profile</a> <a
 							class="dropdown-item" href="#">Settings</a>
 						<div class="dropdown-divider"></div>
 						<c:url value="/logout" var="logout"></c:url>
