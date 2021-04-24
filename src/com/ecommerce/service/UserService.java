@@ -65,12 +65,18 @@ public interface UserService {
 	
 	
 	/**
-	 * Check exist user's name
+	 * Check exist username
 	 * @param userName
 	 * @return
 	 */
 	boolean checkExistUsername(String username);
 	
+	/**
+	 * Check exist phone
+	 * @param mobile
+	 * @return
+	 */
+	boolean checkExistMobile(String mobile);
 	
 	/**
 	 * Login to website

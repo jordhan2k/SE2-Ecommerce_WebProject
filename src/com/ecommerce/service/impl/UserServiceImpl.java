@@ -143,4 +143,10 @@ public class UserServiceImpl implements UserService{
 		return true;
 	}
 
+	@Override
+	public boolean checkExistMobile(String mobile) {
+		
+		return userDAO.checkExistPhone(mobile);
+	}
+
 }
