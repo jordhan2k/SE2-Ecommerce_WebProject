@@ -8,7 +8,8 @@
 <aside class="customer-sidebar">
         <div class="container-fluid">
            
-            <h2>USENAME</h2>
+            <h4>Hello,</h4>
+            <h5>${account.username}</h5>
         </div>
         <ul class="list-group list-group-flush">
 
@@ -17,9 +18,7 @@
 
             <li id="acc-detail" class="list-group-item"><a href="${pageContext.request.contextPath }/customer/profile"><div><i class="fas fa-user-circle"></i></div>Account details</a></li>
          
-            <li id="acc-password" class="list-group-item"><a href="${pageContext.request.contextPath }/customer/password"><div><i class="fas fa-key"></i></div>Password</a></li>
-
-            <li id="acc-address" class="list-group-item"><a href=""><div><i class="fas fa-map-marker-alt"></i></div>My address</a></li>
+            
 
             <li id="acc-order" class="list-group-item"><a href=""><div><i class="fas fa-receipt"></i></i></div>Manage orders</a></li>
 

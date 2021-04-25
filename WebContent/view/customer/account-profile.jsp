@@ -46,11 +46,16 @@
 				<p>Manage your information to secure your account</p>
 				<hr>
 				<form action="<c:url value='/customer/profile'/>" method="post">
+
+					<div class="mb-3 row">
+						<h5>Basic information</h5>
+
+					</div>
 					<div class="mb-3 row">
 						<label for="username" class="col-sm-2 col-form-label">Username</label>
 						<div class="col-sm-5">
 							<input type="text" readonly class="form-control readonly"
-								id="username" name="username" value="${user.username}"
+								id="username" name="username" value="${account.username}"
 								maxlength="25">
 						</div>
 					</div>
@@ -59,7 +64,7 @@
 							name</label>
 						<div class="col-sm-5">
 							<input type="text" class="form-control" id="fullname"
-								name="fullname" value="${user.fullname}" maxlength="30">
+								name="fullname" value="${account.fullname}" maxlength="30">
 						</div>
 					</div>
 					<div class="mb-3 row">
@@ -67,7 +72,7 @@
 							address</label>
 						<div class="col-sm-5">
 							<input type="email" readonly class="form-control readonly"
-								id="email" name="email" value="$user.email" maxlength="50">
+								id="email" name="email" value="${ account.email}" maxlength="50">
 						</div>
 					</div>
 					<div class="mb-3 row">
@@ -75,7 +80,7 @@
 							number</label>
 						<div class="col-sm-5">
 							<input type="tel" class="form-control" id="mobile" name="mobile"
-								maxlength="10">
+								value="${account.mobile }" maxlength="10">
 						</div>
 					</div>
 
@@ -84,18 +89,27 @@
 						<div class="col-sm-5">
 							<div class="form-check horizon">
 								<input class="form-check-input" type="radio" name="gender"
-									id="male" value="male"> <label class="form-check-label"
-									for="male"> Male </label>
+									id="male" value="Male"
+									<c:if test ="${account.gender == 'Male'}">
+																		 checked="checked"
+																		</c:if>>
+								<label class="form-check-label" for="male"> Male </label>
 							</div>
 							<div class="form-check horizon">
 								<input class="form-check-input" type="radio" name="gender"
-									id="female" value="female"> <label
-									class="form-check-label" for="female"> Female </label>
+									id="female" value="Female"
+									<c:if test ="${account.gender == 'Female'}">
+																		 checked="checked"
+																		</c:if>>
+								<label class="form-check-label" for="female"> Female </label>
 							</div>
 							<div class="form-check horizon">
 								<input class="form-check-input" type="radio" name="gender"
-									id="others" value="others"> <label
-									class="form-check-label" for="others"> Others </label>
+									id="other" value="Others"
+									<c:if test ="${account.gender == 'Other'}">
+																		 checked="checked"
+																		</c:if>>
+								<label class="form-check-label" for="other"> Other </label>
 							</div>
 						</div>
 					</div>
@@ -104,7 +118,9 @@
 						<label for="dob" class="col-sm-2 col-form-label">Date of
 							birth</label>
 						<div class="col-sm-5">
-							<select class="custom-select" name="day"><option
+							<input type="date" class="form-control" id="mobile" name="dob"
+								value="${account.dob }">
+							<!--	<select class="custom-select" name="day"><option
 									value="0">Day</option>
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -216,16 +232,55 @@
 								<option value="1959">1959</option>
 								<option value="1958">1958</option>
 								<option value="1957">1957</option>
-								<option value="1956">1956</option></select>
+								<option value="1956">1956</option></select> -->
+						</div>
+
+
+					</div>
+
+					<div class="mb-3 row">
+						<label for="address" class="col-sm-2 col-form-label">Address</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" id="address"
+								name="address" value="${account.address}">
+						</div>
+					</div>
+
+					<div class="mb-3 row">
+						<label class="col-sm-2 col-form-label"></label>
+						<div class="col-sm-5">
+							<input type="checkbox" class="btn btn-light" type="button"
+								data-toggle="collapse" data-target="#collapseExample"
+								aria-expanded="false" aria-controls="collapseExample"
+								id="change-password" name="change-password" value="change" /> <label
+								for="change-password">Change password</label>
 						</div>
 					</div>
 
 
 
+					<div class="collapse" id="collapseExample">
+
+						<div class="mb-3 row">
+							<label for="new-password" class="col-sm-2 col-form-label">New
+								password</label>
+							<div class="col-sm-5">
+								<input type="password" class="form-control" id="new-password"
+									name="new-password" value="">
+							</div>
+						</div>
+						
+
+
+
+
+
+					</div>
+
 					<div class="mb-3 row">
 						<label for="mobile" class="col-sm-2 col-form-label"></label>
 						<div class="col-sm-5">
-							<input type="submit" value="Update" class="btn btn-danger">
+							<input type="submit" value="Update" class="btn btn-danger" onclick="validatePassword()" >
 						</div>
 					</div>
 
@@ -272,7 +327,32 @@
 
 	<script type="text/javascript">
 		$("#acc-detail").addClass("active");
+		
+		function validatePassword(){
+			const change = document.querySelector("#change-password");
+			if (change.checked){
+				const newPassword = document.querySelector("#new-password").value;
+				const confirm = document.querySelector("#confirm").value;
+				
+				if (newPassword != confirm) {
+					alert("Confirm password and new password do not match.")
+				}
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
 	</script>
+	
+	
 
 </body>
 </html>
