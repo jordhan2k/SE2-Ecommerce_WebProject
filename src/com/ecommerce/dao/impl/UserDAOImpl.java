@@ -39,7 +39,12 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(4, user.getMobile());
 			ps.setString(5, user.getEmail());
 			ps.setString(6, user.getAddress());
-			ps.setString(7, user.getGender());
+			if (user.getGender() == null) {
+				gender = "Other";
+			}else {
+				gender = user.getGender();
+			}
+			ps.setString(7, gender);
 
 			// TODO: wait for User to have dob modified
 			ps.setDate(8, user.getDob());
