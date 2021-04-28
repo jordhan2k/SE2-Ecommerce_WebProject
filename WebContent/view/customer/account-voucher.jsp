@@ -14,6 +14,8 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
+
 
 <link rel="stylesheet" href="${url }custom.css/style.css">
 <link rel="stylesheet"
@@ -51,7 +53,7 @@
 					
 						<c:forEach items="${vouchers}" var="vou">
 							<div class="col-md-5 voucher-item">
-								<img alt="voucher-img" src="${url }images/voucher-img.png">
+								<img alt="voucher-img" src="${url}images/voucher-img.png">
 								<div>
 									<h5>${vou.discountPercentage}% off per order</h5>
 									<p>Code: ${vou.voucherCode }ABCXYZ</p>
@@ -104,6 +106,12 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+		
+	
+	<script type="text/javascript">
+
+
 	<script type="text/javascript">
 		$("#acc-voucher").addClass("active");
 	</script>
