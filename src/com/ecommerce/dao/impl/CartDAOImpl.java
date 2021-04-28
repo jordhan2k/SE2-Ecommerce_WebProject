@@ -21,12 +21,11 @@ import javafx.scene.chart.PieChart.Data;
  * @author Huu Bang
  *
  */
-public class CartDAOImpl implements CartDAO{
+public class CartDAOImpl implements CartDAO {
 	Connection connection = DatabaseConnection.getConnection();
-	
+
 	/**
-	 * @effects
-	 * 	Insert a new cart record into Cart table  
+	 * @effects Insert a new cart record into Cart table
 	 * @param cart
 	 */
 	@Override
@@ -42,16 +41,18 @@ public class CartDAOImpl implements CartDAO{
 			ps.setLong(6, cart.getTotal());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
-	 * Update cart in database 
+	 * Update cart in database
 	 * 
-	 * @effects<pre>
+	 * @effects
+	 * 
+	 * <pre>
 	 *	if the update is successful
 	 * 		return true
 	 * 	else
@@ -64,10 +65,10 @@ public class CartDAOImpl implements CartDAO{
 	public boolean updateCart(Cart cart) {
 		String sql = "UPDATE cart SET voucher_id = ?, user_id = ?, order_date = ?, status =?, payment_mode =? , total = ? WHERE cart_id = ?";
 		boolean isUpdated = false;
-		
+
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			
+
 			ps.setInt(1, cart.getVoucher().getVoucherID());
 			ps.setInt(2, cart.getUser().getUserID());
 			ps.setDate(3, cart.getOrderDate());
@@ -75,18 +76,20 @@ public class CartDAOImpl implements CartDAO{
 			ps.setString(5, cart.getPaymentMode());
 			ps.setLong(6, cart.getTotal());
 			ps.setInt(7, cart.getCartID());
-			
+
 			isUpdated = ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return isUpdated;
 	}
-	
+
 	/**
-	 * Update cart status in database 
+	 * Update cart status in database
 	 * 
-	 * @effects<pre>
+	 * @effects
+	 * 
+	 * <pre>
 	 *	if the update is successful
 	 * 		return true
 	 * 	else
@@ -102,10 +105,10 @@ public class CartDAOImpl implements CartDAO{
 		System.out.println(cartID + "" + cartStatus);
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			
+
 			ps.setString(1, cartStatus);
 			ps.setInt(2, cartID);
-			
+
 			isUpdated = ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -116,19 +119,22 @@ public class CartDAOImpl implements CartDAO{
 	/**
 	 * Delete a cart in database by using it's id
 	 * 
-	 * @effects <pre>
+	 * @effects
+	 * 
+	 *          <pre>
 	 * if delete successful
 	 * 		return true
 	 * else
 	 * 		return false
 	 * 
-	 * </pre>
+	 *          </pre>
+	 * 
 	 * @param id
 	 * @return
 	 */
 	@Override
 	public boolean deleteCart(int cartId) {
-		//Query statement
+		// Query statement
 		String sql = "DELETE FROM cart WHERE cart_id = ?";
 		boolean isDeleted = false;
 		try {
@@ -140,66 +146,62 @@ public class CartDAOImpl implements CartDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		return isDeleted;
 	}
 
 	/**
 	 * Get cart from database by using it's id
 	 * 
-	 * @effects  <pre>
+	 * @effects
+	 * 
+	 *          <pre>
 	 * if id is  valid
 	 * 		get record and return
 	 * else
 	 * 		return null
-	 * </pre>
+	 *          </pre>
 	 * 
 	 * @param cartId
 	 * @return
 	 */
 	@Override
 	public Cart getCartById(int cartId) {
-		String sql = "SELECT c.order_date, c.status, c.payment_mode, c.total,u.user_email,u.user_id, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date" + 
-				"	FROM cart c INNER JOIN user u" + 
-				"    ON c.user_id = u.user_id" + 
-				"    INNER JOIN voucher v" + 
-				"    ON c.voucher_id = v.voucher_id"
-				+ "	WHERE cart_id = ?";
+		String sql = "SELECT c.order_date, c.status, c.payment_mode, c.total,u.user_email,u.user_id, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date"
+				+ "	FROM cart c INNER JOIN user u" + "    ON c.user_id = u.user_id" + "    INNER JOIN voucher v"
+				+ "    ON c.voucher_id = v.voucher_id" + "	WHERE cart_id = ?";
 		Cart cart = null;
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, cartId);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
-			
-			if(rs.next()) {
-				//create user object with  required data
+
+			if (rs.next()) {
+				// create user object with required data
 				User user = new User();
 				user.setUserID(Integer.parseInt(rs.getString("user_id")));
 				user.setFullname(rs.getString("user_fullname"));
 				user.setMobile(rs.getString("user_phone"));
 				user.setAddress(rs.getString("user_address"));
 				user.setEmail(rs.getString("user_email"));
-				
-				
-				//create voucher object with required data
+
+				// create voucher object with required data
 				Voucher voucher = new Voucher();
 				voucher.setVoucherCode(rs.getString("voucher_code"));
 				voucher.setDiscountPercentage(rs.getInt("discount_percent"));
 				voucher.setExpireDate(rs.getDate("expire_date"));
-				
-				//c.order_date, c.status, c.payment_mode, c.total,
-				//create cart object
+
+				// c.order_date, c.status, c.payment_mode, c.total,
+				// create cart object
 				Date orderDate = rs.getDate("order_date");
 				String status = rs.getString("status");
 				String paymentMode = rs.getString("payment_mode");
 				long total = rs.getLong("total");
 				cart = new Cart(cartId, user, orderDate, status, paymentMode, voucher, total);
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -208,40 +210,37 @@ public class CartDAOImpl implements CartDAO{
 
 	/**
 	 * Get all carts in database
+	 * 
 	 * @return
 	 */
 	@Override
 	public List<Cart> getAllCarts() {
-		
-		String sql = "SELECT c.cart_id, c.order_date, c.status,c.user_id, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date\r\n" + 
-				"				FROM cart c INNER JOIN user u" + 
-				"				ON c.user_id = u.user_id" + 
-				"				INNER JOIN voucher v " + 
-				"				ON c.voucher_id = v.voucher_id;";
+
+		String sql = "SELECT c.cart_id, c.order_date, c.status,c.user_id, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date\r\n"
+				+ "				FROM cart c INNER JOIN user u" + "				ON c.user_id = u.user_id"
+				+ "				INNER JOIN voucher v " + "				ON c.voucher_id = v.voucher_id;";
 		List<Cart> carts = new ArrayList<>();
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
-			
-			while(rs.next()) {
-				//create user object with  required data
+
+			while (rs.next()) {
+				// create user object with required data
 				User user = new User();
 				user.setUserID(Integer.parseInt(rs.getString("user_id")));
 				user.setFullname(rs.getString("user_fullname"));
 				user.setMobile(rs.getString("user_phone"));
 				user.setAddress(rs.getString("user_address"));
-				
-				
-				//create voucher object with required data
+
+				// create voucher object with required data
 				Voucher voucher = new Voucher();
 				voucher.setVoucherCode(rs.getString("voucher_code"));
 				voucher.setDiscountPercentage(rs.getInt("discount_percent"));
 				voucher.setExpireDate(rs.getDate("expire_date"));
-				
-				//c.order_date, c.status, c.payment_mode, c.total,
-				//create cart object
+
+				// c.order_date, c.status, c.payment_mode, c.total,
+				// create cart object
 				int id = rs.getInt("cart_id");
 				Date orderDate = rs.getDate("order_date");
 				String status = rs.getString("status");
@@ -254,7 +253,7 @@ public class CartDAOImpl implements CartDAO{
 			e.printStackTrace();
 		}
 		return carts;
-	}	
+	}
 
 	/**
 	 * Search all carts by using email
@@ -266,36 +265,32 @@ public class CartDAOImpl implements CartDAO{
 	@Override
 	public List<Cart> searchCartByEmail(String email) {
 		List<Cart> carts = new ArrayList<>();
-		
-		String sql = "SELECT c.cart_id, c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date \r\n" + 
-				"	FROM cart c\r\n" + 
-				"	INNER JOIN user u \r\n" + 
-				"    ON c.user_id = u.user_id\r\n" + 
-				"    INNER JOIN voucher v\r\n" + 
-				"    ON c.voucher_id = v.voucher_id\r\n" + 
-				"    WHERE u.user_email LIKE ?";
-		
+
+		String sql = "SELECT c.cart_id, c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date \r\n"
+				+ "	FROM cart c\r\n" + "	INNER JOIN user u \r\n" + "    ON c.user_id = u.user_id\r\n"
+				+ "    INNER JOIN voucher v\r\n" + "    ON c.voucher_id = v.voucher_id\r\n"
+				+ "    WHERE u.user_email LIKE ?";
+
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1,"%" + email +"%");
+			ps.setString(1, "%" + email + "%");
 			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				//create user object with  required data
+
+			while (rs.next()) {
+				// create user object with required data
 				User user = new User();
 				user.setFullname(rs.getString("user_fullname"));
 				user.setMobile(rs.getString("user_phone"));
 				user.setAddress(rs.getString("user_address"));
-				
-				
-				//create voucher object with required data
+
+				// create voucher object with required data
 				Voucher voucher = new Voucher();
 				voucher.setVoucherCode(rs.getString("voucher_code"));
 				voucher.setDiscountPercentage(rs.getInt("discount_percent"));
 				voucher.setExpireDate(rs.getDate("expire_date"));
-				
-				//c.order_date, c.status, c.payment_mode, c.total,
-				//create cart object
+
+				// c.order_date, c.status, c.payment_mode, c.total,
+				// create cart object
 				int id = rs.getInt("cart_id");
 				Date orderDate = rs.getDate("order_date");
 				String status = rs.getString("status");
@@ -304,59 +299,55 @@ public class CartDAOImpl implements CartDAO{
 				Cart cart = new Cart(id, user, orderDate, status, paymentMode, voucher, total);
 				carts.add(cart);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return carts;
 	}
 
 	/**
 	 * Search all carts by using phone
 	 * 
-	 * @effects <pre>
+	 * @effects
+	 * 
+	 *          <pre>
 	 * 	return all cart match with this phone
-	 * </pre>
+	 *          </pre>
+	 * 
 	 * @param phone
 	 * @return
 	 */
 	@Override
 	public List<Cart> searchCartByPhone(String phone) {
-List<Cart> carts = new ArrayList<>();
-		
-		String sql = "SELECT c.cart_id, c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date \r\n" + 
-				"	FROM cart c\r\n" + 
-				"	INNER JOIN user u \r\n" + 
-				"    ON c.user_id = u.user_id\r\n" + 
-				"    INNER JOIN voucher v\r\n" + 
-				"    ON c.voucher_id = v.voucher_id\r\n" + 
-				"    WHERE u.user_phone LIKE ?";
-		
+		List<Cart> carts = new ArrayList<>();
+
+		String sql = "SELECT c.cart_id, c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date \r\n"
+				+ "	FROM cart c\r\n" + "	INNER JOIN user u \r\n" + "    ON c.user_id = u.user_id\r\n"
+				+ "    INNER JOIN voucher v\r\n" + "    ON c.voucher_id = v.voucher_id\r\n"
+				+ "    WHERE u.user_phone LIKE ?";
+
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1,"%" + phone +"%");
+			ps.setString(1, "%" + phone + "%");
 			ResultSet rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				//create user object with  required data
+
+			while (rs.next()) {
+				// create user object with required data
 				User user = new User();
 				user.setFullname(rs.getString("user_fullname"));
 				user.setMobile(rs.getString("user_phone"));
 				user.setAddress(rs.getString("user_address"));
-				
-				
-				//create voucher object with required data
+
+				// create voucher object with required data
 				Voucher voucher = new Voucher();
 				voucher.setVoucherCode(rs.getString("voucher_code"));
 				voucher.setDiscountPercentage(rs.getInt("discount_percent"));
 				voucher.setExpireDate(rs.getDate("expire_date"));
-				
-				//c.order_date, c.status, c.payment_mode, c.total,
-				//create cart object
+
+				// c.order_date, c.status, c.payment_mode, c.total,
+				// create cart object
 				int id = rs.getInt("cart_id");
 				Date orderDate = rs.getDate("order_date");
 				String status = rs.getString("status");
@@ -365,13 +356,53 @@ List<Cart> carts = new ArrayList<>();
 				Cart cart = new Cart(id, user, orderDate, status, paymentMode, voucher, total);
 				carts.add(cart);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
+
+		return carts;
+	}
+
+	@Override
+	public List<Cart> getCartByUserId(int userId) {
+		String sql = "SELECT c.cart_id, c.order_date, c.status,c.user_id, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date\r\n"
+				+ "				FROM cart c INNER JOIN user u" + "				ON c.user_id = u.user_id"
+				+ "				INNER JOIN voucher v " + "				ON c.voucher_id = v.voucher_id WHERE c.user_id = ? ORDER BY c.order_date DESC";
+		List<Cart> carts = new ArrayList<>();
+		try {
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, userId);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				// create user object with required data
+				User user = new User();
+				user.setUserID(Integer.parseInt(rs.getString("user_id")));
+				user.setFullname(rs.getString("user_fullname"));
+				user.setMobile(rs.getString("user_phone"));
+				user.setAddress(rs.getString("user_address"));
+
+				// create voucher object with required data
+				Voucher voucher = new Voucher();
+				voucher.setVoucherCode(rs.getString("voucher_code"));
+				voucher.setDiscountPercentage(rs.getInt("discount_percent"));
+				voucher.setExpireDate(rs.getDate("expire_date"));
+
+				// c.order_date, c.status, c.payment_mode, c.total,
+				// create cart object
+				int id = rs.getInt("cart_id");
+				Date orderDate = rs.getDate("order_date");
+				String status = rs.getString("status");
+				String paymentMode = rs.getString("payment_mode");
+				long total = rs.getLong("total");
+				Cart cart = new Cart(id, user, orderDate, status, paymentMode, voucher, total);
+				carts.add(cart);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return carts;
 	}
 

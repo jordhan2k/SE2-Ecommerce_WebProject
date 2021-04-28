@@ -51,6 +51,14 @@ public interface CartDAO {
 	 */
 	Cart getCartById(int cartId);
 	
+	/**
+	 * Get Cart from database by using it's user id
+	 * 
+	 * @param cartId
+	 * @return
+	 */
+	List<Cart> getCartByUserId(int userId);
+	
 	
 	/**
 	 * Get all carts in database
