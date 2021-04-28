@@ -1,0 +1,39 @@
+package com.ecommerce.controller.client;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ecommerce.model.Cart;
+import com.ecommerce.model.User;
+import com.ecommerce.service.CartLineService;
+import com.ecommerce.service.CartService;
+import com.ecommerce.service.impl.CartLineServiceImpl;
+import com.ecommerce.service.impl.CartServiceImpl;
+
+@WebServlet("/customer/orders")
+public class CustomerOrdersServlet extends HttpServlet {
+	CartService cartService = new CartServiceImpl();
+	CartLineService cartLineService = new  CartLineServiceImpl();
+	
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		User account = (User) req.getSession().getAttribute("account");
+		
+		List<Cart> orders = cartService.getCartByUserId(account.getUserID());
+		
+		req.setAttribute("orders", orders);
+		
+		
+		RequestDispatcher rd = req.getRequestDispatcher("/view/customer/account-orders.jsp");
+		rd.forward(req, resp);
+	}
+
+}
