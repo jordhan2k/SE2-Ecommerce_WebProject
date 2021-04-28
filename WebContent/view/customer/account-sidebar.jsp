@@ -20,7 +20,7 @@
          
             
 
-            <li id="acc-order" class="list-group-item"><a href=""><div><i class="fas fa-receipt"></i></i></div>Manage orders</a></li>
+            <li id="acc-order" class="list-group-item"><a href="${pageContext.request.contextPath }/customer/orders"><div><i class="fas fa-receipt"></i></i></div>Manage orders</a></li>
 
             <li id="acc-payment" class="list-group-item"><a href=""><div><i class="far fa-credit-card"></i></div>Payment methods</a></li>
 
