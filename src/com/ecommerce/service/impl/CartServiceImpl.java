@@ -91,6 +91,11 @@ public class CartServiceImpl implements CartService {
 	public List<Cart> searchCartByPhone(String phone){
 		return cartDAO.searchCartByPhone(phone);
 	}
+
+	@Override
+	public List<Cart> getCartByUserId(int userId) {
+		return cartDAO.getCartByUserId(userId);
+	}
 	
 	
 	

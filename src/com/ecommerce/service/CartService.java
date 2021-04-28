@@ -50,6 +50,14 @@ public interface CartService {
 	Cart getCartById(int cartId);
 	
 	/**
+	 * Get Cart from database by using it's user id
+	 * 
+	 * @param cartId
+	 * @return
+	 */
+	List<Cart> getCartByUserId(int userId);
+	
+	/**
 	 * Retrieve all carts
 	 * 
 	 * @return Either the list of all carts or null if there is none
