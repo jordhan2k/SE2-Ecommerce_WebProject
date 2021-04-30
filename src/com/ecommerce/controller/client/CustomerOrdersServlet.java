@@ -17,7 +17,7 @@ import com.ecommerce.service.CartService;
 import com.ecommerce.service.impl.CartLineServiceImpl;
 import com.ecommerce.service.impl.CartServiceImpl;
 
-@WebServlet("/customer/orders")
+@WebServlet("/customer/order")
 public class CustomerOrdersServlet extends HttpServlet {
 	CartService cartService = new CartServiceImpl();
 	CartLineService cartLineService = new  CartLineServiceImpl();
