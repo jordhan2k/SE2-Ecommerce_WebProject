@@ -16,6 +16,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="${url }custom.css/style.css">
+
+<link rel="stylesheet" href="${url }custom.css/breadcrumb.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
@@ -32,6 +34,15 @@
 	<!-- MAIN STARTS -->
 	<main class="container-fluid">
 		<div class="container main-content">
+
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb breadcrumb-custom">
+					<li class="breadcrumb-item"><a href="#" data-abc="true">Home</a></li>
+					<li class="breadcrumb-item"><a href="#" data-abc="true">Customer</a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span>Profile</span></li>
+				</ol>
+			</nav>
+
 
 			<!-- SIDEBAR STARTS -->
 			<jsp:include page="../customer/account-sidebar.jsp"></jsp:include>
@@ -269,7 +280,7 @@
 									name="new-password" value="">
 							</div>
 						</div>
-						
+
 
 
 
@@ -280,7 +291,8 @@
 					<div class="mb-3 row">
 						<label for="mobile" class="col-sm-2 col-form-label"></label>
 						<div class="col-sm-5">
-							<input type="submit" value="Update" class="btn btn-danger" onclick="validatePassword()" >
+							<input type="submit" value="Update" class="btn btn-danger"
+								onclick="validatePassword()">
 						</div>
 					</div>
 
@@ -327,32 +339,23 @@
 
 	<script type="text/javascript">
 		$("#acc-detail").addClass("active");
-		
-		function validatePassword(){
+
+		function validatePassword() {
 			const change = document.querySelector("#change-password");
-			if (change.checked){
+			if (change.checked) {
 				const newPassword = document.querySelector("#new-password").value;
 				const confirm = document.querySelector("#confirm").value;
-				
+
 				if (newPassword != confirm) {
 					alert("Confirm password and new password do not match.")
 				}
-				
-				
+
 			}
-			
-			
+
 		}
-		
-		
-		
-		
-		
-		
-		
 	</script>
-	
-	
+
+
 
 </body>
 </html>

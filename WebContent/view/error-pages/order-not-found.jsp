@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/customer/" var="url"></c:url>
@@ -10,16 +10,19 @@
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="${url }images/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>All voucher</title>
+<title>Oops! Order not found</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="${url }custom.css/breadcrumb.css">
 
+
+
+<link
+	rel="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
 <link rel="stylesheet" href="${url }custom.css/style.css">
-
-
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
@@ -34,16 +37,19 @@
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->
-	<main class="container-fluid">
+	<main class="container-fluid" >
+
+
 		<div class="container main-content">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-custom">
 					<li class="breadcrumb-item"><a href="#" data-abc="true">Home</a></li>
 					<li class="breadcrumb-item"><a href="#" data-abc="true">Customer</a></li>
-					<li class="breadcrumb-item active" aria-current="page"><span>Vouchers</span></li>
+					<li class="breadcrumb-item"><a href="#" data-abc="true">Orders</a></li>
+					<li class="breadcrumb-item active" aria-current="page"><span>Detail</span></li>
+
 				</ol>
 			</nav>
-
 
 			<!-- SIDEBAR STARTS -->
 			<jsp:include page="../customer/account-sidebar.jsp"></jsp:include>
@@ -52,34 +58,17 @@
 
 			<!-- MAIN PANEL STARTS -->
 
-			<!-- <div class="main-panel transparent"> -->
-			<div class="main-panel">
-				<h3>Choose a voucher</h3>
-				<p>All vouchers will be offered to you on this page.</p>
-				<hr>
-
-				<div class="row">
-
-
-					<c:forEach items="${vouchers}" var="vou">
-						<div class="col-md-5 voucher-item">
-							<img alt="voucher-img" src="${url}images/voucher-img.png">
-							<div>
-								<h5>${vou.discountPercentage}%offper order</h5>
-								<p>Code: ${vou.voucherCode }ABCXYZ</p>
-								<p>Expire date: ${vou.expireDate }</p>
-								<a class="btn btn-primary" href="#">Use now</a>
-							</div>
-						</div>
-					</c:forEach>
-
+			<div class="main-panel not-found">
+			
+				<img alt="404" width="200px" src="${url}images/ic_404.png"> 
+				
+				<div><h5>404</h5>
+				Order not found!
 				</div>
+				
+				<a class="btn btn-warning" href="${pageContext.request.contextPath }/">Continue shopping</a>
+
 			</div>
-
-
-
-
-		</div>
 
 
 
@@ -118,10 +107,14 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-
+	
 	<script type="text/javascript">
-		$("#acc-voucher").addClass("active");
+		$("#acc-order").addClass("active");
+
+		
+		
 	</script>
+
 
 
 </body>
