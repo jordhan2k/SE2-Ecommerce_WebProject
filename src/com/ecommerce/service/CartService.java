@@ -16,7 +16,7 @@ public interface CartService {
 	 * Insert new cart
 	 * @param cart
 	 */
-	void insertCart(Cart cart);
+	int insertCart(Cart cart);
 	
 	/**
 	 * Update cart information

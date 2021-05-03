@@ -18,8 +18,8 @@ public class CartServiceImpl implements CartService {
 	 * @param cart
 	 */
 	@Override
-	public void insertCart(Cart cart) {
-		cartDAO.insertCart(cart);
+	public int insertCart(Cart cart) {
+		return cartDAO.insertCart(cart);
 	}
 	
 	/**
