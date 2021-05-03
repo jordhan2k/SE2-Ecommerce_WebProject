@@ -16,7 +16,7 @@ public interface CartDAO {
 	 * 	Insert a new cart record into Cart table  
 	 * @param cart
 	 */
-	void insertCart(Cart cart);
+	int insertCart(Cart cart);
 	
 	
 	/**

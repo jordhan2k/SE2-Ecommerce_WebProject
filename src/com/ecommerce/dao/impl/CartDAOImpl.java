@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,11 @@ public class CartDAOImpl implements CartDAO {
 	 * @param cart
 	 */
 	@Override
-	public void insertCart(Cart cart) {
+	public int insertCart(Cart cart) {
 		String sql = "INSERT INTO cart(voucher_id, user_id, order_date, status, payment_mode, total) VALUES (?, ?, ?, ?,?, ?)";
+		int cartID = 0;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, cart.getVoucher().getVoucherID());
 			ps.setInt(2, cart.getUser().getUserID());
 			ps.setDate(3, cart.getOrderDate());
@@ -40,11 +42,19 @@ public class CartDAOImpl implements CartDAO {
 			ps.setString(5, cart.getPaymentMode());
 			ps.setLong(6, cart.getTotal());
 			ps.executeUpdate();
+			
+			
+			
+			ResultSet generatedKeys = ps.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				cartID = generatedKeys.getInt(1);
+			}
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-
+		return cartID;
 	}
 
 	/**
@@ -405,5 +415,6 @@ public class CartDAOImpl implements CartDAO {
 		}
 		return carts;
 	}
-
+	
+	
 }
