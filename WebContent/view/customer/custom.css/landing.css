@@ -1,13 +1,9 @@
-body {
-    background-color: rgb(244, 244, 244);
-  }
+
 
 img{
     max-width: 100%;
     border-style: none;
 }
-
-
 
 .container-fluid{
     margin: 0;
