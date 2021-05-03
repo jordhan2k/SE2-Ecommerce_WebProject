@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" %>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/customer/" var="url"></c:url>
 
@@ -37,7 +38,7 @@
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->
-	<main class="container-fluid" >
+	<main class="container-fluid">
 
 
 		<div class="container main-content">
@@ -61,8 +62,8 @@
 			<div class="main-panel">
 				<h3>Order detail</h3>
 				<p>
-					Order id: #${order.cartID} - <b>${order.status}</b><br>
-					Order date: ${order.orderDate }
+					Order id: #${order.cartID} - <b>${order.status}</b><br> Order
+					date: ${order.orderDate }
 				</p>
 
 				<hr>
@@ -74,63 +75,66 @@
 					<div class="row flex-row">
 						<div class="col-sm-3 detail-box">
 							<h6>Receiver address</h6>
-							<p><b>${order.user.fullname }</b> <br> Address:
-								${order.user.address } </br>
-								Phone number: ${order.user.mobile }
+							<p>
+								<b>${order.user.fullname }</b> <br> Address:
+								${order.user.address } </br> Phone number: ${order.user.mobile }
 							</p>
-							
+
 						</div>
 
 						<div class="col-sm-3 detail-box">
 							<h6>Shipment Method</h6>
-							<p><b>Lapeki express</b> <br>
-							Standard shipment - You will receive the package within 7 days.
+							<p>
+								<b>Lapeki express</b> <br> Standard shipment - You will
+								receive the package within 7 days.
 							</p>
-							
+
 						</div>
 
 						<div class="col-sm-3 detail-box">
 							<h6>Payment method</h6>
-							<p>Pay through: <b>${order.paymentMode } </b><br>
-							<em><c:if test="${order.paymentMode  != 'COD'}">
+							<p>
+								Pay through: <b>${order.paymentMode } </b><br> <em><c:if
+										test="${order.paymentMode  != 'COD'}">
 							Successfully Paid
-							</c:if>
-							<c:if test="${order.paymentMode  == 'COD'}">
+							</c:if> <c:if test="${order.paymentMode  == 'COD'}">
 							Please prepare cash beforehand!
-							</c:if>
-							</em></p>
+							</c:if> </em>
+							</p>
 						</div>
 					</div>
 
 				</div>
 
 				<div class="container-fluid dash-separator"></div>
-				
-				
-				
 
 
 
-				
-				<table id="order-table" class="table table-striped table-hover table-shopping"
+
+
+
+
+				<table id="order-table"
+					class="table table-striped table-hover table-shopping"
 					style="width: 100%; margin-top: 20px;">
 
 					<thead>
 						<th style="width: 60%">Product</th>
 						<th style="width: 10%">Price</th>
 						<th style="width: 10%">Quantity</th>
-						<th  style="width: 10%">Discount</th>
-						<th  style="width: 15%">Subtotal</th>
+						<!--  <th  style="width: 10%">Discount</th>-->
+						<th style="width: 15%">Subtotal</th>
 					</thead>
 
 					<tbody>
 						<c:forEach items="${items}" var="item">
 							<tr>
 								<td style="width: 60%">${item.product.productName }</td>
-								<td style="width:10%">${item.product.productPrice}</td>
-								<td style="width:10%">${item.quantity }</td>
-								<td style="width: 10%"></td>
-								<td style="width: 15%"><c:out value="${item.product.productPrice * item.quantity}"></c:out></td>
+								<td style="width: 10%">${item.product.productPrice}</td>
+								<td style="width: 10%">${item.quantity }</td>
+								<!--  <th  style="width: 10%">Discount</th>-->
+								<td class="subtotal" style="width: 15%"><c:out
+										value="${item.product.productPrice * item.quantity}"></c:out></td>
 
 
 							</tr>
@@ -141,8 +145,65 @@
 					</tbody>
 
 				</table>
+
+				<div class="conainer-fluid"
+					style="display: flex; justify-content: flex-end;">
+
+					<table id="total-table" style="width: 50%; text-align: right;">
+
+						<tr>
+							<td style="height: 30px;">Total:</td>
+							<td id="total"></td>
+						</tr>
+						<tr>
+							<td style="height: 30px;">Shipping fee:</td>
+							<td>30.000 VND</td>
+						</tr>
+
+						<tr>
+							<td style="height: 30px;">Discount with voucher:</td>
+							<td id="voucher">
+								<!--<fmt:formatNumber var="discount"
+									value="${order.total / order.voucher.discountPercentage}"
+									maxFractionDigits="0" />-${discount } VND --> <c:if
+									test="${order.voucher != null }">${order.voucher.discountPercentage }</c:if>
+								<c:if test="${order.voucher == null }">0</c:if>
+							</td>
+						</tr>
+
+
+						<tr>
+							<td style="height: 30px;"><b>Final total:</b></td>
+							<td id="final">${order.total}VND</td>
+						</tr>
+
+
+
+
+
+
+
+
+
+
+
+					</table>
+
+
+				</div>
 				
-				<div></div>
+				<c:if test="${order.status == 'Checkout' }" >
+				<div class="conainer-fluid"
+					style="display: flex; justify-content: flex-end;">
+					
+					
+					<a class="btn btn-danger" href="${pageContext.request.contextPath}/customer/order/cancel?id=${order.cartID}"
+						>Cancel this order
+					</a>
+				</div>
+				
+				</c:if>
+
 
 			</div>
 
@@ -183,13 +244,30 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-	
+
 	<script type="text/javascript">
 		$("#acc-order").addClass("active");
 
+		const subtotal = document.querySelectorAll(".subtotal");
+		let total = 0;
 		
+		for (const x of subtotal){
+			console.log(x.textContent);
+			total += parseInt(x.textContent);
+		}
+		console.log(total);
+		const totalText = document.querySelector("#total");
+		totalText.textContent = total.toLocaleString("vi-VN") +" VND";
 		
-	</script>
+		const voucher = document.querySelector("#voucher");
+		const voucherNum = parseInt(voucher.textContent);
+		const discount = Math.floor(total * voucherNum / 100)
+		voucher.textContent = "-" + discount.toLocaleString("vi-VN") + " VND";
+		
+		const finalTotal = document.querySelector("#final");
+		finalTotal.textContent = (total + 30000 - discount).toLocaleString("vi-VN") + " VND";
+		
+		</script>
 
 
 

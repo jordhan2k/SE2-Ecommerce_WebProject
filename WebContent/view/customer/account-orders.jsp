@@ -14,10 +14,9 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	
-	<link rel="stylesheet"
-	href="${url }custom.css/breadcrumb.css">
-	
+
+<link rel="stylesheet" href="${url }custom.css/breadcrumb.css">
+
 
 
 <link
@@ -40,7 +39,7 @@
 	<!-- MAIN STARTS -->
 	<main class="container-fluid">
 
-		
+
 		<div class="container main-content">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-custom">
@@ -56,43 +55,51 @@
 
 
 			<!-- MAIN PANEL STARTS -->
+			<c:if test="${orders.size() !=0 }">
+				<div class="main-panel">
+					<h3>My orders</h3>
+					<p>Track your orders here</p>
+					<hr>
+					<table id="order-table"
+						class="table table-striped table-hover table-shopping"
+						style="width: 100%">
+						<thead>
+							<th style="width: 10%">Order ID</th>
+							<th style="width: 20%">Order Date</th>
+							<th>Products</th>
+							<th style="width: 20%">Total (VND)</th>
+							<th style="width: 15%">Status</th>
+						</thead>
+						<tbody>
+							<c:forEach items="${orders}" var="order">
+								<tr>
+									<td style="width: 10%"><a
+										href="${pageContext.request.contextPath }/customer/order/detail?id=${order.cartID}">${order.cartID }</a></td>
+									<td style="width: 20%">${order.orderDate}</td>
+									<td></td>
+									<td style="width: 20%">${order.total }</td>
+									<td style="width: 15%">${order.status}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</c:if>
+			<c:if test="${orders.size() == 0 }">
+				<div class="main-panel not-found">
 
-			<div class="main-panel">
-				<h3>My orders</h3>
-				<p>Track your orders here</p>
-				<hr>
+					<img alt="404" width="200px" src="${url}images/ic_404.png">
 
-				<table id="order-table" class="table table-striped table-hover table-shopping"
-					style="width: 100%">
+					<div>
+						<h5>404</h5>
+						You have no orders!
+					</div>
 
-					<thead>
-						<th style="width: 10%">Order ID</th>
-						<th style="width: 20%">Order Date</th>
-						<th>Products</th>
-						<th  style="width: 20%">Total (VND)</th>
-						<th  style="width: 15%">Status</th>
-					</thead>
+					<a class="btn btn-warning"
+						href="${pageContext.request.contextPath }/">Continue shopping</a>
 
-					<tbody>
-						<c:forEach items="${orders}" var="order">
-							<tr>
-								<td style="width: 10%"><a href="${pageContext.request.contextPath }/customer/order/detail?id=${order.cartID}">${order.cartID }</a></td>
-								<td style="width: 20%">${order.orderDate}</td>
-								<td></td>
-								<td  style="width: 20%">${order.total }</td>
-								<td style="width: 15%">${order.status}</td>
-
-
-							</tr>
-						</c:forEach>
-
-
-
-					</tbody>
-
-				</table>
-
-			</div>
+				</div>
+			</c:if>
 
 
 
