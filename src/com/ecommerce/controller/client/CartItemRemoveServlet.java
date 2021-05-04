@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.ecommerce.model.CartLine;
 
 @WebServlet("/customer/cart/remove")
-public class CartItemRemove extends HttpServlet{
+public class CartItemRemoveServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession httpSession = req.getSession();
