@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet{
 		}
 		
 		///Redirect to register page
-		req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+		resp.sendRedirect(req.getContextPath() +"/login");
 		
 		
 	}
@@ -59,6 +59,7 @@ public class RegisterServlet extends HttpServlet{
 			String email = req.getParameter("email");
 			String address = req.getParameter("address");
 			String gender = req.getParameter("gender");
+			System.out.println("hihi" + username);
 			Date dob = Date.valueOf(req.getParameter("dob"));
 			
 			UserService service = new UserServiceImpl();
@@ -67,19 +68,19 @@ public class RegisterServlet extends HttpServlet{
 			if(service.checkExistUsername(username)) {
 				alertMsg = "Username alredy exist!";
 				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
 			}
 			
 			if(service.checkExistEmail(email)) {
 				alertMsg = "Email alredy exist!";
 				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
 			}
 			
 			if(service.checkExistMobile(mobile)) {
 				alertMsg = "Phone number alredy exist!";
 				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+				req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
 			}
 			
 			boolean isSuccess = service.register(username, password, fullname, mobile, email, address, gender, dob);
