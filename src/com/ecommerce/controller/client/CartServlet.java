@@ -31,4 +31,18 @@ public class CartServlet extends HttpServlet{
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/customer/list-cart.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int subtotal = Integer.parseInt(req.getParameter("subtotal"));
+		int discount = Integer.parseInt(req.getParameter("discount"));
+		int total = Integer.parseInt(req.getParameter("total"));
+		
+		req.setAttribute("subtotal", subtotal);
+		req.setAttribute("discount", discount);
+		req.setAttribute("total", total);
+		
+		RequestDispatcher rd = req.getRequestDispatcher("/view/customer/checkout.jsp");
+		rd.forward(req, resp);
+	}
 }

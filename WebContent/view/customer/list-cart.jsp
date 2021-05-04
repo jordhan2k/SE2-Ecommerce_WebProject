@@ -46,7 +46,7 @@
 									<img alt="voucher-img" src="${url}images/voucher-img.png"
 										style="height: 100px; width: 100px;">
 									<div>
-										<h5>${vou.discountPercentage}%off per order</h5>
+										<h5>${vou.discountPercentage}%offperorder</h5>
 										<p>Code: ${vou.voucherCode }</p>
 										<p>Expire date: ${vou.expireDate }</p>
 
@@ -78,8 +78,7 @@
 										<c:set var="imgs" value="${map.value.product.productImg}" />
 										<c:set var="img" value="${fn:split(imgs,',')}" />
 										<c:set var="ava" value="${img[0]}" />
-										<c:url value="/image?fname=${ava }"
-											var="imgUrl"></c:url>
+										<c:url value="/image?fname=${ava }" var="imgUrl"></c:url>
 										<a href=""> <img src="${imgUrl}" alt="">
 										</a>
 									</div>
@@ -136,35 +135,36 @@
 						</div>
 					</div>
 
+					<form role="form" action="<c:url value='/customer/checkout'/>"
+						method="post" enctype="multipart/form-data">
+						<div class="cart-price">
+							<ul class="prices-item-list">
+								<li class="prices-item"><span class="text">Subtotal</span>
+									<c:set var="total" value="${0}" /> <c:forEach
+										items="${sessionScope.cart}" var="map">
+										<c:set var="total"
+											value="${total + map.value.quantity * map.value.product.productPrice}" />
+									</c:forEach> <span class="value">$ <ins id="subtotal">${total }</ins>
+										<input style="display: none" id="subtotal-input" value=""
+										name="subtotal">
+								</span></li>
+								<li class="prices-item"><span class="text">Discount</span>
+									<span class="value"> <ins id="discount">0</ins> <input
+										style="display: none;" id="discount-input" value=""
+										name="discount">
+								</span></li>
+							</ul>
+							<p class="prices-total">
+								<span class="text">Total Amount</span> <span class="final-value">
+									$<ins id="total">${total }</ins> <input style="display: none;"
+									value="" id="total-input" name="total"> <i>(VAT
+										included)</i>
+								</span>
+							</p>
+						</div>
 
-					<div class="cart-price">
-						<ul class="prices-item-list">
-							<li class="prices-item"><span class="text">Subtotal</span> <c:set
-									var="total" value="${0}" /> <c:forEach
-									items="${sessionScope.cart}" var="map">
-									<c:set var="total"
-										value="${total + map.value.quantity * map.value.product.productPrice}" />
-								</c:forEach> <span class="value">$ <ins id="subtotal">${total }</ins>
-									<input style="display: none" id="subtotal-input" value=""
-									name="subtotal">
-							</span></li>
-							<li class="prices-item"><span class="text">Discount</span> <span
-								class="value"> <ins id="discount">0</ins> <input
-									style="display: none;" id="discount-input" value=""
-									name="discount">
-							</span></li>
-						</ul>
-						<p class="prices-total">
-							<span class="text">Total Amount</span> <span class="final-value">
-								$<ins id="total">${total }</ins> <input style="display: none;"
-								value="" id="total-input" name="total"> <i>(VAT
-									included)</i>
-							</span>
-						</p>
-					</div>
-
-					<a class="cart-submit" href="<c:url value='/customer/checkout'/>">Place
-						Order</a>
+						<button class="cart-submit" type="submit">Place Order</button>
+					</form>
 				</div>
 			</div>
 		</div>
