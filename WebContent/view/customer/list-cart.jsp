@@ -21,10 +21,10 @@
 <link rel="stylesheet" href="${url }custom.css/footer.css">
 </head>
 <body>
-	
+
 	<jsp:include page="../customer/account-header.jsp"></jsp:include>
-	
-		<div class="popup-voucher" id="popup">
+
+	<div class="popup-voucher" id="popup">
 		<div class="outer-background" style="z-index: 1050">
 			<div class="menu-wrapper">
 				<div class="menu-inner">
@@ -46,12 +46,13 @@
 									<img alt="voucher-img" src="${url}images/voucher-img.png"
 										style="height: 100px; width: 100px;">
 									<div>
-										<h5>${vou.discountPercentage}% off per order</h5>
+										<h5>${vou.discountPercentage}%off per order</h5>
 										<p>Code: ${vou.voucherCode }</p>
 										<p>Expire date: ${vou.expireDate }</p>
 
 									</div>
-									<a class="btn btn-primary" href="<c:url value='/customer/cart?discount=${vou.voucherCode}'/>">Use Now</a>
+									<button class="btn btn-primary" id="${vou.discountPercentage }"
+										onclick="selectVoucher(this.id)">Use Now</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -63,7 +64,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="container-cart">
 		<div class="cart">
 			<div class="cart-inner">
@@ -74,7 +75,10 @@
 							<div class="cart-products__product">
 								<div class="cart-products__inner">
 									<div class="cart-products__img">
-										<c:url value="/image?fname=${map.value.product.productImage }"
+										<c:set var="imgs" value="${map.value.product.productImg}" />
+										<c:set var="img" value="${fn:split(imgs,',')}" />
+										<c:set var="ava" value="${img[0]}" />
+										<c:url value="/image?fname=${ava }"
 											var="imgUrl"></c:url>
 										<a href=""> <img src="${imgUrl}" alt="">
 										</a>
@@ -85,20 +89,22 @@
 												<a class="cart-product-name" href="">${map.value.product.productName }</a>
 												<p class="cart-product-description">${map.value.product.productDesc }</p>
 
-												<p class="cart-product-action" >
-													<a class="cart-product-del" href="${pageContext.request.contextPath}/customer/cart/remove?pId=${map.value.product.productID}">Delete</a>
+												<p class="cart-product-action">
+													<a class="cart-product-del"
+														href="${pageContext.request.contextPath}/customer/cart/remove?pId=${map.value.product.productID}">Delete</a>
 												</p>
 											</div>
 											<div class="cart-product-details">
 												<div class="cart-product-pricess">
-													<div class="cart-product-realprice">$ ${map.value.product.productPrice }</div>
+													<div class="cart-product-realprice">$
+														${map.value.product.productPrice }</div>
 												</div>
 												<div class="cart-product-qty">
 													<div class="qty-wrapper">
 														<span class="qty-decrease" onclick="decreaseValue()">-</span>
 														<input type="tel" class="qty-input" id="input-num"
-															value="${map.value.quantity }"> <span class="qty-increase"
-															onclick="increaseValue()">+</span>
+															value="${map.value.quantity }"> <span
+															class="qty-increase" onclick="increaseValue()">+</span>
 													</div>
 												</div>
 											</div>
@@ -117,9 +123,11 @@
 
 					<div class="voucher-choose">
 						<div class="title-usage">
-						<c:set var="discount" value="${0 + vou.discountPercentage}"/>
 							<p class="voucher-title">Voucher</p>
-							<p class="discount-percent">${discount}% OFF</p>
+							<p class="discount-percent">
+								<ins id="dis-per" style="text-decoration: none">0</ins>
+								% OFF
+							</p>
 						</div>
 						<div class="more-voucher" onclick="moreVoucher()">
 							<img
@@ -131,24 +139,32 @@
 
 					<div class="cart-price">
 						<ul class="prices-item-list">
-							<li class="prices-item"><span class="text">Subtotal</span> 
-									<c:set var="total" value="${0}" /> <c:forEach
-												items="${sessionScope.cart}" var="map">
-												<c:set var="total"
-													value="${total + map.value.quantity * map.value.product.productPrice}" />
-											</c:forEach>
-									<span class="value">$ ${total }</span></li>
+							<li class="prices-item"><span class="text">Subtotal</span> <c:set
+									var="total" value="${0}" /> <c:forEach
+									items="${sessionScope.cart}" var="map">
+									<c:set var="total"
+										value="${total + map.value.quantity * map.value.product.productPrice}" />
+								</c:forEach> <span class="value">$ <ins id="subtotal">${total }</ins>
+									<input style="display: none" id="subtotal-input" value=""
+									name="subtotal">
+							</span></li>
 							<li class="prices-item"><span class="text">Discount</span> <span
-								class="value">----</span></li>
+								class="value"> <ins id="discount">0</ins> <input
+									style="display: none;" id="discount-input" value=""
+									name="discount">
+							</span></li>
 						</ul>
 						<p class="prices-total">
 							<span class="text">Total Amount</span> <span class="final-value">
-								$ ${total } <i>(VAT included)</i>
+								$<ins id="total">${total }</ins> <input style="display: none;"
+								value="" id="total-input" name="total"> <i>(VAT
+									included)</i>
 							</span>
 						</p>
 					</div>
 
-					<button class="cart-submit">Place Order</button>
+					<a class="cart-submit" href="<c:url value='/customer/checkout'/>">Place
+						Order</a>
 				</div>
 			</div>
 		</div>
@@ -156,11 +172,11 @@
 	</div>
 
 
-	
 
-	
+
+
 	<!-- FOOTER -->
-	<footer style="padding-top: 20px;" >
+	<footer style="padding-top: 20px;">
 		<div class="footer-content">
 			<div class="content-container"
 				style="display: flex; justify-content: space-between;">
@@ -207,8 +223,9 @@
 			</div>
 
 		</div>
-		<div class="footer-copyright text-center py-3" style="background-color: #d03737; color: white">Copyright: © 2020
-			Lapeki. All Rights Reserved.</div>
+		<div class="footer-copyright text-center py-3"
+			style="background-color: #d03737; color: white">Copyright: ©
+			2020 Lapeki. All Rights Reserved.</div>
 	</footer>
 
 
@@ -234,6 +251,34 @@
 
 		function closeVoucher() {
 			document.getElementById('popup').style.display = "none";
+		}
+
+		//case: do not use voucher
+		const subtotalValue = parseInt(document.getElementById('subtotal').innerText)
+		document.getElementById('subtotal-input').value = subtotalValue
+		document.getElementById('total-input').value = subtotalValue
+
+		console.log(document.getElementById('subtotal-input').value)
+		console.log(document.getElementById('total-input').value)
+
+		//case: use voucher
+		function selectVoucher(discount) {
+			document.getElementById('dis-per').innerText = discount;
+			closeVoucher();
+			const subtotalValue = parseInt(document.getElementById('subtotal').innerText)
+			const discountValue = (subtotalValue * discount) / 100
+			document.getElementById('discount').innerText = "-" + discountValue
+			document.getElementById('total').innerText = subtotalValue
+					- discountValue
+
+			document.getElementById('subtotal-input').value = subtotalValue
+			document.getElementById('discount-input').value = discountValue
+			document.getElementById('total-input').value = subtotalValue
+					- discountValue
+
+			console.log(document.getElementById('subtotal-input').value)
+			console.log(document.getElementById('discount-input').value)
+			console.log(document.getElementById('total-input').value)
 		}
 	</script>
 
