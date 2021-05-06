@@ -30,11 +30,11 @@
 
 
 	<!-- HEADER START -->
-	<jsp:include page="../customer/account-header.jsp"></jsp:include>
+	<jsp:include page="../customer/header.jsp"></jsp:include>
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->
-	<main class="container-fluid">
+	<main class="container-fluid" style="height: 700px">
 		<div class="container main-content">
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-custom">
@@ -90,7 +90,7 @@
 
 	<!--  -->
 
-	<footer></footer>
+	<jsp:include page="../customer/footer.jsp"></jsp:include>
 
 
 

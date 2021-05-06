@@ -4,29 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/customer/" var="url"></c:url>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="icon" type="image/png" href="images/favicon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lapeki - Enjoy incredible online shopping.</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<link rel="stylesheet" href="${url }custom.css/header.css">
-
-</head>
-<body>
 	<header class="header-style">
 
 		<nav class="navbar navbar-expand-md   navbar-dark sticky-top"
 			style="background-color: #d03737;">
 			<div class="container">
-				<a class="navbar-brand" href="#"> <img
+				<a class="navbar-brand" href="${pageContext.request.contextPath }/"> <img
 					src="${url }images/account-brand.png" width="50px" alt=""> <img
 					src="${url }images/brand-light.png" height="50px" alt="">
 				</a>
@@ -46,7 +29,7 @@
 
 				<div class="user-shortcut">
 					<div class="account-container">
-						<img src="images/profile-img.png" class="profile-icon">
+						<img src="${url }images/profile-img.png" class="profile-icon">
 						<c:choose>
 							<c:when test="${sessionScope.account == null }">
 								<div class="account-block">
@@ -84,5 +67,3 @@
 				</div>
 		</nav>
 	</header>
-</body>
-</html>

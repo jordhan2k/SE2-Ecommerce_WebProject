@@ -2,21 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/view/customer/" var="url"></c:url>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="icon" type="image/png" href="images/favicon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lapeki - Enjoy incredible online shopping.</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="${url }custom.css/footer.css">
-</head>
-<body>
+
 	<footer style="padding-top: 20px;" >
 		<div class="footer-content">
 			<div class="content-container"
@@ -67,6 +53,3 @@
 		<div class="footer-copyright text-center py-3" style="background-color: #d03737; color: white">Copyright: © 2020
 			Lapeki. All Rights Reserved.</div>
 	</footer>
-
-</body>
-</html>

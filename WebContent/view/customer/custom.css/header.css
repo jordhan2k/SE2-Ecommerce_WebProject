@@ -1,3 +1,5 @@
+/* HEADER */
+
 .header-style{
     position: relative;
     background: rgb(1, 127, 255);
@@ -60,7 +62,7 @@
     color: rgb(255, 255, 255);
     font-size: 12px;
     position: relative;
-    width: 140px;
+    width: 170px;
 }
 
 .account-container a{
@@ -86,7 +88,7 @@
 
 .user-shortcut .cart-container{
     position: relative;
-    display: block;
+    display: flex;
 }
 
 .cart-container .cart-wrapper{
