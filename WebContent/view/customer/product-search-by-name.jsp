@@ -1,168 +1,259 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:url value="/view/customer/" var="url"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
-<c:url value="/view/client/static" var="url"></c:url>
-<meta charset="ISO-8859-1">
-<title>Product List</title>
-<!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
-
-<!-- Web Fonts -->
-<link rel='stylesheet' type='text/css'
-	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
-
-<!-- CSS Global Compulsory -->
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="${url }images/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lapeki - Enjoy incredible online shopping.</title>
+<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="${url}/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="${url}/css/shop.style.css">
-
-<!-- CSS Header and Footer -->
-
-
-
-<!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="${url}/plugins/animate.css">
-<link rel="stylesheet" href="${url}/plugins/line-icons/line-icons.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"
-	href="${url}/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="${url}/plugins/noUiSlider/jquery.nouislider.min.css">
-<link rel="stylesheet"
-	href="${url}/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<!-- Style Switcher -->
-<link rel="stylesheet" href="${url}/css/plugins/style-switcher.css">
+<link rel="stylesheet" href="${url }custom.css/landing.css">
 
-<!-- CSS Theme -->
-<link rel="stylesheet" href="${url}/css/theme-colors/default.css"
-	id="style_color">
-
-<!-- CSS Customization -->
-<link rel="stylesheet" href="${url}/css/custom.css">
 </head>
-<body>
-<body class="header-fixed">
-	<div class="wrapper">
-		<jsp:include page="header.jsp"></jsp:include>
-		
-		<!--=== Content Part ===-->
-		<div class="content container">
-			<div class="row">
-				<%-- 				<jsp:include page="/view/client/view/seach.jsp"></jsp:include> --%>
+<body style="background-color: rgb(244, 244, 244);">
 
-				<div class="col-md-9">
-					<div class="row margin-bottom-5">
-						<div class="col-sm-4 result-category"></div>
-
-					</div>
-					<!--/end result category-->
-					<c:forEach items="${productSearchByName}" var="productSearchByName">
-
-						<div class="filter-results">
-
-							<div
-								class="list-product-description product-description-brd margin-bottom-30">
-								<div class="row">
-
-									<div class="col-sm-4">
-										<c:url value="/image?fname=${productSearchByName.productImg }" var="imgUrl"></c:url>
-										<a
-											href="${pageContext.request.contextPath }/product/detail?id=${productSearchByName.productID}"><img
-											class="img-responsive sm-margin-bottom-20" src="${imgUrl}"
-											alt=""></a>
-									</div>
-									<div class="col-sm-8 product-description">
+	<jsp:include page="../customer/header.jsp"></jsp:include>
 
 
-										<div class="overflow-h margin-bottom-5">
-											<ul class="list-inline overflow-h">
-												<li><h4 class="title-price">
-														<a href=""
-															${pageContext.request.contextPath }/product/detail?id=${productSearchByName.productID}"">${productSearchByName.productName }</a>
+	<div class="container"></div>
 
-													</h4></li>
-												<li><span class="gender text-uppercase">${productSearchByName.category.productName }</span></li>
+	<div class="body-container">
+		<!-- Category Section -->
 
-											</ul>
-											<div class="margin-bottom-10">
-												<span class="title-price margin-right-10">$
-													${productSearchByName.productPrice } VND</span>
+		<!-- Trend Search Section -->
 
-											</div>
-											<p class="margin-bottom-20">${productSearchByName.productDesc }</p>
+		<!-- Product Section -->
 
+		<div class="product-sec">
+			<div class="header">
+				<span style="font-weight: 500; color: #D03737;">Result for
+					"${pname }" | <span style="color: gray; text-transform: lowercase;font-weight: normal;" >(${results.size() } results)</span></span>
+
+			</div>
+
+			<nav>
+				<div class="nav nav-tabs" id="nav-tab" role="tablist">
+					<a class="nav-item nav-link active" id="nav-home-tab"
+						data-toggle="tab" href="#nav-home" role="tab"
+						aria-controls="nav-home" aria-selected="true">Common</a> <a
+						class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+						href="#nav-profile" role="tab" aria-controls="nav-profile"
+						aria-selected="false">Low price</a> <a class="nav-item nav-link"
+						id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+						role="tab" aria-controls="nav-contact" aria-selected="false">High
+						price</a>
+				</div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+					aria-labelledby="nav-home-tab">
+
+					<div class="product-list-wrapper">
+						<div class="content">
+
+
+
+
+
+							<c:forEach items="${results}" var="product">
+
+								<div>
+									<a class="product-item"
+										href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
+										<div class="product-border">
+											<span class="product-inner">
+												<div>
+													<div class="thumbnail">
+														<c:set var="imgs" value="${product.productImg}" />
+														<c:set var="img" value="${fn:split(imgs,',')}" />
+														<c:set var="ava" value="${img[0]}" />
+														<img src="${ava}" />
+													</div>
+													<div class="info">
+														<div class="p-categories">
+															<span>${product.category.categoryName }</span>
+														</div>
+														<div class="p-name">
+															<h3>${product.productName }</h3>
+														</div>
+														<span class="p-price"> <ins>$${product.productPrice}
+															</ins>
+														</span>
+														<div class="atc-btn">
+															<i class="fa fa-shopping-basket"></i> <em>Add To
+																Cart</em>
+														</div>
+
+													</div>
+												</div>
+											</span>
 										</div>
-										
-									</div>
-								</div>
 
-							</div>
+									</a>
+								</div>
+							</c:forEach>
 
 						</div>
-					</c:forEach>
-					<!--/end filter resilts-->
-
-					<div class="text-center">
-						<ul class="pagination pagination-v2">
-							<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-							<li><a href="#">1</a></li>
-							<li class="active"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-						</ul>
 					</div>
-					<!--/end pagination-->
+
+				</div>
+				<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+					aria-labelledby="nav-profile-tab">
+
+					<div class="product-list-wrapper">
+						<div class="content">
+
+
+
+
+
+							<c:forEach items="${lowPrice}" var="product">
+
+								<div>
+									<a class="product-item"
+										href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
+										<div class="product-border">
+											<span class="product-inner">
+												<div>
+													<div class="thumbnail">
+														<c:set var="imgs" value="${product.productImg}" />
+														<c:set var="img" value="${fn:split(imgs,',')}" />
+														<c:set var="ava" value="${img[0]}" />
+														<img src="${ava}" />
+													</div>
+													<div class="info">
+														<div class="p-categories">
+															<span>${product.category.categoryName }</span>
+														</div>
+														<div class="p-name">
+															<h3>${product.productName }</h3>
+														</div>
+														<span class="p-price"> <ins>$${product.productPrice}
+															</ins>
+														</span>
+														<div class="atc-btn">
+															<i class="fa fa-shopping-basket"></i> <em>Add To
+																Cart</em>
+														</div>
+
+													</div>
+												</div>
+											</span>
+										</div>
+
+									</a>
+								</div>
+							</c:forEach>
+
+						</div>
+					</div>
+
+
+
+				</div>
+				<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+					aria-labelledby="nav-contact-tab">
+
+					<div class="product-list-wrapper">
+						<div class="content">
+
+
+
+
+
+							<c:forEach items="${highPrice}" var="product">
+
+								<div>
+									<a class="product-item"
+										href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
+										<div class="product-border">
+											<span class="product-inner">
+												<div>
+													<div class="thumbnail">
+														<c:set var="imgs" value="${product.productImg}" />
+														<c:set var="img" value="${fn:split(imgs,',')}" />
+														<c:set var="ava" value="${img[0]}" />
+														<img src="${ava}" />
+													</div>
+													<div class="info">
+														<div class="p-categories">
+															<span>${product.category.categoryName }</span>
+														</div>
+														<div class="p-name">
+															<h3>${product.productName }</h3>
+														</div>
+														<span class="p-price"> <ins>$${product.productPrice}
+															</ins>
+														</span>
+														<div class="atc-btn">
+															<i class="fa fa-shopping-basket"></i> <em>Add To
+																Cart</em>
+														</div>
+
+													</div>
+												</div>
+											</span>
+										</div>
+
+									</a>
+								</div>
+							</c:forEach>
+
+						</div>
+					</div>
+
+
+
 				</div>
 			</div>
-			<!--/end row-->
+
 		</div>
-		<!--/end container-->
-		<!--=== End Content Part ===-->
 
-		<!--=== Shop Suvbscribe ===-->
-		
-
-		<!--=== Footer v4 ===-->
-		<jsp:include page="footer.jsp"></jsp:include>
-		<!--=== End Footer v4 ===-->
 	</div>
-	<!--/wrapper-->
 
-	<!-- JS Global Compulsory -->
-	<script src="${url}/plugins/jquery/jquery.min.js"></script>
-	<script src="${url}/plugins/jquery/jquery-migrate.min.js"></script>
-	<script src="${url}/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<!-- JS Implementing Plugins -->
-	<script src="${url}/plugins/back-to-top.js"></script>
-	<script src="${url}/plugins/smoothScroll.js"></script>
-	<script src="${url}/plugins/noUiSlider/jquery.nouislider.all.min.js"></script>
+	<!-- FOOTER -->
+	<jsp:include page="../customer/footer.jsp"></jsp:include>
+
+	<a onclick="topFunction()" id="btnTop"> <i
+		class="fas fa-chevron-up"></i>
+	</a>
+
 	<script
-		src="${url}/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<!-- JS Customization -->
-	<script src="${url}/js/custom.js"></script>
-	<!-- JS Page Level -->
-	<script src="${url}/js/shop.app.js"></script>
-	<script src="${url}/js/plugins/mouse-wheel.js"></script>
-	<script>
-		jQuery(document).ready(function() {
-			App.init();
-			App.initScrollBar();
-			MouseWheel.initMouseWheel();
-		});
-	</script>
-	<!--[if lt IE 9]>
-    <script src="${url}/plugins/respond.js"></script>
-    <script src="${url}/plugins/html5shiv.js"></script>
-    <script src="${url}/js/plugins/placeholder-IE-fixes.js"></script>    
-<![endif]-->
-	<!--[if lt IE 10]>
-    <script src="${url}/plugins/sky-forms-pro/skyforms/js/jquery.placeholder.min.js"></script>
-<![endif]-->
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-</body>
+	<script type="text/javascript">
+		//Get the button
+		var mybutton = document.querySelector("#btnTop");
+
+		// When the user scrolls down 20px from the top of the document, show the button
+		window.onscroll = function scrollFunction() {
+			if (document.body.scrollTop > 20
+					|| document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+			} else {
+				mybutton.style.display = "none";
+			}
+		}
+
+		// When the user clicks on the button, scroll to the top of the document
+		function topFunction() {
+			document.body.scrollTop = 0;
+			document.documentElement.scrollTop = 0;
+		}
+	</script>
 
 </body>
 </html>

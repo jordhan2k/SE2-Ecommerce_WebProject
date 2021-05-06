@@ -136,7 +136,7 @@
 					</div>
 
 					<form role="form" action="<c:url value='/customer/checkout'/>"
-						method="post" enctype="multipart/form-data">
+						method="get" enctype="multipart/form-data">
 						<div class="cart-price">
 							<ul class="prices-item-list">
 								<li class="prices-item"><span class="text">Subtotal</span>
