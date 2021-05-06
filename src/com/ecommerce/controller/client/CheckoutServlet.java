@@ -2,6 +2,7 @@ package com.ecommerce.controller.client;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -14,16 +15,22 @@ import javax.servlet.http.HttpSession;
 
 import com.ecommerce.model.Cart;
 import com.ecommerce.model.CartLine;
+import com.ecommerce.model.Product;
 import com.ecommerce.model.User;
 import com.ecommerce.model.Voucher;
+import com.ecommerce.payment.PayPalService;
 import com.ecommerce.service.CartLineService;
 import com.ecommerce.service.CartService;
+import com.ecommerce.service.ProductService;
 import com.ecommerce.service.UserService;
 import com.ecommerce.service.VoucherService;
 import com.ecommerce.service.impl.CartLineServiceImpl;
 import com.ecommerce.service.impl.CartServiceImpl;
+import com.ecommerce.service.impl.ProductServiceImpl;
 import com.ecommerce.service.impl.UserServiceImpl;
 import com.ecommerce.service.impl.VoucherServiceImpl;
+import com.ecommerce.tools.MailTools;
+import com.paypal.base.rest.PayPalRESTException;
 
 @WebServlet("/customer/checkout")
 public class CheckoutServlet extends HttpServlet {
@@ -31,6 +38,7 @@ public class CheckoutServlet extends HttpServlet {
 	CartLineService cartLineService = new CartLineServiceImpl();
 	UserService userService = new UserServiceImpl();
 	VoucherService voucherService = new VoucherServiceImpl();
+	ProductService productService = new ProductServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,21 +54,48 @@ public class CheckoutServlet extends HttpServlet {
 		User account = (User) session.getAttribute("account");
 
 		String paymentMode = req.getParameter("paymentMode");
-//		Voucher voucher = (Voucher) req.getAttribute("voucher");
-		Voucher voucher = voucherService.getVoucherByID(100000);
-		
+//		Voucher voucher = (Voucher) req.getAttribute("voucher");   // keep
+		Voucher voucher = voucherService.getVoucherByID(100000); // test
+
 		System.out.println(paymentMode);
 
 		if (paymentMode.equals("PayPal")) { // handle online payment with pay pal
 
-			
-			
-			
-			
+			Object temporaryCart = req.getSession().getAttribute("cart");
+//			Map<Integer, CartLine> map = (Map<Integer, CartLine>) temporaryCart; // keep
+			try {
+				// TEST
+
+				Product pr1 = productService.getProductByID(100010);
+				Product pr2 = productService.getProductByID(100011);
+				CartLine line1 = new CartLine(2, 20000, pr1, null); // test
+				CartLine line2 = new CartLine(2, 20000, pr2, null); // test
+
+				Map<Integer, CartLine> map = new HashMap<Integer, CartLine>();
+				map.put(1, line1);
+				map.put(2, line2);
+				// TEST ends
+
+				for (CartLine line : map.values()) {
+					System.out.println(line.toString());
+				}
+
+				PayPalService payPalService = new PayPalService();
+				String approvalLink = payPalService.authorizePayment(map);
+				System.out.println(approvalLink);
+				resp.sendRedirect(approvalLink);
+			} catch (PayPalRESTException ex) {
+				req.setAttribute("errorMessage", ex.getMessage());
+				ex.printStackTrace();
+				req.getRequestDispatcher("/view/error-pages/error.jsp").forward(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		else {
-			
+
 			Cart cart = new Cart();
 			cart.setUser(account);
 			cart.setOrderDate(new Date(System.currentTimeMillis()));
@@ -84,6 +119,11 @@ public class CheckoutServlet extends HttpServlet {
 					cartLineService.insertCartLine(cartLine);
 				}
 			}
+
+			MailTools mailTools = new MailTools();
+			mailTools.sendMail(account.getEmail(), "Lapeki - Order placed successfully",
+					"Your order - #" + cartID + " has been successfully placed.\n" + " The chosen payment method is "
+							+ cart.getPaymentMode() + " . " + "Please be noticed!");
 			System.out.println(cartID);
 			session.removeAttribute("cart");
 			req.setAttribute("placed-id", cartID);

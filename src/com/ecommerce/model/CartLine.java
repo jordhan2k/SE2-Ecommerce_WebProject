@@ -104,6 +104,12 @@ public class CartLine implements Serializable {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
+	@Override
+	public String toString() {
+		return "CartLine [cartLineID=" + cartLineID + ", quantity=" + quantity + ", unitPrice=" + unitPrice
+				+ ", product=" + product + ", cart=" + cart + "]";
+	}
 	
 	
 	
