@@ -28,12 +28,18 @@ public class ProductDetailServlet extends HttpServlet{
 		
 		Product product = productService.getProductByID(productID);
 		
+		Category cat  = product.getCategory();
+		
+		List<Product> relatedProducts = productService.searchProductByCategory(cat.getCategoryID());
+		
+		
 		List<Category> categories = categoryService.getAllCategories();
 		
 		req.setAttribute("categories", categories);
 		req.setAttribute("product", product);
+		req.setAttribute("relatedProducts", relatedProducts);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/customer/view/product-detail.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/customer/product-detail.jsp");
 		dispatcher.forward(req, resp);
 	}
 }
