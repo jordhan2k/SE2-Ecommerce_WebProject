@@ -13,14 +13,17 @@ import com.ecommerce.model.Product;
 import com.ecommerce.service.ProductService;
 import com.ecommerce.service.impl.ProductServiceImpl;
 
-@WebServlet("/customer/product/name")
+@WebServlet("/product/search")
 public class ProductSearchByName extends HttpServlet {
 	ProductService productService=new ProductServiceImpl();
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		String name=req.getParameter("productName");
-		List<Product> productSeachByName =productService.searchProductByName(name);
-		req.setAttribute("productSeachByName", productSeachByName);
-		req.getRequestDispatcher("/view/customer/product-seach-by-name.jsp").forward(req, resp);
+		
+		System.out.println(name);
+		List<Product> productSearchByName =productService.searchProductByName(name);
+		req.setAttribute("productSearchByName", productSearchByName);
+		req.getRequestDispatcher("/view/customer/product-search-by-name.jsp").forward(req, resp);
+		
 		
 	}
 
