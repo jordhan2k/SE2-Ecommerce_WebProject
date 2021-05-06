@@ -279,6 +279,16 @@ img{
     cursor: pointer;
 }
 
+.product-sec .header .seemore{
+    font-size: 14px;
+    display: flex;
+    position: absolute;
+    right: 0;
+    text-transform: none;
+    margin-right: 20px;
+    color: inherit;
+}
+
 .product-list-wrapper{
     display: flex;
     flex-direction: column;
