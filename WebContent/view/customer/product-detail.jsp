@@ -82,7 +82,8 @@
 								<button type='button' class="quantity-button" name='subtract'
 									onclick='javascript: document.getElementById("qty").value--;'
 									value='-'>-</button>
-								<input class="quantity" min="0" name="quantity" value="1" type="number" id='qty'>
+								<input class="quantity" min="0" name="quantity" value="1"
+									type="number" id='qty'>
 								<button type='button' class="quantity-button" name='add'
 									onclick='javascript: document.getElementById("qty").value++;'
 									value='+'>+</button>
@@ -136,15 +137,20 @@
 
 									<div class="view zoom overlay z-depth-2 rounded">
 										<div class="mask">
-											<img src="${relatedProducts.productImg}">
+											<c:set var="imgs" value="${relatedProducts.productImg}" />
+											<c:set var="img" value="${fn:split(imgs,',')}" />
+											<c:set var="ava" value="${img[0]}" />
 											<div class="mask rgba-black-slight"></div>
+											<td><img  src="${ava}" /></td>
 										</div>
 
 									</div>
 
 									<div class="pt-4">
 
-										<a class="namelink" href="${pageContext.request.contextPath }/product/detail?id=${relatedProducts.productID}"> ${relatedProducts.productName}</a>
+										<a class="namelink"
+											href="${pageContext.request.contextPath }/product/detail?id=${relatedProducts.productID}">
+											${relatedProducts.productName}</a>
 										<h6>${relatedProducts.productPrice} VND</h6>
 									</div>
 
