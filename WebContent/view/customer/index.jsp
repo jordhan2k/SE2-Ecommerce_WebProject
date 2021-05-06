@@ -71,8 +71,7 @@
 									<div>
 										<div class="page">
 											<c:forEach items="${categories}" var="category">
-												<a class="item" href="">
-													 <span class="text">${category.categoryName }</span>
+												<a class="item" href=""> <span class="text">${category.categoryName }</span>
 												</a>
 											</c:forEach>
 										</div>
@@ -195,51 +194,60 @@
 		</div>
 
 		<!-- Product Section -->
-		<div class="product-sec">
-			<div class="header">
-				<span style="font-weight: 500; color: #D03737;">Suggestion</span>
-			</div>
-			<div class="product-list-wrapper">
-				<div class="content">
-					<c:forEach items="${products}" var="product">
-						<div>
-							<a class="product-item" href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
-								<div class="product-border">
-									<span class="product-inner">
-										<div>
-											<div class="thumbnail">
-												<c:set var="imgs" value="${product.productImg}" />
-												<c:set var="img" value="${fn:split(imgs,',')}" />
-												<c:set var="ava" value="${img[0]}" />
-												<img src="${ava}"/>
+		<c:forEach items="${categories }" var="category">
+			<div class="product-sec">
+				<div class="header">
+					<span style="font-weight: 500; color: #D03737;">${category.categoryName}</span>
+					<a class="seemore" href="">See more</a>
+				</div>
+				<div class="product-list-wrapper">
+					<div class="content">
+						<c:forEach items="${products}" begin="0" step="1" end="9" var="product">
+							<c:if
+								test="${product.category.categoryName == category.categoryName }">
+								<c:set var="productCat" value="${product}" />
+							</c:if>
+							<div>
+								<a class="product-item"
+									href="${pageContext.request.contextPath }/product/detail?id=${productCat.productID}">
+									<div class="product-border">
+										<span class="product-inner">
+											<div>
+												<div class="thumbnail">
+													<c:set var="imgs" value="${productCat.productImg}" />
+													<c:set var="img" value="${fn:split(imgs,',')}" />
+													<c:set var="ava" value="${img[0]}" />
+													<img src="${ava}" />
+												</div>
+												<div class="info">
+													<div class="p-categories">
+														<span>${productCat.category.categoryName }</span>
+													</div>
+													<div class="p-name">
+														<h3>${productCat.productName }</h3>
+													</div>
+													<span class="p-price"> <ins>$${productCat.productPrice}
+														</ins>
+													</span>
+													<div class="atc-btn">
+														<i class="fa fa-shopping-basket"></i> <em>Add To Cart</em>
+													</div>
+
+												</div>
 											</div>
-											<div class="info">
-												<div class="p-categories">
-													<span>${product.category.categoryName }</span>
-												</div>
-												<div class="p-name">
-													<h3>${product.productName }</h3>
-												</div>
-												<span class="p-price"> <ins>$${product.productPrice} </ins>
-												</span>
-												<div class="atc-btn">
-													<i class="fa fa-shopping-basket"></i> <em>Add To Cart</em>
-												</div>
+										</span>
+									</div>
 
-											</div>
-										</div>
-									</span>
-								</div>
+								</a>
+							</div>
+						</c:forEach>
 
-							</a>
-						</div>
-					</c:forEach>
-
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:forEach>
 	</div>
-	
+
 	<!-- FOOTER -->
 	<jsp:include page="../customer/footer.jsp"></jsp:include>
 
