@@ -170,7 +170,7 @@
 								</span></li>
 								<li class="prices-item"><span class="text">Discount</span>
 									<span class="value"> <ins id="discount">0</ins> <input
-										style="display: none;" id="discount-input" value=""
+										style="display: none;" id="discount-input" value="0"
 										name="discount">
 								</span></li>
 							</ul>
@@ -181,7 +181,7 @@
 										included)</i>
 								</span>
 							</p>
-							<input style="display: none;" value="" id="voucher-input" name="voucherID">
+							<input style="display: none;" value="11111" id="voucher-input" name="voucherID">
 						</div>
 
 						<button class="cart-submit" type="submit">Checkout</button>
