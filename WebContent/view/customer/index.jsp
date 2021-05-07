@@ -87,8 +87,8 @@
 		<!-- Trend Search Section -->
 		<div class="trend-search-sec">
 			<div class="header">
-				<span class="header-name"> <img src="${url }images/search-icon.png">
-					Trend Search
+				<span class="header-name"> <img
+					src="${url }images/search-icon.png"> Trend Search
 				</span>
 			</div>
 			<div class="body">
@@ -202,44 +202,45 @@
 				</div>
 				<div class="product-list-wrapper">
 					<div class="content">
-						<c:forEach items="${products}" begin="0" step="1" end="9" var="product">
+						<c:forEach items="${products}" var="product" begin="0" end="9">
 							<c:if
-								test="${product.category.categoryName == category.categoryName }">
-								<c:set var="productCat" value="${product}" />
+								test="${product.category.categoryID == category.categoryID }">
+
+								<div>
+									<a class="product-item"
+										href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
+										<div class="product-border">
+											<span class="product-inner">
+												<div>
+													<div class="thumbnail">
+														<c:set var="imgs" value="${product.productImg}" />
+														<c:set var="img" value="${fn:split(imgs,',')}" />
+														<c:set var="ava" value="${img[0]}" />
+														<img src="${ava}" />
+													</div>
+													<div class="info">
+														<div class="p-categories">
+															<span>${product.category.categoryName }</span>
+														</div>
+														<div class="p-name">
+															<h3>${product.productName }</h3>
+														</div>
+														<span class="p-price"> <ins>$${product.productPrice}
+															</ins>
+														</span>
+														<div class="atc-btn">
+															<i class="fa fa-shopping-basket"></i> <em>Add To
+																Cart</em>
+														</div>
+
+													</div>
+												</div>
+											</span>
+										</div>
+
+									</a>
+								</div>
 							</c:if>
-							<div>
-								<a class="product-item"
-									href="${pageContext.request.contextPath }/product/detail?id=${productCat.productID}">
-									<div class="product-border">
-										<span class="product-inner">
-											<div>
-												<div class="thumbnail">
-													<c:set var="imgs" value="${productCat.productImg}" />
-													<c:set var="img" value="${fn:split(imgs,',')}" />
-													<c:set var="ava" value="${img[0]}" />
-													<img src="${ava}" />
-												</div>
-												<div class="info">
-													<div class="p-categories">
-														<span>${productCat.category.categoryName }</span>
-													</div>
-													<div class="p-name">
-														<h3>${productCat.productName }</h3>
-													</div>
-													<span class="p-price"> <ins>$${productCat.productPrice}
-														</ins>
-													</span>
-													<div class="atc-btn">
-														<i class="fa fa-shopping-basket"></i> <em>Add To Cart</em>
-													</div>
-
-												</div>
-											</div>
-										</span>
-									</div>
-
-								</a>
-							</div>
 						</c:forEach>
 
 					</div>

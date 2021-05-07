@@ -72,7 +72,7 @@
 				<c:forEach items="${sessionScope.cart}" var="map">
 					<c:set var="count" value="${count + map.value.quantity}" />
 				</c:forEach>
-				<h2 class="cart-products__title">Your Cart (${count } products)</h2>
+				<h2 class="cart-products__title">Your Cart <span style="text-transform: none">(${count } products)</span></h2>
 				<c:choose>
 					<c:when test="${count == 0 }">
 						<div class="cart-products-inner">
