@@ -53,6 +53,6 @@ public class CartAddServlet extends HttpServlet {
 			httpSession.setAttribute("cart", map);
 		}
 		
-		resp.sendRedirect(req.getContextPath() + "/customer/cart");				
+		resp.sendRedirect(req.getContextPath() + "/product/detail?id=" + Integer.parseInt(productID));				
 	}
 }
