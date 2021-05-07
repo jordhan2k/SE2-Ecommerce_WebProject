@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/customer/" var="url"></c:url>
@@ -11,9 +11,11 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="${url }custom.css/login_register_style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
   	<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <div class="cont">
     <form action="login" method="post" class="form sign-in">
      <a href="${path}">
@@ -22,17 +24,17 @@
       <h2>Sign In</h2>
       <label>
         <span>Username</span>
-        <input type="text" name="username">
+        <input type="text" name="username" required>
       </label>
       <label>
         <span>Password</span>
-        <input type="password" name="password">
+        <input type="password" name="password" required>
       </label>
       <label class="container">Remember me
         <input type="checkbox" name="remember" >
         <span class="checkmark"></span>
       </label>
-      <button class="submit">Sign In</button>
+      <button class="custom-button submit">Sign In</button>
       <p class="forgot-pass">Forgot Password ?</p>
 
       <div class="social-media">
@@ -112,16 +114,29 @@
         </div>
         
         
-        <button type="submit" class="submit submit-signup">Sign Up</button>
+        <button type="submit" class="custom-button submit submit-signup">Sign Up</button>
       </form>
     </div>
   </div>
+ 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script >
   document.querySelector('.img-btn').addEventListener('click', function()
 	{
-		document.querySelector('.cont').classList.toggle('s-signup')
+		document.querySelector('.cont').classList.toggle('s-signup');
 	}
 );
+ 	
+ 	var alert = '${alert}';
+ 	if(alert.length > 0){
+ 		sweetAlert({
+ 			  title: "Error!",
+ 			  text: alert,
+ 			  icon: "error",
+ 			  button: "Ok",
+ 			});
+ 	}
+ 	
 </script>
 </body>
 </html>
