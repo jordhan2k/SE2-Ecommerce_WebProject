@@ -193,7 +193,7 @@
 
 				</div>
 				
-				<c:if test="${order.status == 'Checkout' }" >
+				<c:if test="${order.status == 'Pending' }" >
 				<div class="conainer-fluid"
 					style="display: flex; justify-content: flex-end;">
 					
@@ -261,7 +261,7 @@
 		
 		const voucher = document.querySelector("#voucher");
 		const voucherNum = parseInt(voucher.textContent);
-		const discount = Math.floor(total * voucherNum / 100)
+		const discount = Math.floor(total * voucherNum / 100);
 		voucher.textContent = "-" + discount.toLocaleString("vi-VN") + " VND";
 		
 		const finalTotal = document.querySelector("#final");

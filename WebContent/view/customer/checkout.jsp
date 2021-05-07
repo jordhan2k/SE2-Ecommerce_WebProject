@@ -29,13 +29,7 @@
 </head>
 
 <body>
-	<%
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
 
-	response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-
-	response.setHeader("Expires", "0");
-	%>
 
 
 
@@ -52,9 +46,12 @@
 
 			<nav class="bcnav" aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-custom">
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/customer/cart" data-abc="true">Cart</a></li>
-				
+					<li class="breadcrumb-item"><a
+						href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
+					<li class="breadcrumb-item"><a
+						href="${pageContext.request.contextPath}/customer/cart"
+						data-abc="true">Cart</a></li>
+
 					<li class="breadcrumb-item active" aria-current="page"><span>Payment</span></li>
 
 				</ol>
@@ -210,7 +207,7 @@
 
 							<tr>
 								<td style="height: 30px;">Total:</td>
-								<td id="total">${subtotal}</td>
+								<td><span id="total">${subtotal}</span> VND</td>
 							</tr>
 							<tr>
 								<td style="height: 30px;">Shipping fee:</td>
@@ -218,20 +215,27 @@
 							</tr>
 
 							<tr>
-								<td style="height: 30px;">Discount with voucher:</td>
-								<td id="voucher">
+
+								<td style="height: 30px;">Discount with voucher :</td>
+								<td>
 									<!--<fmt:formatNumber var="discount"
 									value="${order.total / order.voucher.discountPercentage}"
-									maxFractionDigits="0" />-${discount } VND --> <c:if
-										test="${order.voucher != null }">${order.voucher.discountPercentage }</c:if>
-									<c:if test="${order.voucher == null }">0</c:if>
+									maxFractionDigits="0" />-${discount } VND  --> <span
+									id="voucher"> <c:choose>
+											<c:when test="${discount > 0 }">-${discount }</c:when>
+
+											<c:otherwise>0</c:otherwise>
+										</c:choose>
+
+								</span> VND
 								</td>
 							</tr>
 
 
 							<tr>
 								<td style="height: 30px;"><b>Final total:</b></td>
-								<td id="final">${order.total}VND</td>
+								<td style="font-weight: bold;"><span id="final">${total + 30000}</span>
+									VND</td>
 							</tr>
 
 
@@ -254,8 +258,10 @@
 
 				</aside>
 
-
-
+				<input type="hidden" value=${voucherID } name="voucherID" /> <input
+					type="hidden" value=${subtotal } name="subtotal" /> <input
+					type="hidden" value=${discount } name="discount" />
+					<input type="hidden" value=${total } name="total" />
 
 
 
@@ -304,6 +310,18 @@
 
 	<script type="text/javascript">
 		$("#acc-order").addClass("active");
+
+		const finalTotal = document.querySelector("#final");
+		const a = parseInt(finalTotal.textContent);
+		finalTotal.textContent = a.toLocaleString("vi-VN");
+
+		const voucher = document.querySelector("#voucher");
+		const b = parseInt(voucher.textContent);
+		voucher.textContent = b.toLocaleString("vi-VN");
+
+		const subTotal = document.querySelector("#total");
+		const c = parseInt(subTotal.textContent);
+		subTotal.textContent = c.toLocaleString("vi-VN");
 	</script>
 
 
