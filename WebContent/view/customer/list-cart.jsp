@@ -155,8 +155,8 @@
 						</div>
 					</div>
 
-					<form role="form" action="<c:url value='/customer/checkout'/>"
-						method="get" enctype="multipart/form-data">
+					<form role="form" action="<c:url value='/customer/cart'/>"
+						method="post" enctype="multipart/form-data">
 						<div class="cart-price">
 							<ul class="prices-item-list">
 								<li class="prices-item"><span class="text">Subtotal</span>
@@ -184,7 +184,7 @@
 							<input style="display: none;" value="" id="voucher-input" name="voucherID">
 						</div>
 
-						<button class="cart-submit" type="submit">Place Order</button>
+						<button class="cart-submit" type="submit">Checkout</button>
 					</form>
 				</div>
 			</div>

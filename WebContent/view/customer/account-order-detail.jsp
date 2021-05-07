@@ -34,7 +34,8 @@
 
 
 	<!-- HEADER START -->
-	<jsp:include page="../customer/account-header.jsp"></jsp:include>
+	<jsp:include page="../customer/header.jsp"></jsp:include>
+	
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->
@@ -42,9 +43,9 @@
 
 
 		<div class="container main-content">
-			<nav aria-label="breadcrumb">
+			<nav class="bcnav" aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-custom">
-					<li class="breadcrumb-item"><a href="#" data-abc="true">Home</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
 					<li class="breadcrumb-item"><a href="#" data-abc="true">Customer</a></li>
 					<li class="breadcrumb-item"><a href="#" data-abc="true">Orders</a></li>
 					<li class="breadcrumb-item active" aria-current="page"><span>Detail</span></li>
@@ -216,7 +217,6 @@
 
 	<!--  -->
 
-	<footer></footer>
 
 
 

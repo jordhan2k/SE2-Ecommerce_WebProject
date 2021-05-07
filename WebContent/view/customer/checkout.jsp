@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/customer/" var="url"></c:url>
@@ -41,28 +41,27 @@
 
 	<!-- HEADER START -->
 
-	<header class="container-fluid">
-		<nav class="navbar navbar-expand-md   navbar-dark sticky-top"
-			style="background-color: #d03737;">
-			<div class="container">
-				<a class="navbar-brand" href="#"> <img
-					src="${url }images/account-brand.png" width="50px" alt=""> <img
-					src="${url }images/brand-light.png" height="50px" alt="">
-				</a>
+	<jsp:include page="../customer/header.jsp"></jsp:include>
 
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->
 	<main class="container-fluid">
 
 		<div class="container main-content">
+
+			<nav class="bcnav" aria-label="breadcrumb">
+				<ol class="breadcrumb breadcrumb-custom">
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/customer/cart" data-abc="true">Cart</a></li>
+				
+					<li class="breadcrumb-item active" aria-current="page"><span>Payment</span></li>
+
+				</ol>
+			</nav>
+
+
+
 			<form action="${pageContext.request.contextPath}/customer/checkout"
 				method="post">
 				<div class="main-panel-left">
@@ -162,7 +161,7 @@
 
 				</div>
 
-				<aside class="side-bar-right">
+				<aside class="side-bar-right" style="background-color: white;">
 					<div class="container-fluid">
 						<div class="heading-fluid-btn">
 							<h5>Receiver address</h5>
@@ -176,8 +175,9 @@
 						</p>
 						<p>Address: ${account.address }</p>
 					</div>
-
-					<div class="container-fluid">
+					<div
+						style="height: 4px; border: 1px rgba(0, 0, 0, .4) dashed; border-left: none; border-right: none;"></div>
+					<div class="container-fluid"">
 						<div class="heading-fluid-btn">
 							<h5>Order detail</h5>
 							<a data-toggle="collapse" href="#collapseExample" role="button"
@@ -189,10 +189,62 @@
 						<hr>
 						<p></p>
 						<div class="collapse" id="collapseExample">
-							<div class="card card-body">Some placeholder content for
-								the collapse component. This panel is hidden by default but
-								revealed when the user activates the relevant trigger.</div>
+
+							<table style="width: 100%;">
+								<c:forEach items="${sessionScope.cart }" var="line">
+									<tr>
+										<td style="width: 5%">${ line.value.quantity}</td>
+										<td style="width: 5%">x</td>
+										<td style="width: 70%">${line.value.product.productName }</td>
+										<td style="width: 20%; text-align: right;">${ line.value.quantity * line.value.unitPrice}</td>
+									</tr>
+								</c:forEach>
+
+							</table>
+							<hr>
+
 						</div>
+
+						<table id="total-table"
+							style="width: 100%; text-align: right; float: right; margin-bottom: 30px">
+
+							<tr>
+								<td style="height: 30px;">Total:</td>
+								<td id="total">${subtotal}</td>
+							</tr>
+							<tr>
+								<td style="height: 30px;">Shipping fee:</td>
+								<td>30.000 VND</td>
+							</tr>
+
+							<tr>
+								<td style="height: 30px;">Discount with voucher:</td>
+								<td id="voucher">
+									<!--<fmt:formatNumber var="discount"
+									value="${order.total / order.voucher.discountPercentage}"
+									maxFractionDigits="0" />-${discount } VND --> <c:if
+										test="${order.voucher != null }">${order.voucher.discountPercentage }</c:if>
+									<c:if test="${order.voucher == null }">0</c:if>
+								</td>
+							</tr>
+
+
+							<tr>
+								<td style="height: 30px;"><b>Final total:</b></td>
+								<td id="final">${order.total}VND</td>
+							</tr>
+
+
+
+
+
+
+
+
+
+
+
+						</table>
 					</div>
 
 

@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<jsp:include page="../customer/account-header.jsp"></jsp:include>
+	<jsp:include page="../customer/header.jsp"></jsp:include>
 
 	<div class="container-cart">
 		<div class="cart">

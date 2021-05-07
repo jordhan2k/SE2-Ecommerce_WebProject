@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="${url }custom.css/breadcrumb.css">
 
-
+<link rel="stylesheet" href="${url }custom.css/landing.css">
 
 <link
 	rel="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
@@ -33,7 +33,7 @@
 
 
 	<!-- HEADER START -->
-	<jsp:include page="../customer/account-header.jsp"></jsp:include>
+	<jsp:include page="../customer/header.jsp"></jsp:include>
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->

@@ -54,8 +54,8 @@ public class CheckoutServlet extends HttpServlet {
 		User account = (User) session.getAttribute("account");
 
 		String paymentMode = req.getParameter("paymentMode");
-//		Voucher voucher = (Voucher) req.getAttribute("voucher");   // keep
-		Voucher voucher = voucherService.getVoucherByID(100000); // test
+		String voucherID = req.getParameter("voucher");
+		System.out.println();
 
 		System.out.println(paymentMode);
 
@@ -101,7 +101,7 @@ public class CheckoutServlet extends HttpServlet {
 			cart.setOrderDate(new Date(System.currentTimeMillis()));
 			cart.setStatus("Checkout");
 			cart.setPayment(paymentMode);
-			cart.setVoucher(voucher);
+//			cart.setVoucher(voucher);
 
 			// get inserted cartID
 			int cartID = cartService.insertCart(cart);
@@ -121,9 +121,16 @@ public class CheckoutServlet extends HttpServlet {
 			}
 
 			MailTools mailTools = new MailTools();
-			mailTools.sendMail(account.getEmail(), "Lapeki - Order placed successfully",
-					"Your order - #" + cartID + " has been successfully placed.\n" + " The chosen payment method is "
-							+ cart.getPaymentMode() + " . " + "Please be noticed!");
+
+			try {
+				mailTools.sendMail(account.getEmail(), "Lapeki - Order placed successfully",
+						"Your order - #" + cartID + " has been successfully placed.\n"
+								+ " The chosen payment method is " + cart.getPaymentMode() + " . "
+								+ "Please be noticed!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			System.out.println(cartID);
 			session.removeAttribute("cart");
 			req.setAttribute("placed-id", cartID);

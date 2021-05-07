@@ -18,7 +18,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-
+<link rel="stylesheet" href="${url }custom.css/breadcrumb.css">
 
 <link rel="stylesheet" href="${url }custom.css/landing.css">
 
@@ -43,6 +43,15 @@
 		<!-- Trend Search Section -->
 
 		<!-- Product Section -->
+		
+		<nav class="bcnav" aria-label="breadcrumb" style="margin-top: 20px">
+				<ol class="breadcrumb breadcrumb-custom">
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
+				
+					<li class="breadcrumb-item active" aria-current="page"><span>${pname }</span></li>
+
+				</ol>
+			</nav>
 
 
 
@@ -57,7 +66,7 @@
 									<div>
 										<div class="page">
 											<c:forEach items="${categories}" var="category">
-												<a class="item" href=""> <span class="text">${category.categoryName }</span>
+												<a class="item" href="${pageContext.request.contextPath }/product/category?id=${category.categoryID}"> <span class="text">${category.categoryName }</span>
 												</a>
 											</c:forEach>
 										</div>

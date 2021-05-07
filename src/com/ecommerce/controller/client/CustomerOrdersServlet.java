@@ -26,9 +26,14 @@ public class CustomerOrdersServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User account = (User) req.getSession().getAttribute("account");
-		
-		List<Cart> orders = cartService.getCartByUserId(account.getUserID());
-		
+		List<Cart> orders = null;
+		try {
+		orders = cartService.getCartByUserId(account.getUserID());
+		}  catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("no orders: " + orders.size());
+		System.out.println("user id - " + account.getUserID());
 		req.setAttribute("orders", orders);
 		
 		

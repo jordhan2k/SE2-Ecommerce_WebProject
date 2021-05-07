@@ -35,9 +35,9 @@
 	<main class="container-fluid" style="height: 700px">
 		<div class="container main-content">
 
-			<nav aria-label="breadcrumb">
+			<nav class="bcnav" aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-custom">
-					<li class="breadcrumb-item"><a href="#" data-abc="true">Home</a></li>
+					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
 					<li class="breadcrumb-item"><a href="#" data-abc="true">Customer</a></li>
 					<li class="breadcrumb-item active" aria-current="page"><span>Profile</span></li>
 				</ol>

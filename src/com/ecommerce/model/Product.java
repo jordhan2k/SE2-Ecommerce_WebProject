@@ -1,5 +1,7 @@
 package com.ecommerce.model;
 
+import java.io.Serializable;
+
 /**
  * @overview
  *   <pre>
@@ -30,7 +32,7 @@ package com.ecommerce.model;
  *
  */
 
-public class Product {
+public class Product implements Serializable{
 	private int productID; 
 	private String productName;
 	private String productImg; 

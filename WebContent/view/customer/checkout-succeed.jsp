@@ -34,22 +34,7 @@
 
 	<!-- HEADER START -->
 
-	<header class="container-fluid">
-		<nav class="navbar navbar-expand-md   navbar-dark sticky-top"
-			style="background-color: #d03737;">
-			<div class="container">
-				<a class="navbar-brand" href="#"> <img
-					src="${url }images/account-brand.png" width="50px" alt=""> <img
-					src="${url }images/brand-light.png" height="50px" alt="">
-				</a>
-
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
+	<jsp:include page="../customer/header.jsp"></jsp:include>
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->
