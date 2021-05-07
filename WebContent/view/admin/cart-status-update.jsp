@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/assets" var="url"></c:url>
 <!DOCTYPE html>
 <html>
@@ -144,7 +145,10 @@
 														<c:set var="total" value="${total + subtotal}" />
 														<tr>
 															<td>${cl.cartLineID}</td>
-															<td><img height="100" src="${cl.product.productImg}" /></td>
+															<c:set var="imgs" value="${cl.product.productImg}" />
+															<c:set var="img" value="${fn:split(imgs,',')}" />
+																<c:set var="ava" value="${img[0]}" />
+															<td><img height="100" src="${img[0]}" /></td>
 															<td>${cl.product.productName}</td>
 															<td>${cl.product.productPrice}</td>
 															<td>${cl.quantity}</td>
@@ -167,14 +171,45 @@
 													</select>
 												</div>
 											</div>
+											
+											<div class="col-md-9"
+												style="display: flex; justify-content: flex-end;">
 
-											<div class="col-md-3">
-												<h2 class="text-danger">Total</h2>
-												<h3>${total -(total * cart.voucher.discountPercentage)/100}
-													VND</h3>
+												<table id="total-table"
+													style="width: 50%; text-align: right;">
+
+													<tr>
+														<td style="height: 30px;">Total:</td>
+														<td id="total">${total}VND</td>
+													</tr>
+													
+
+													<tr>
+														<td style="height: 30px;">Discount with voucher:</td>
+														<td id="voucher">
+															<c:if
+																test="${cart.voucher != null }">-${(total*cart.voucher.discountPercentage)/100 }</c:if>
+															<c:if test="${cart.voucher == null }">0</c:if>
+														</td>
+													</tr>
+													
+													<tr>
+														<td style="height: 30px;">Shipping fee:</td>
+														<td>30.000 VND</td>
+													</tr>
+
+													<tr>
+														<td style="height: 30px;"><b>Final total:</b></td>
+														<td id="final">${cart.total}VND</td>
+													</tr>
+
+												</table>
+
+
 											</div>
+											
 										</div>
-										<button type="submit" class="btn btn-primary pull-right">Save
+										<button type="submit" class="btn btn-primary pull-right" style="margin-top: 45px">Save
 											change</button>
 										<div class="clearfix"></div>
 									</form>
