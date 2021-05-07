@@ -35,7 +35,7 @@
 
 	<!-- HEADER START -->
 	<jsp:include page="../customer/header.jsp"></jsp:include>
-	
+
 	<!-- HEADER ENDS -->
 
 	<!-- MAIN STARTS -->
@@ -45,7 +45,8 @@
 		<div class="container main-content">
 			<nav class="bcnav" aria-label="breadcrumb">
 				<ol class="breadcrumb breadcrumb-custom">
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
+					<li class="breadcrumb-item"><a
+						href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
 					<li class="breadcrumb-item"><a href="#" data-abc="true">Customer</a></li>
 					<li class="breadcrumb-item"><a href="#" data-abc="true">Orders</a></li>
 					<li class="breadcrumb-item active" aria-current="page"><span>Detail</span></li>
@@ -120,7 +121,7 @@
 					style="width: 100%; margin-top: 20px;">
 
 					<thead>
-						<th style="width: 60%">Product</th>
+						<th colspan="2" style="width: 60%">Product</th>
 						<th style="width: 10%">Price</th>
 						<th style="width: 10%">Quantity</th>
 						<!--  <th  style="width: 10%">Discount</th>-->
@@ -130,7 +131,15 @@
 					<tbody>
 						<c:forEach items="${items}" var="item">
 							<tr>
-								<td style="width: 60%">${item.product.productName }</td>
+
+								<c:set var="imgs" value="${item.product.productImg}" />
+								<c:set var="img" value="${fn:split(imgs,',')}" />
+								<c:set var="ava" value="${img[0]}" />
+								
+								<td style="width: 10%"><img height="100" src="${ava}" /></td>
+								<td style="width: 50%"><a
+									href="${pageContext.request.contextPath}/product/detail?id=${item.product.productID}">${item.product.productName }</a>
+								</td>
 								<td style="width: 10%">${item.product.productPrice}</td>
 								<td style="width: 10%">${item.quantity }</td>
 								<!--  <th  style="width: 10%">Discount</th>-->
@@ -192,17 +201,17 @@
 
 
 				</div>
-				
-				<c:if test="${order.status == 'Pending' }" >
-				<div class="conainer-fluid"
-					style="display: flex; justify-content: flex-end;">
-					
-					
-					<a class="btn btn-danger" href="${pageContext.request.contextPath}/customer/order/cancel?id=${order.cartID}"
-						>Cancel this order
-					</a>
-				</div>
-				
+
+				<c:if test="${order.status == 'Pending' }">
+					<div class="conainer-fluid"
+						style="display: flex; justify-content: flex-end;">
+
+
+						<a class="btn btn-danger"
+							href="${pageContext.request.contextPath}/customer/order/cancel?id=${order.cartID}">Cancel
+							this order </a>
+					</div>
+
 				</c:if>
 
 
