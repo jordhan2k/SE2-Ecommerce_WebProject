@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DatabaseConnection {
 	
 //    private static String DB_URL = "jdbc:mysql://localhost:3306/fit_shop?useSSL=false&allowPublicKeyRetrieval=true";
-    private static String DB_URL = "jdbc:mysql://localhost:3306/fit_shop?useSSL=false";
+    private static String DB_URL = "jdbc:mysql://localhost:3306/lapeki_dbs?useSSL=false";
     private static String USER_NAME = "root";
     private static String PASSWORD = "123456789";
 	
