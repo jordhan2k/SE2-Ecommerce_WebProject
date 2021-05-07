@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/customer/" var="url"></c:url>
@@ -235,12 +235,11 @@
 															<div class="p-name">
 																<h3>${product.productName }</h3>
 															</div>
-															<span class="p-price"> <ins>$${product.productPrice}
+															<span class="p-price"> <ins>${product.productPrice} VND
 																</ins>
 															</span>
 															<div class="atc-btn">
-																<i class="fa fa-shopping-basket"></i> <em>Add To
-																	Cart</em>
+																<i class="fa fa-shopping-basket"></i> <em style="margin-left:7px">See more details</em>
 															</div>
 
 														</div>
