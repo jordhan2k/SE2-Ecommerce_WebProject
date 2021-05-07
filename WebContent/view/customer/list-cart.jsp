@@ -46,7 +46,7 @@
 									<img alt="voucher-img" src="${url}images/voucher-img.png"
 										style="height: 100px; width: 100px;">
 									<div>
-										<h5>${vou.discountPercentage}%offperorder</h5>
+										<h5>${vou.discountPercentage}%off per order</h5>
 										<p>Code: ${vou.voucherCode }</p>
 										<p>Expire date: ${vou.expireDate }</p>
 
@@ -78,24 +78,25 @@
 										<c:set var="imgs" value="${map.value.product.productImg}" />
 										<c:set var="img" value="${fn:split(imgs,',')}" />
 										<c:set var="ava" value="${img[0]}" />
-										<c:url value="/image?fname=${ava }" var="imgUrl"></c:url>
-										<a href=""> <img src="${imgUrl}" alt="">
+										<a href=""> <img src="${ava}" alt="">
 										</a>
 									</div>
 									<div class="cart-products__content">
 										<div class="cart-products__content--inner">
 											<div class="cart-product-desc">
-												<a class="cart-product-name" href="">${map.value.product.productName }</a>
-												<p class="cart-product-description">${map.value.product.productDesc }</p>
+												<a class="cart-product-name"
+													href="${pageContext.request.contextPath}/product/detail?id=${map.value.product.productID}">${map.value.product.productName }</a>
+												<div class="cart-product-description">${map.value.product.productDesc }</div>
 
 												<p class="cart-product-action">
 													<a class="cart-product-del"
-														href="${pageContext.request.contextPath}/customer/cart/remove?pId=${map.value.product.productID}">Delete</a>
+														href="${pageContext.request.contextPath}/customer/cart/remove?productID=${map.value.product.productID}">Delete</a>
 												</p>
 											</div>
 											<div class="cart-product-details">
 												<div class="cart-product-pricess">
-													<div class="cart-product-realprice">$
+													$
+													<div class="cart-product-realprice">
 														${map.value.product.productPrice }</div>
 												</div>
 												<div class="cart-product-qty">
@@ -179,14 +180,21 @@
 	<jsp:include page="../customer/footer.jsp"></jsp:include>
 
 
-	<script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
 		function increaseValue() {
 			var value = parseInt(document.getElementById('input-num').value, 10);
 			value = isNaN(value) ? 0 : value;
 			value++;
 			document.getElementById('input-num').value = value;
 		}
-
+		
 		function decreaseValue() {
 			var value = parseInt(document.getElementById('input-num').value, 10);
 			value = isNaN(value) ? 0 : value;
@@ -194,7 +202,7 @@
 			value--;
 			document.getElementById('input-num').value = value;
 		}
-
+		
 		function moreVoucher() {
 			document.getElementById('popup').style.display = "block";
 		}

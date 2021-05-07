@@ -159,6 +159,7 @@ img {
 .cart-product-pricess {
 	text-align: right;
 	margin-right: 25px;
+	width: 100px;
 }
 
 .cart-product-realprice {
@@ -286,6 +287,10 @@ img {
 .cart-total-prices__inner {
 	position: sticky;
 	top: 30px;
+}
+
+.cart-product-qty{
+    margin-top: 5px;
 }
 
 .voucher-choose {

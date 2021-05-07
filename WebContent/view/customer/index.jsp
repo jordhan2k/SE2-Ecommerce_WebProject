@@ -87,7 +87,7 @@
 		<!-- Trend Search Section -->
 		<div class="trend-search-sec">
 			<div class="header">
-				<span class="header-name"> <img src="/images/search-icon.png">
+				<span class="header-name"> <img src="${url }images/search-icon.png">
 					Trend Search
 				</span>
 			</div>
@@ -96,23 +96,23 @@
 					<div class="picture-group">
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product1.jpg" class="image-inner">
+								<img src="${url }images/miwa1.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product2.jpg" class="image-inner">
+								<img src="${url }images/miwa2.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product3.jpg" class="image-inner">
+								<img src="${url }images/miwa3.jpg" class="image-inner">
 							</div>
 						</div>
 
 					</div>
 					<div class="content">
-						<span class="title">Tablet</span> <span class="subtitle">123
+						<span class="title">Micellar Water</span> <span class="subtitle">123
 							products</span>
 					</div>
 
@@ -120,23 +120,23 @@
 					<div class="picture-group">
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product1.jpg" class="image-inner">
+								<img src="${url }images/bihu1.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product2.jpg" class="image-inner">
+								<img src="${url }images/bihu2.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product3.jpg" class="image-inner">
+								<img src="${url }images/bihu3.jpg" class="image-inner">
 							</div>
 						</div>
 
 					</div>
 					<div class="content">
-						<span class="title">Tablet</span> <span class="subtitle">123
+						<span class="title">Biti's Hunter</span> <span class="subtitle">123
 							products</span>
 					</div>
 
@@ -144,23 +144,23 @@
 					<div class="picture-group">
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product1.jpg" class="image-inner">
+								<img src="${url }images/spli1.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product2.jpg" class="image-inner">
+								<img src="${url }images/spli2.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product3.jpg" class="image-inner">
+								<img src="${url }images/spli3.jpg" class="image-inner">
 							</div>
 						</div>
 
 					</div>
 					<div class="content">
-						<span class="title">Tablet</span> <span class="subtitle">123
+						<span class="title">Sportslink</span> <span class="subtitle">123
 							products</span>
 					</div>
 
@@ -168,23 +168,23 @@
 					<div class="picture-group">
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product1.jpg" class="image-inner">
+								<img src="${url }images/pow1.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product2.jpg" class="image-inner">
+								<img src="${url }images/pow2.jpg" class="image-inner">
 							</div>
 						</div>
 						<div style="width: 86px;">
 							<div class="image-search">
-								<img src="images/product3.jpg" class="image-inner">
+								<img src="${url }images/pow3.jpg" class="image-inner">
 							</div>
 						</div>
 
 					</div>
 					<div class="content">
-						<span class="title">Tablet</span> <span class="subtitle">123
+						<span class="title">Powder</span> <span class="subtitle">123
 							products</span>
 					</div>
 
