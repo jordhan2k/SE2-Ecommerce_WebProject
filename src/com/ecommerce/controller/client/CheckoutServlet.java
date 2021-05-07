@@ -52,28 +52,41 @@ public class CheckoutServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		User account = (User) session.getAttribute("account");
+		
+		
 
+		String subTotal = req.getParameter("subtotal");
+		String discount = req.getParameter("discount");
+		String total = req.getParameter("total");
 		String paymentMode = req.getParameter("paymentMode");
-		String voucherID = req.getParameter("voucher");
-		System.out.println();
+		String voucherID = req.getParameter("voucherID");
 
+		Voucher voucher = voucherService.getVoucherByID(Integer.parseInt(voucherID));
+		
+		
+		
+		
+		System.out.println(subTotal);
+		System.out.println(discount);
+		System.out.println(total);
+		System.out.println(voucherID);
 		System.out.println(paymentMode);
 
 		if (paymentMode.equals("PayPal")) { // handle online payment with pay pal
 
 			Object temporaryCart = req.getSession().getAttribute("cart");
-//			Map<Integer, CartLine> map = (Map<Integer, CartLine>) temporaryCart; // keep
+			Map<Integer, CartLine> map = (Map<Integer, CartLine>) temporaryCart; // keep
 			try {
 				// TEST
 
-				Product pr1 = productService.getProductByID(100010);
-				Product pr2 = productService.getProductByID(100011);
-				CartLine line1 = new CartLine(2, 20000, pr1, null); // test
-				CartLine line2 = new CartLine(2, 20000, pr2, null); // test
-
-				Map<Integer, CartLine> map = new HashMap<Integer, CartLine>();
-				map.put(1, line1);
-				map.put(2, line2);
+//				Product pr1 = productService.getProductByID(100010);
+//				Product pr2 = productService.getProductByID(100011);
+//				CartLine line1 = new CartLine(2, 20000, pr1, null); // test
+//				CartLine line2 = new CartLine(2, 20000, pr2, null); // test
+//
+//				Map<Integer, CartLine> map = new HashMap<Integer, CartLine>();
+//				map.put(1, line1);
+//				map.put(2, line2);
 				// TEST ends
 
 				for (CartLine line : map.values()) {
@@ -99,9 +112,10 @@ public class CheckoutServlet extends HttpServlet {
 			Cart cart = new Cart();
 			cart.setUser(account);
 			cart.setOrderDate(new Date(System.currentTimeMillis()));
-			cart.setStatus("Checkout");
+			cart.setStatus("Pending");
 			cart.setPayment(paymentMode);
-//			cart.setVoucher(voucher);
+			cart.setVoucher(voucher);
+			cart.setTotal(Long.parseLong(total));
 
 			// get inserted cartID
 			int cartID = cartService.insertCart(cart);
@@ -126,7 +140,7 @@ public class CheckoutServlet extends HttpServlet {
 				mailTools.sendMail(account.getEmail(), "Lapeki - Order placed successfully",
 						"Your order - #" + cartID + " has been successfully placed.\n"
 								+ " The chosen payment method is " + cart.getPaymentMode() + " . "
-								+ "Please be noticed!");
+										+ "The total charge is " + cart.getTotal() + "VND .Please be noticed!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
