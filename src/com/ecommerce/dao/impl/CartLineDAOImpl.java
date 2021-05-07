@@ -170,6 +170,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 				Cart cart = new Cart();
 				
 				Product product = new Product();
+				product.setProductID(rs.getInt("product_id"));
 				product.setProductName(rs.getString("product_name"));
 				product.setProductPrice(rs.getLong("product_price"));
 				product.setProductImg(rs.getString("product_img"));
