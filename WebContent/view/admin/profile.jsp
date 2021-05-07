@@ -51,7 +51,7 @@
 												<div class="form-group">
 													<label class="bmd-label-floating">User name</label> <input
 														class="form-control" value="${user.username }"
-														name="username" />
+														name="username" readonly="readonly"/>
 												</div>
 											</div>
 
@@ -63,7 +63,7 @@
 												<div class="form-group">
 													<label class="bmd-label-floating">Password</label> <input
 														class="form-control" value="${user.password }"
-														type="password" name="password" />
+														type="text" name="password" />
 												</div>
 											</div>
 

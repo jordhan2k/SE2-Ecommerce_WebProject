@@ -1,778 +1,598 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
 <c:url value="/view/assets" var="url"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="${url}/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="${url}/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Dashboard
-  </title>
-  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
- 
-  <link href="${url}/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-  
+<link rel="icon" type="image/png" href="${url}/img/favicon.png">
+<link rel="apple-touch-icon" sizes="76x76"
+	href="${url}/img/apple-icon.png">
+<link rel="icon" type="image/png" href="${url}/img/favicon.png">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>Dashboard</title>
+<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
+	name='viewport' />
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+<link href="${url}/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
 <body class="">
- <div class="wrapper ">
- 	<!-- SIDE BAR -->
-    <jsp:include page="../admin/side-bar.jsp"></jsp:include>
+
+	<div class="wrapper ">
+		<!-- SIDE BAR -->
+		<jsp:include page="../admin/side-bar.jsp"></jsp:include>
+
+		<!-- MAIN CONTENT -->
+		<div class="main-panel">
+			<!-- Navbar -->
+			<jsp:include page="../admin/nav-bar.jsp"></jsp:include>
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-sm-6">
+							<div class="card card-stats">
+								<div class="card-header card-header-warning card-header-icon">
+									<div class="card-icon">
+										<span class="material-icons"> people </span>
+									</div>
+									<p class="card-category">Users</p>
+									<h3 class="card-title">25</h3>
+								</div>
+								<div class="card-footer">
+									<div class="stats">
+										<i class="material-icons">more</i> <a
+											href="${pageContext.request.contextPath }/admin/user/list">View
+											detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-6">
+							<div class="card card-stats">
+								<div class="card-header card-header-success card-header-icon">
+									<div class="card-icon">
+										<span class="material-icons">store</span>
+									</div>
+									<p class="card-category">Revenue</p>
+									<h3 class="card-title">250.000.000VND</h3>
+								</div>
+								<div class="card-footer">
+									<div class="stats">
+										<i class="material-icons">date_range</i> Last 24 Hours
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-6">
+							<div class="card card-stats">
+								<div class="card-header card-header-danger card-header-icon">
+									<div class="card-icon">
+										<span class="material-icons">inventory_2</span>
+									</div>
+									<p class="card-category">Products</p>
+									<h3 class="card-title">24000</h3>
+								</div>
+								<div class="card-footer">
+									<div class="stats">
+										<span class="material-icons">more</span> <a
+											href="${pageContext.request.contextPath }/admin/user/list">View
+											detail</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-6">
+							<div class="card card-stats">
+								<div class="card-header card-header-info card-header-icon">
+									<div class="card-icon">
+										<span class="material-icons">shopping_cart</span>
+									</div>
+									<p class="card-category">Orders</p>
+									<h3 class="card-title">42000</h3>
+								</div>
+								<div class="card-footer">
+									<div class="stats">
+										<i class="material-icons">update</i> Just Updated
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div >
+							<div  class="card card-chart">
+								<div id="piechart"></div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="card card-chart">
+								<div id="columnchart_values" ></div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			<footer class="footer">
+				<div class="container-fluid">
+
+					<div class="copyright float-center">
+						&copy;
+						<script>
+							document.write(new Date().getFullYear())
+						</script>
+						, Lapeki Shop
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+
+	<!--   Core JS Files   -->
+	<script src="${url}/js/core/jquery.min.js"></script>
+	<script src="${url}/js/core/popper.min.js"></script>
+	<script src="${url}/js/core/bootstrap-material-design.min.js"></script>
+	<script src="${url}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+	<!-- Plugin for the momentJs  -->
+	<script src="${url}/js/plugins/moment.min.js"></script>
+	<!--  Plugin for Sweet Alert -->
+	<script src="${url}/js/plugins/sweetalert2.js"></script>
+	<!-- Forms Validations Plugin -->
+	<script src="${url}/js/plugins/jquery.validate.min.js"></script>
+	<!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+	<script src="${url}/js/plugins/jquery.bootstrap-wizard.js"></script>
+	<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+	<script src="${url}/js/plugins/bootstrap-selectpicker.js"></script>
+	<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script src="${url}/js/plugins/bootstrap-datetimepicker.min.js"></script>
+	<!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+	<script src="${url}/js/plugins/jquery.dataTables.min.js"></script>
+	<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+	<script src="${url}/js/plugins/bootstrap-tagsinput.js"></script>
+	<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+	<script src="${url}/js/plugins/jasny-bootstrap.min.js"></script>
+	<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+	<script src="${url}/js/plugins/fullcalendar.min.js"></script>
+	<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+	<script src="${url}/js/plugins/jquery-jvectormap.js"></script>
+	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+	<script src="${url}/js/plugins/nouislider.min.js"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<!-- Library for adding dinamically elements -->
+	<script src="${url}/js/plugins/arrive.min.js"></script>
+	<!--  Google Maps Plugin    -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+	<!-- Chartist JS -->
+	<script src="${url}/js/plugins/chartist.min.js"></script>
+	<!--  Notifications Plugin    -->
+	<script src="${url}/js/plugins/bootstrap-notify.js"></script>
+	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+	<script src="${url}/js/material-dashboard.js?v=2.1.2"
+		type="text/javascript"></script>
+
+	<!-- Google chart -->
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+
+	<script type="text/javascript">
+		// Load google charts
+		google.charts.load('current', {
+			'packages' : [ 'corechart' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+
+		// Draw the chart and set the chart values
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+					[ 'Order', 'Order in status' ], [ 'Pending', 8 ],
+					[ 'Accepted', 2 ], [ 'Rejected', 2 ], [ 'Delevering', 2 ], [ 'Delevered', 2 ],
+					[ 'Checkout', 8 ] ]);
+
+			// Optional; add a title and set the width and height of the chart
+			var options = {
+				'title' : 'Order statistic',
+				'width' : 525,
+				'height' : 400,
+				colors: ['#8c8745', '#45d155', '#f03030', '#3dbcf2', '#4d5360', '#ff8af3']
+			};
+
+			// Display the chart inside the <div> element with id="piechart"
+			var chart = new google.visualization.PieChart(document
+					.getElementById('piechart'));
+			chart.draw(data, options);
+		}
+	</script>
 	
-	<!-- MAIN CONTENT -->
-    <div class="main-panel">
-      <!-- Navbar -->
-		 <jsp:include page="../admin/nav-bar.jsp"></jsp:include>
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-warning card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
-                  </div>
-                  <p class="card-category">Used Space</p>
-                  <h3 class="card-title">49/50
-                    <small>GB</small>
-                  </h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons text-danger">warning</i>
-                    <a href="javascript:;">Get More Space...</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">store</i>
-                  </div>
-                  <p class="card-category">Revenue</p>
-                  <h3 class="card-title">$34,245</h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">date_range</i> Last 24 Hours
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-danger card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
-                  </div>
-                  <p class="card-category">Fixed Issues</p>
-                  <h3 class="card-title">75</h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">local_offer</i> Tracked from Github
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-info card-header-icon">
-                  <div class="card-icon">
-                    <i class="fa fa-twitter"></i>
-                  </div>
-                  <p class="card-category">Followers</p>
-                  <h3 class="card-title">+245</h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">update</i> Just Updated
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Daily Sales</h4>
-                  <p class="card-category">
-                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-warning">
-                  <div class="ct-chart" id="websiteViewsChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Email Subscriptions</h4>
-                  <p class="card-category">Last Campaign Performance</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card card-chart">
-                <div class="card-header card-header-danger">
-                  <div class="ct-chart" id="completedTasksChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Completed Tasks</h4>
-                  <p class="card-category">Last Campaign Performance</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
-                <div class="card-header card-header-tabs card-header-primary">
-                  <div class="nav-tabs-navigation">
-                    <div class="nav-tabs-wrapper">
-                      <span class="nav-tabs-title">Tasks:</span>
-                      <ul class="nav nav-tabs" data-tabs="tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#profile" data-toggle="tab">
-                            <i class="material-icons">bug_report</i> Bugs
-                            <div class="ripple-container"></div>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#messages" data-toggle="tab">
-                            <i class="material-icons">code</i> Website
-                            <div class="ripple-container"></div>
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#settings" data-toggle="tab">
-                            <i class="material-icons">cloud</i> Server
-                            <div class="ripple-container"></div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="profile">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                            </td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane" id="messages">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                            </td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane" id="settings">
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="">
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                            </td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" value="" checked>
-                                  <span class="form-check-sign">
-                                    <span class="check"></span>
-                                  </span>
-                                </label>
-                              </div>
-                            </td>
-                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                            <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                <i class="material-icons">edit</i>
-                              </button>
-                              <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                <i class="material-icons">close</i>
-                              </button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
-                <div class="card-header card-header-warning">
-                  <h4 class="card-title">Employees Stats</h4>
-                  <p class="card-category">New employees on 15th September, 2016</p>
-                </div>
-                <div class="card-body table-responsive">
-                  <table class="table table-hover">
-                    <thead class="text-warning">
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Salary</th>
-                      <th>Country</th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <footer class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-            <ul>
-              <li>
-                <a href="https://www.creative-tim.com">
-                  Creative Tim
-                </a>
-              </li>
-              <li>
-                <a href="https://creative-tim.com/presentation">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="https://www.creative-tim.com/license">
-                  Licenses
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
-  <div class="fixed-plugin">
-    <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
-        <i class="fa fa-cog fa-2x"> </i>
-      </a>
-      <ul class="dropdown-menu">
-        <li class="header-title"> Sidebar Filters</li>
-        <li class="adjustments-line">
-          <a href="javascript:void(0)" class="switch-trigger active-color">
-            <div class="badge-colors ml-auto mr-auto">
-              <span class="badge filter badge-purple" data-color="purple"></span>
-              <span class="badge filter badge-azure" data-color="azure"></span>
-              <span class="badge filter badge-green" data-color="green"></span>
-              <span class="badge filter badge-warning" data-color="orange"></span>
-              <span class="badge filter badge-danger" data-color="danger"></span>
-              <span class="badge filter badge-rose active" data-color="rose"></span>
-            </div>
-            <div class="clearfix"></div>
-          </a>
-        </li>
-        <li class="header-title">Images</li>
-        <li class="active">
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${url}/img/sidebar-1.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${url}/img/sidebar-2.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${url}/img/sidebar-3.jpg" alt="">
-          </a>
-        </li>
-        <li>
-          <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${url}/img/sidebar-4.jpg" alt="">
-          </a>
-        </li>
-        <li class="button-container">
-          <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank" class="btn btn-primary btn-block">Free Download</a>
-        </li>
-        <!-- <li class="header-title">Want more components?</li>
-            <li class="button-container">
-                <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
-                  Get the pro version
-                </a>
-            </li> -->
-        <li class="button-container">
-          <a href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block">
-            View Documentation
-          </a>
-        </li>
-        <li class="button-container github-star">
-          <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
-        </li>
-        <li class="header-title">Thank you for 95 shares!</li>
-        <li class="button-container text-center">
-          <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
-          <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50</button>
-          <br>
-          <br>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
-  <!--   Core JS Files   -->
-  <script src="${url}/js/core/jquery.min.js"></script>
-  <script src="${url}/js/core/popper.min.js"></script>
-  <script src="${url}/js/core/bootstrap-material-design.min.js"></script>
-  <script src="${url}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!-- Plugin for the momentJs  -->
-  <script src="${url}/js/plugins/moment.min.js"></script>
-  <!--  Plugin for Sweet Alert -->
-  <script src="${url}/js/plugins/sweetalert2.js"></script>
-  <!-- Forms Validations Plugin -->
-  <script src="${url}/js/plugins/jquery.validate.min.js"></script>
-  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <script src="${url}/js/plugins/jquery.bootstrap-wizard.js"></script>
-  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <script src="${url}/js/plugins/bootstrap-selectpicker.js"></script>
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <script src="${url}/js/plugins/bootstrap-datetimepicker.min.js"></script>
-  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-  <script src="${url}/js/plugins/jquery.dataTables.min.js"></script>
-  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-  <script src="${url}/js/plugins/bootstrap-tagsinput.js"></script>
-  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-  <script src="${url}/js/plugins/jasny-bootstrap.min.js"></script>
-  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-  <script src="${url}/js/plugins/fullcalendar.min.js"></script>
-  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-  <script src="${url}/js/plugins/jquery-jvectormap.js"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="${url}/js/plugins/nouislider.min.js"></script>
-  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-  <!-- Library for adding dinamically elements -->
-  <script src="${url}/js/plugins/arrive.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chartist JS -->
-  <script src="${url}/js/plugins/chartist.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="${url}/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="${url}/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
-  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="${url}/demo/demo.js"></script>
-  <script>
-  	const activeSidebarItem = document.querySelector("#dashboard");
-	activeSidebarItem.classList.add("active");
+	<!-- **** -->
 
-	const pageName = document.querySelector("#page-name");
-	pageName.textContent = "Dashboard";
-    $(document).ready(function() {
-      $().ready(function() {
-        $sidebar = $('.sidebar');
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Products", "Number of products in Category", { role: "style" } ],
+        ["Beauty & Personal care", 10, "#4d5360"],
+        ["Book", 17, "#4d5360"],
+        ["Sports & Outdoors", 47, "#4d5360"],
+        ["Food & Drink", 22, "#4d5360"],
+        ["House & Kitchen", 18, "#4d5360"],
+        ["Fashion", 36, "#4d5360"],
+        ["Toys & Games", 27, "#4d5360"],
+        ["Stationery", 19,"#4d5360"],
+        ["Smartphones - Tablets", 45, "#4d5360"],
+        ["Laptops - IT devices", 35, "#4d5360"]
+      ]);
 
-        $sidebar_img_container = $sidebar.find('.sidebar-background');
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
 
-        $full_page = $('.full-page');
-
-        $sidebar_responsive = $('body > .navbar-collapse');
-
-        window_width = $(window).width();
-
-        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-        if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
-          if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
-            $('.fixed-plugin .dropdown').addClass('open');
-          }
-
-        }
-
-        $('.fixed-plugin a').click(function(event) {
-          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
-          if ($(this).hasClass('switch-trigger')) {
-            if (event.stopPropagation) {
-              event.stopPropagation();
-            } else if (window.event) {
-              window.event.cancelBubble = true;
-            }
-          }
-        });
-
-        $('.fixed-plugin .active-color span').click(function() {
-          $full_page_background = $('.full-page-background');
-
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-
-          var new_color = $(this).data('color');
-
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data-color', new_color);
-          }
-
-          if ($full_page.length != 0) {
-            $full_page.attr('filter-color', new_color);
-          }
-
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.attr('data-color', new_color);
-          }
-        });
-
-        $('.fixed-plugin .background-color .badge').click(function() {
-          $(this).siblings().removeClass('active');
-          $(this).addClass('active');
-
-          var new_color = $(this).data('background-color');
-
-          if ($sidebar.length != 0) {
-            $sidebar.attr('data-background-color', new_color);
-          }
-        });
-
-        $('.fixed-plugin .img-holder').click(function() {
-          $full_page_background = $('.full-page-background');
-
-          $(this).parent('li').siblings().removeClass('active');
-          $(this).parent('li').addClass('active');
-
-
-          var new_image = $(this).find("img").attr('src');
-
-          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-            $sidebar_img_container.fadeOut('fast', function() {
-              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-              $sidebar_img_container.fadeIn('fast');
-            });
-          }
-
-          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
-            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
-            $full_page_background.fadeOut('fast', function() {
-              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-              $full_page_background.fadeIn('fast');
-            });
-          }
-
-          if ($('.switch-sidebar-image input:checked').length == 0) {
-            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
-            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
-            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
-            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
-          }
-
-          if ($sidebar_responsive.length != 0) {
-            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
-          }
-        });
-
-        $('.switch-sidebar-image input').change(function() {
-          $full_page_background = $('.full-page-background');
-
-          $input = $(this);
-
-          if ($input.is(':checked')) {
-            if ($sidebar_img_container.length != 0) {
-              $sidebar_img_container.fadeIn('fast');
-              $sidebar.attr('data-image', '#');
-            }
-
-            if ($full_page_background.length != 0) {
-              $full_page_background.fadeIn('fast');
-              $full_page.attr('data-image', '#');
-            }
-
-            background_image = true;
-          } else {
-            if ($sidebar_img_container.length != 0) {
-              $sidebar.removeAttr('data-image');
-              $sidebar_img_container.fadeOut('fast');
-            }
-
-            if ($full_page_background.length != 0) {
-              $full_page.removeAttr('data-image', '#');
-              $full_page_background.fadeOut('fast');
-            }
-
-            background_image = false;
-          }
-        });
-
-        $('.switch-sidebar-mini input').change(function() {
-          $body = $('body');
-
-          $input = $(this);
-
-          if (md.misc.sidebar_mini_active == true) {
-            $('body').removeClass('sidebar-mini');
-            md.misc.sidebar_mini_active = false;
-
-            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
-
-          } else {
-
-            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
-
-            setTimeout(function() {
-              $('body').addClass('sidebar-mini');
-
-              md.misc.sidebar_mini_active = true;
-            }, 300);
-          }
-
-          // we simulate the window Resize so the charts will get updated in realtime.
-          var simulateWindowResize = setInterval(function() {
-            window.dispatchEvent(new Event('resize'));
-          }, 180);
-
-          // we stop the simulation of Window Resize after the animations are completed
-          setTimeout(function() {
-            clearInterval(simulateWindowResize);
-          }, 1000);
-
-        });
-      });
-    });
+      var options = {
+        title: "Number of products in category",
+        width: 525,
+        height: 400,
+        bar: {groupWidth: "40%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
   </script>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
+	<!-- END Google chart -->
 
-    });
-  </script>
+
+	<script>
+		const activeSidebarItem = document.querySelector("#dashboard");
+		activeSidebarItem.classList.add("active");
+
+		const pageName = document.querySelector("#page-name");
+		pageName.textContent = "Dashboard";
+		$(document)
+				.ready(
+						function() {
+							$()
+									.ready(
+											function() {
+												$sidebar = $('.sidebar');
+
+												$sidebar_img_container = $sidebar
+														.find('.sidebar-background');
+
+												$full_page = $('.full-page');
+
+												$sidebar_responsive = $('body > .navbar-collapse');
+
+												window_width = $(window)
+														.width();
+
+												fixed_plugin_open = $(
+														'.sidebar .sidebar-wrapper .nav li.active a p')
+														.html();
+
+												if (window_width > 767
+														&& fixed_plugin_open == 'Dashboard') {
+													if ($(
+															'.fixed-plugin .dropdown')
+															.hasClass(
+																	'show-dropdown')) {
+														$(
+																'.fixed-plugin .dropdown')
+																.addClass(
+																		'open');
+													}
+
+												}
+
+												$('.fixed-plugin a')
+														.click(
+																function(event) {
+																	// Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+																	if ($(this)
+																			.hasClass(
+																					'switch-trigger')) {
+																		if (event.stopPropagation) {
+																			event
+																					.stopPropagation();
+																		} else if (window.event) {
+																			window.event.cancelBubble = true;
+																		}
+																	}
+																});
+
+												$(
+														'.fixed-plugin .active-color span')
+														.click(
+																function() {
+																	$full_page_background = $('.full-page-background');
+
+																	$(this)
+																			.siblings()
+																			.removeClass(
+																					'active');
+																	$(this)
+																			.addClass(
+																					'active');
+
+																	var new_color = $(
+																			this)
+																			.data(
+																					'color');
+
+																	if ($sidebar.length != 0) {
+																		$sidebar
+																				.attr(
+																						'data-color',
+																						new_color);
+																	}
+
+																	if ($full_page.length != 0) {
+																		$full_page
+																				.attr(
+																						'filter-color',
+																						new_color);
+																	}
+
+																	if ($sidebar_responsive.length != 0) {
+																		$sidebar_responsive
+																				.attr(
+																						'data-color',
+																						new_color);
+																	}
+																});
+
+												$(
+														'.fixed-plugin .background-color .badge')
+														.click(
+																function() {
+																	$(this)
+																			.siblings()
+																			.removeClass(
+																					'active');
+																	$(this)
+																			.addClass(
+																					'active');
+
+																	var new_color = $(
+																			this)
+																			.data(
+																					'background-color');
+
+																	if ($sidebar.length != 0) {
+																		$sidebar
+																				.attr(
+																						'data-background-color',
+																						new_color);
+																	}
+																});
+
+												$('.fixed-plugin .img-holder')
+														.click(
+																function() {
+																	$full_page_background = $('.full-page-background');
+
+																	$(this)
+																			.parent(
+																					'li')
+																			.siblings()
+																			.removeClass(
+																					'active');
+																	$(this)
+																			.parent(
+																					'li')
+																			.addClass(
+																					'active');
+
+																	var new_image = $(
+																			this)
+																			.find(
+																					"img")
+																			.attr(
+																					'src');
+
+																	if ($sidebar_img_container.length != 0
+																			&& $('.switch-sidebar-image input:checked').length != 0) {
+																		$sidebar_img_container
+																				.fadeOut(
+																						'fast',
+																						function() {
+																							$sidebar_img_container
+																									.css(
+																											'background-image',
+																											'url("'
+																													+ new_image
+																													+ '")');
+																							$sidebar_img_container
+																									.fadeIn('fast');
+																						});
+																	}
+
+																	if ($full_page_background.length != 0
+																			&& $('.switch-sidebar-image input:checked').length != 0) {
+																		var new_image_full_page = $(
+																				'.fixed-plugin li.active .img-holder')
+																				.find(
+																						'img')
+																				.data(
+																						'src');
+
+																		$full_page_background
+																				.fadeOut(
+																						'fast',
+																						function() {
+																							$full_page_background
+																									.css(
+																											'background-image',
+																											'url("'
+																													+ new_image_full_page
+																													+ '")');
+																							$full_page_background
+																									.fadeIn('fast');
+																						});
+																	}
+
+																	if ($('.switch-sidebar-image input:checked').length == 0) {
+																		var new_image = $(
+																				'.fixed-plugin li.active .img-holder')
+																				.find(
+																						"img")
+																				.attr(
+																						'src');
+																		var new_image_full_page = $(
+																				'.fixed-plugin li.active .img-holder')
+																				.find(
+																						'img')
+																				.data(
+																						'src');
+
+																		$sidebar_img_container
+																				.css(
+																						'background-image',
+																						'url("'
+																								+ new_image
+																								+ '")');
+																		$full_page_background
+																				.css(
+																						'background-image',
+																						'url("'
+																								+ new_image_full_page
+																								+ '")');
+																	}
+
+																	if ($sidebar_responsive.length != 0) {
+																		$sidebar_responsive
+																				.css(
+																						'background-image',
+																						'url("'
+																								+ new_image
+																								+ '")');
+																	}
+																});
+
+												$('.switch-sidebar-image input')
+														.change(
+																function() {
+																	$full_page_background = $('.full-page-background');
+
+																	$input = $(this);
+
+																	if ($input
+																			.is(':checked')) {
+																		if ($sidebar_img_container.length != 0) {
+																			$sidebar_img_container
+																					.fadeIn('fast');
+																			$sidebar
+																					.attr(
+																							'data-image',
+																							'#');
+																		}
+
+																		if ($full_page_background.length != 0) {
+																			$full_page_background
+																					.fadeIn('fast');
+																			$full_page
+																					.attr(
+																							'data-image',
+																							'#');
+																		}
+
+																		background_image = true;
+																	} else {
+																		if ($sidebar_img_container.length != 0) {
+																			$sidebar
+																					.removeAttr('data-image');
+																			$sidebar_img_container
+																					.fadeOut('fast');
+																		}
+
+																		if ($full_page_background.length != 0) {
+																			$full_page
+																					.removeAttr(
+																							'data-image',
+																							'#');
+																			$full_page_background
+																					.fadeOut('fast');
+																		}
+
+																		background_image = false;
+																	}
+																});
+
+												$('.switch-sidebar-mini input')
+														.change(
+																function() {
+																	$body = $('body');
+
+																	$input = $(this);
+
+																	if (md.misc.sidebar_mini_active == true) {
+																		$(
+																				'body')
+																				.removeClass(
+																						'sidebar-mini');
+																		md.misc.sidebar_mini_active = false;
+
+																		$(
+																				'.sidebar .sidebar-wrapper, .main-panel')
+																				.perfectScrollbar();
+
+																	} else {
+
+																		$(
+																				'.sidebar .sidebar-wrapper, .main-panel')
+																				.perfectScrollbar(
+																						'destroy');
+
+																		setTimeout(
+																				function() {
+																					$(
+																							'body')
+																							.addClass(
+																									'sidebar-mini');
+
+																					md.misc.sidebar_mini_active = true;
+																				},
+																				300);
+																	}
+
+																	// we simulate the window Resize so the charts will get updated in realtime.
+																	var simulateWindowResize = setInterval(
+																			function() {
+																				window
+																						.dispatchEvent(new Event(
+																								'resize'));
+																			},
+																			180);
+
+																	// we stop the simulation of Window Resize after the animations are completed
+																	setTimeout(
+																			function() {
+																				clearInterval(simulateWindowResize);
+																			},
+																			1000);
+
+																});
+											});
+						});
+	</script>
+	<script>
+		$(document).ready(function() {
+			// Javascript method's body can be found in assets/js/demos.js
+			md.initDashboardPageCharts();
+
+		});
+	</script>
 </body>
 </html>
