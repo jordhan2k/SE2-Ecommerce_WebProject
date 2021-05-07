@@ -193,10 +193,11 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Product> list = new ArrayList<Product>();
 		Product product = null;
 
-		String sql = "SELECT * FROM product WHERE product_name LIKE ?";
+		String sql = "SELECT * FROM product p INNER JOIN category c ON p.category_id = c.category_id WHERE product_name LIKE ? OR c.category_name LIKE ?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + productName + "%");
+			ps.setString(2, "%" + productName + "%");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
