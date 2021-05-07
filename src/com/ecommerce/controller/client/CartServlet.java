@@ -37,10 +37,12 @@ public class CartServlet extends HttpServlet{
 		int subtotal = Integer.parseInt(req.getParameter("subtotal"));
 		int discount = Integer.parseInt(req.getParameter("discount"));
 		int total = Integer.parseInt(req.getParameter("total"));
+		int voucherID = Integer.parseInt(req.getParameter("voucherID"));
 		
 		req.setAttribute("subtotal", subtotal);
 		req.setAttribute("discount", discount);
 		req.setAttribute("total", total);
+		req.setAttribute("voucherID", voucherID);
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/view/customer/checkout.jsp");
 		rd.forward(req, resp);

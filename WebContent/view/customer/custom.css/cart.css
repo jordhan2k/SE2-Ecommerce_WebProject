@@ -185,6 +185,10 @@ img {
 	cursor: pointer;
 }
 
+.qty-input{
+	padding: 6px 12px;
+}
+
 .qty-increase {
 	border-right: none;
 	border-left: 1px solid rgb(200, 200, 200);
@@ -467,6 +471,22 @@ img {
 ins {
 	text-decoration: none;
 }
+
+.contin-btn{
+	background-color: rgb(253, 216, 53);
+    color: rgb(74, 74, 74);
+    font-weight: 500;
+    padding: 10px 55px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.contin-btn:hover{
+	text-decoration: none;
+	background: rgb(253, 206, 3);
+	color: rgb(74, 74, 74);
+}
+
 
 /* HEADER */
 
