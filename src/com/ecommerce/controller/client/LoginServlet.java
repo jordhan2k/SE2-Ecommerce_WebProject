@@ -65,11 +65,6 @@ public class LoginServlet extends HttpServlet{
 			isRememberMe = true;
 		}
 		
-		if(username.isEmpty() || password.isEmpty()) {
-			alertMsg ="Username and password can't be empty!";
-			req.setAttribute("alert", alertMsg);
-			req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
-		}
 		
 		UserService userService = new UserServiceImpl();
 		

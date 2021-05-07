@@ -3,6 +3,7 @@ package com.ecommerce.controller.client;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -44,8 +45,10 @@ public class RegisterServlet extends HttpServlet{
 		}
 		
 		///Redirect to register page
-		resp.sendRedirect(req.getContextPath() +"/login");
-		
+		//		resp.sendRedirect(req.getContextPath() +"/login");
+		//if session and cookies do not exist, redirect to login page
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/view/customer/register.jsp");
+		requestDispatcher.forward(req, resp);
 		
 	}
 	
@@ -59,7 +62,7 @@ public class RegisterServlet extends HttpServlet{
 			String email = req.getParameter("email");
 			String address = req.getParameter("address");
 			String gender = req.getParameter("gender");
-			System.out.println("hihi" + username);
+
 			Date dob = Date.valueOf(req.getParameter("dob"));
 			
 			UserService service = new UserServiceImpl();
@@ -67,20 +70,19 @@ public class RegisterServlet extends HttpServlet{
 			
 			if(service.checkExistUsername(username)) {
 				alertMsg = "Username alredy exist!";
-				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
-			}
-			
-			if(service.checkExistEmail(email)) {
+				req.setAttribute("alert", alertMsg);
+				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+				return;
+			} else if(service.checkExistEmail(email)) {
 				alertMsg = "Email alredy exist!";
-				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
-			}
-			
-			if(service.checkExistMobile(mobile)) {
+				req.setAttribute("alert", alertMsg);
+				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+				return;
+			} else if(service.checkExistMobile(mobile)) {
 				alertMsg = "Phone number alredy exist!";
-				req.setAttribute("alerrt", alertMsg);
-				req.getRequestDispatcher("/view/customer/login.jsp").forward(req, resp);
+				req.setAttribute("alert", alertMsg);
+				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+				return;
 			}
 			
 			boolean isSuccess = service.register(username, password, fullname, mobile, email, address, gender, dob);
@@ -93,11 +95,13 @@ public class RegisterServlet extends HttpServlet{
 							+ "Lapeki Team</p>";
 				mail.sendMail(email, "Lapeka Shop", text);
 				req.setAttribute("alert", alertMsg);
-				resp.sendRedirect(req.getContextPath() + "/login");
+				req.getRequestDispatcher("/view/customer/register-succeed.jsp").forward(req, resp);
+				return;
 			}else {
 				alertMsg = "System error";
-				req.setAttribute("alerrt", alertMsg);
+				req.setAttribute("alert", alertMsg);
 				req.getRequestDispatcher("/view/customer/register.jsp").forward(req, resp);
+				return;
 			}
 	}
 }
