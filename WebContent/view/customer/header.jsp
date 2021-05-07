@@ -14,11 +14,12 @@
 					src="${url }images/brand-light.png" height="50px" alt="">
 				</a>
 
-				<form class="form-search">
+				<form class="form-search" action="${pageContext.request.contextPath}/product/search"
+				method="get">
 					<div class="search-content">
-						<input type="text" value="" placeholder="Find product.."
-							class="search-input">
-						<button class="search-btn">
+						<input type="text" placeholder="Find product.."
+							class="search-input" name="pname">
+						<button type="submit" class="search-btn">
 							<img class="search-icon"
 								src="${url }images/search-icon-light.png"> Search
 						</button>

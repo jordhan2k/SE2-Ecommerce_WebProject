@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="icon" type="image/png" href="${url }images/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cart</title>
 <!-- Latest compiled and minified CSS -->
@@ -46,17 +46,17 @@
 									<img alt="voucher-img" src="${url}images/voucher-img.png"
 										style="height: 100px; width: 100px;">
 									<div>
-										<h5>${vou.discountPercentage}%offperorder</h5>
+										<h5>${vou.discountPercentage}% off per order</h5>
 										<p>Code: ${vou.voucherCode }</p>
 										<p>Expire date: ${vou.expireDate }</p>
 
 									</div>
-									<button class="btn btn-primary" id="${vou.discountPercentage }"
-										onclick="selectVoucher(this.id)">Use Now</button>
+									<button class="btn btn-primary" id="${vou.voucherID }" value="${vou.discountPercentage }"
+										onclick="selectVoucher(this.value, this.id)">Use Now</button>
 								</div>
 							</div>
 						</c:forEach>
-
+								
 
 					</div>
 				</div>
@@ -68,53 +68,73 @@
 	<div class="container-cart">
 		<div class="cart">
 			<div class="cart-inner">
-				<h2 class="cart-products__title">Your Cart</h2>
-				<div class="cart-products-inner">
-					<c:forEach items="${sessionScope.cart}" var="map">
-						<div class="cart-products__group">
-							<div class="cart-products__product">
-								<div class="cart-products__inner">
-									<div class="cart-products__img">
-										<c:set var="imgs" value="${map.value.product.productImg}" />
-										<c:set var="img" value="${fn:split(imgs,',')}" />
-										<c:set var="ava" value="${img[0]}" />
-										<c:url value="/image?fname=${ava }" var="imgUrl"></c:url>
-										<a href=""> <img src="${imgUrl}" alt="">
-										</a>
-									</div>
-									<div class="cart-products__content">
-										<div class="cart-products__content--inner">
-											<div class="cart-product-desc">
-												<a class="cart-product-name" href="">${map.value.product.productName }</a>
-												<p class="cart-product-description">${map.value.product.productDesc }</p>
-
-												<p class="cart-product-action">
-													<a class="cart-product-del"
-														href="${pageContext.request.contextPath}/customer/cart/remove?pId=${map.value.product.productID}">Delete</a>
-												</p>
+				<c:set var="count" value="${0}" />
+				<c:forEach items="${sessionScope.cart}" var="map">
+					<c:set var="count" value="${count + map.value.quantity}" />
+				</c:forEach>
+				<h2 class="cart-products__title">Your Cart (${count } products)</h2>
+				<c:choose>
+					<c:when test="${count == 0 }">
+						<div class="cart-products-inner">
+							<div class="cart-products__group"
+								style="text-align: center; padding: 40px 20px; border-radius: 4px">
+								<img src="https://salt.tikicdn.com/desktop/img/mascot@2x.png"
+									style="width: 100px; max-width: 100%;">
+								<p style="margin: 15px 0px 30px;">Your cart is empty.</p>
+								<a href="${pageContext.request.contextPath}/" class="contin-btn">Continue Shopping </a>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="cart-products-inner">
+							<c:forEach items="${sessionScope.cart}" var="map">
+								<div class="cart-products__group">
+									<div class="cart-products__product">
+										<div class="cart-products__inner">
+											<div class="cart-products__img">
+												<c:set var="imgs" value="${map.value.product.productImg}" />
+												<c:set var="img" value="${fn:split(imgs,',')}" />
+												<c:set var="ava" value="${img[0]}" />
+												<a href="${pageContext.request.contextPath}/product/detail?id=${map.value.product.productID}"> <img src="${ava}" alt="">
+												</a>
 											</div>
-											<div class="cart-product-details">
-												<div class="cart-product-pricess">
-													<div class="cart-product-realprice">$
-														${map.value.product.productPrice }</div>
-												</div>
-												<div class="cart-product-qty">
-													<div class="qty-wrapper">
-														<span class="qty-decrease" onclick="decreaseValue()">-</span>
-														<input type="tel" class="qty-input" id="input-num"
-															value="${map.value.quantity }"> <span
-															class="qty-increase" onclick="increaseValue()">+</span>
+											<div class="cart-products__content">
+												<div class="cart-products__content--inner">
+													<div class="cart-product-desc">
+														<a class="cart-product-name"
+															href="${pageContext.request.contextPath}/product/detail?id=${map.value.product.productID}">${map.value.product.productName }</a>
+														<div class="cart-product-description">${map.value.product.productDesc }</div>
+
+														<p class="cart-product-action">
+															<a class="cart-product-del"
+																href="${pageContext.request.contextPath}/customer/cart/remove?productID=${map.value.product.productID}">Delete</a>
+														</p>
+													</div>
+													<div class="cart-product-details">
+														<div class="cart-product-pricess">
+															$
+															<div class="cart-product-realprice">
+																${map.value.product.productPrice }</div>
+														</div>
+														<div class="cart-product-qty">
+															<div class="qty-wrapper">
+																<span class="qty-decrease" onclick="decreaseValue()">-</span>
+																<input type="tel" class="qty-input" id="input-num"
+																	value="${map.value.quantity }"> <span
+																	class="qty-increase" onclick="increaseValue()">+</span>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-					</c:forEach>
+							</c:forEach>
 
-				</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<div class="cart-total-prices">
@@ -136,7 +156,7 @@
 					</div>
 
 					<form role="form" action="<c:url value='/customer/checkout'/>"
-						method="post" enctype="multipart/form-data">
+						method="get" enctype="multipart/form-data">
 						<div class="cart-price">
 							<ul class="prices-item-list">
 								<li class="prices-item"><span class="text">Subtotal</span>
@@ -161,6 +181,7 @@
 										included)</i>
 								</span>
 							</p>
+							<input style="display: none;" value="" id="voucher-input" name="voucherID">
 						</div>
 
 						<button class="cart-submit" type="submit">Place Order</button>
@@ -179,7 +200,14 @@
 	<jsp:include page="../customer/footer.jsp"></jsp:include>
 
 
-	<script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
 		function increaseValue() {
 			var value = parseInt(document.getElementById('input-num').value, 10);
 			value = isNaN(value) ? 0 : value;
@@ -212,7 +240,7 @@
 		console.log(document.getElementById('total-input').value)
 
 		//case: use voucher
-		function selectVoucher(discount) {
+		function selectVoucher(discount, voucherID) {
 			document.getElementById('dis-per').innerText = discount;
 			closeVoucher();
 			const subtotalValue = parseInt(document.getElementById('subtotal').innerText)
@@ -225,10 +253,12 @@
 			document.getElementById('discount-input').value = discountValue
 			document.getElementById('total-input').value = subtotalValue
 					- discountValue
-
+			document.getElementById('voucher-input').value = voucherID
+					
 			console.log(document.getElementById('subtotal-input').value)
 			console.log(document.getElementById('discount-input').value)
 			console.log(document.getElementById('total-input').value)
+			console.log(document.getElementById('voucher-input').value)
 		}
 	</script>
 

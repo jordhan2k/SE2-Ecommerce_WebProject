@@ -29,7 +29,7 @@ public class WaitingServlet extends HttpServlet{
 			if(user.getRoleID() == 1) { //If user is administrator
 				resp.sendRedirect(req.getContextPath()+"/admin"); //redirect to admin page
 			}else {
-				resp.sendRedirect(req.getContextPath()+"/welcome"); //redirect to Home page
+				resp.sendRedirect(req.getContextPath()+"/"); //redirect to Home page
 			}
 			
 		} else {

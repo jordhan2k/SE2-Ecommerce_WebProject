@@ -159,6 +159,7 @@ img {
 .cart-product-pricess {
 	text-align: right;
 	margin-right: 25px;
+	width: 100px;
 }
 
 .cart-product-realprice {
@@ -182,6 +183,10 @@ img {
 	color: rgb(153, 153, 153);
 	padding: 6px 12px;
 	cursor: pointer;
+}
+
+.qty-input{
+	padding: 6px 12px;
 }
 
 .qty-increase {
@@ -286,6 +291,10 @@ img {
 .cart-total-prices__inner {
 	position: sticky;
 	top: 30px;
+}
+
+.cart-product-qty{
+    margin-top: 5px;
 }
 
 .voucher-choose {
@@ -462,6 +471,22 @@ img {
 ins {
 	text-decoration: none;
 }
+
+.contin-btn{
+	background-color: rgb(253, 216, 53);
+    color: rgb(74, 74, 74);
+    font-weight: 500;
+    padding: 10px 55px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.contin-btn:hover{
+	text-decoration: none;
+	background: rgb(253, 206, 3);
+	color: rgb(74, 74, 74);
+}
+
 
 /* HEADER */
 
