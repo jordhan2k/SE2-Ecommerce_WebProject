@@ -10,13 +10,24 @@
 <link rel="icon" type="image/png" href="${url }images/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lapeki - Enjoy incredible online shopping.</title>
+
+<link rel="stylesheet" href="${url }custom.css/cart.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+
+
 <link rel="stylesheet" href="${url }custom.css/landing.css">
+
+<style>
+.nav-item.nav-link.active {
+	font-weight: bold;
+	color: #1C79D8;
+}
+</style>
 
 </head>
 <body style="background-color: rgb(244, 244, 244);">
@@ -26,17 +37,57 @@
 
 	<div class="container"></div>
 
-	<div class="body-container">
+	<div class="body-container" sty>
 		<!-- Category Section -->
 
 		<!-- Trend Search Section -->
 
 		<!-- Product Section -->
 
+
+
+		<div class="category-sec">
+			<div class="header">Found Categories</div>
+			<div class="body">
+				<div class="cate-list-wrapper">
+					<div class="cate-list-content">
+						<div class="cate-list">
+							<div class="cate-list-inner">
+								<div class="cate-current">
+									<div>
+										<div class="page">
+											<c:forEach items="${categories}" var="category">
+												<a class="item" href=""> <span class="text">${category.categoryName }</span>
+												</a>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
 		<div class="product-sec">
+
+
+
 			<div class="header">
 				<span style="font-weight: 500; color: #D03737;">Result for
-					"${pname }" | <span style="color: gray; text-transform: lowercase;font-weight: normal;" >(${results.size() } results)</span></span>
+					"${pname }" | <span
+					style="color: gray; text-transform: lowercase; font-weight: normal;">(${results.size() }
+						results)</span>
+				</span>
 
 			</div>
 
@@ -50,7 +101,11 @@
 						aria-selected="false">Low price</a> <a class="nav-item nav-link"
 						id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
 						role="tab" aria-controls="nav-contact" aria-selected="false">High
-						price</a>
+						price</a> <a class="nav-item nav-link" id="nav-az-tab"
+						data-toggle="tab" href="#nav-az" role="tab" aria-controls="nav-az"
+						aria-selected="false">A - Z</a> <a class="nav-item nav-link"
+						id="nav-za-tab" data-toggle="tab" href="#nav-za" role="tab"
+						aria-controls="nav-za" aria-selected="false">Z - A</a>
 				</div>
 			</nav>
 			<div class="tab-content" id="nav-tabContent">
@@ -162,16 +217,9 @@
 				</div>
 				<div class="tab-pane fade" id="nav-contact" role="tabpanel"
 					aria-labelledby="nav-contact-tab">
-
 					<div class="product-list-wrapper">
 						<div class="content">
-
-
-
-
-
 							<c:forEach items="${highPrice}" var="product">
-
 								<div>
 									<a class="product-item"
 										href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
@@ -198,7 +246,6 @@
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
 														</div>
-
 													</div>
 												</div>
 											</span>
@@ -207,13 +254,102 @@
 									</a>
 								</div>
 							</c:forEach>
-
 						</div>
 					</div>
 
 
 
 				</div>
+
+
+				<div class="tab-pane fade" id="nav-az" role="tabpanel"
+					aria-labelledby="nav-az-tab">
+					<div class="product-list-wrapper">
+						<div class="content">
+							<c:forEach items="${az}" var="product">
+								<div>
+									<a class="product-item"
+										href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
+										<div class="product-border">
+											<span class="product-inner">
+												<div>
+													<div class="thumbnail">
+														<c:set var="imgs" value="${product.productImg}" />
+														<c:set var="img" value="${fn:split(imgs,',')}" />
+														<c:set var="ava" value="${img[0]}" />
+														<img src="${ava}" />
+													</div>
+													<div class="info">
+														<div class="p-categories">
+															<span>${product.category.categoryName }</span>
+														</div>
+														<div class="p-name">
+															<h3>${product.productName }</h3>
+														</div>
+														<span class="p-price"> <ins>$${product.productPrice}
+															</ins>
+														</span>
+														<div class="atc-btn">
+															<i class="fa fa-shopping-basket"></i> <em>Add To
+																Cart</em>
+														</div>
+													</div>
+												</div>
+											</span>
+										</div>
+
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="tab-pane fade" id="nav-za" role="tabpanel"
+					aria-labelledby="nav-za-tab">
+					<div class="product-list-wrapper">
+						<div class="content">
+							<c:forEach items="${za}" var="product">
+								<div>
+									<a class="product-item"
+										href="${pageContext.request.contextPath }/product/detail?id=${product.productID}">
+										<div class="product-border">
+											<span class="product-inner">
+												<div>
+													<div class="thumbnail">
+														<c:set var="imgs" value="${product.productImg}" />
+														<c:set var="img" value="${fn:split(imgs,',')}" />
+														<c:set var="ava" value="${img[0]}" />
+														<img src="${ava}" />
+													</div>
+													<div class="info">
+														<div class="p-categories">
+															<span>${product.category.categoryName }</span>
+														</div>
+														<div class="p-name">
+															<h3>${product.productName }</h3>
+														</div>
+														<span class="p-price"> <ins>$${product.productPrice}
+															</ins>
+														</span>
+														<div class="atc-btn">
+															<i class="fa fa-shopping-basket"></i> <em>Add To
+																Cart</em>
+														</div>
+													</div>
+												</div>
+											</span>
+										</div>
+
+									</a>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 
 		</div>
