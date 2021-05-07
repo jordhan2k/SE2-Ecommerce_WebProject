@@ -202,7 +202,7 @@
 				</div>
 				<div class="product-list-wrapper">
 					<div class="content">
-						<c:forEach items="${products}" var="product" begin="0" end="9">
+						<c:forEach items="${products}" var="product">
 							<c:if
 								test="${product.category.categoryID == category.categoryID }">
 
