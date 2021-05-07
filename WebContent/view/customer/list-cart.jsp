@@ -112,9 +112,9 @@
 													</div>
 													<div class="cart-product-details">
 														<div class="cart-product-pricess">
-															$
+															
 															<div class="cart-product-realprice">
-																${map.value.product.productPrice }</div>
+																${map.value.product.productPrice }</div> VND
 														</div>
 														<div class="cart-product-qty">
 															<div class="qty-wrapper">
@@ -164,19 +164,19 @@
 										items="${sessionScope.cart}" var="map">
 										<c:set var="total"
 											value="${total + map.value.quantity * map.value.product.productPrice}" />
-									</c:forEach> <span class="value">$ <ins id="subtotal">${total }</ins>
+									</c:forEach> <span class="value"> <ins id="subtotal">${total }</ins> VND
 										<input style="display: none" id="subtotal-input" value=""
 										name="subtotal">
 								</span></li>
 								<li class="prices-item"><span class="text">Discount</span>
-									<span class="value"> <ins id="discount">0</ins> <input
+									<span class="value"> <ins id="discount">0</ins> VND<input
 										style="display: none;" id="discount-input" value="0"
 										name="discount">
 								</span></li>
 							</ul>
 							<p class="prices-total">
 								<span class="text">Total Amount</span> <span class="final-value">
-									$<ins id="total">${total }</ins> <input style="display: none;"
+									<ins id="total">${total }</ins> VND <input style="display: none;"
 									value="" id="total-input" name="total"> <i>(VAT
 										included)</i>
 								</span>
