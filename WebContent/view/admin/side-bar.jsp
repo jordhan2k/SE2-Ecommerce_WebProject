@@ -51,7 +51,7 @@
 			</a></li>
 			
 			<li class="nav-item " ><a
-				class="nav-link" href="${pageContext.request.contextPath }/admin/voucher/list"> <i
+				class="nav-link" href="${pageContext.request.contextPath }/"> <i
 					class="material-icons">home</i>
 					<p>Lapeki Home</p>
 			</a></li>
