@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/view/assets" var="url"></c:url>
+<c:url value="/view/customer" var="link"></c:url>
 <div class="sidebar" data-color="green" data-background-color="white"
 	data-image="${url}/img/sidebar-1.jpg">
 
@@ -12,6 +13,7 @@
 	<div class="logo">
 		
 		<a href="#" class="simple-text logo-normal">
+		<img height="60px" src="${link }/images/brand.png"><br>
 			Admin area </a>
 	</div>
 	<div class="sidebar-wrapper">
@@ -46,6 +48,12 @@
 				class="nav-link" href="${pageContext.request.contextPath }/admin/voucher/list"> <i
 					class="material-icons">local_offer</i>
 					<p>Voucher Management</p>
+			</a></li>
+			
+			<li class="nav-item " ><a
+				class="nav-link" href="${pageContext.request.contextPath }/admin/voucher/list"> <i
+					class="material-icons">home</i>
+					<p>Lapeki Home</p>
 			</a></li>
 
 
