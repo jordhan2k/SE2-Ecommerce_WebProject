@@ -17,6 +17,7 @@ public class LogoutServlet extends HttpServlet{
 		 HttpSession session = req.getSession();
 	        
 	        session.removeAttribute("account"); //remove session
+	        session.removeAttribute("cart");
 	        
 	        Cookie[] cookies = req.getCookies();
 	        
