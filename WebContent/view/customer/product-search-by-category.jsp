@@ -105,8 +105,7 @@
 																class="fas fa-star-half-alt"></i>
 														</div>
 														<div class="atc-btn">
-															<i class="fa fa-shopping-basket"></i> <em>Add To
-																Cart</em>
+															<i class="fa fa-shopping-basket"></i> <em style="margin-left: 7px">See more details</em>
 														</div>
 													</div>
 												</div>
