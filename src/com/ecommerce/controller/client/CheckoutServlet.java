@@ -2,7 +2,9 @@ package com.ecommerce.controller.client;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -34,6 +36,7 @@ import com.paypal.base.rest.PayPalRESTException;
 
 @WebServlet("/customer/checkout")
 public class CheckoutServlet extends HttpServlet {
+	NumberFormat nf = NumberFormat.getInstance(new Locale("vi", "VN"));
 	CartService cartService = new CartServiceImpl();
 	CartLineService cartLineService = new CartLineServiceImpl();
 	UserService userService = new UserServiceImpl();
@@ -52,8 +55,6 @@ public class CheckoutServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		User account = (User) session.getAttribute("account");
-		
-		
 
 		String subTotal = req.getParameter("subtotal");
 		String discount = req.getParameter("discount");
@@ -62,10 +63,7 @@ public class CheckoutServlet extends HttpServlet {
 		String voucherID = req.getParameter("voucherID");
 
 		Voucher voucher = voucherService.getVoucherByID(Integer.parseInt(voucherID));
-		
-		
-		
-		
+
 		System.out.println(subTotal);
 		System.out.println(discount);
 		System.out.println(total);
@@ -123,24 +121,56 @@ public class CheckoutServlet extends HttpServlet {
 			cart = cartService.getCartById(cartID);
 
 			Object temporaryCart = session.getAttribute("cart");
+			String message = "<p>Your order - <b>#" + cartID + "</b> has been successfully placed. <br>"
+					+ " The chosen payment method is <b>" + cart.getPaymentMode() + "</b>. <br>"
+					+ "The total charge is " + nf.format(cart.getTotal()) + " VND.<br>"
+					+ "Please be noticed! </p> <hr>";
+
+			String orderDetail = "<h3>Order detail - #"+ cart.getCartID() +"</h3> <br> "
+					+ "<table style=\"width: 100%;\">"
+					+ "<thead>"
+					+ "<th style=\"width:50%; text-align: left;\">Product name</th>"
+					+ "<th style=\"width:20%; text-align: left;\">Price</th>"
+					+ "<th style=\"width:10%; text-align: left;\">Quantity</th>"
+					+ "<th style=\"width:20%; text-align: left;\">Subtotal</th>"
+					+ "</thead>"
+					+ "<tbody>";
 
 			if (temporaryCart != null) {
 
 				Map<Integer, CartLine> map = (Map<Integer, CartLine>) temporaryCart;
 
 				for (CartLine cartLine : map.values()) {
+					
+					orderDetail += "<tr>"
+							+ "<td>"+ cartLine.getProduct().getProductName()+"</td>"
+							+ "<td>" + nf.format(cartLine.getUnitPrice() )+"</td>"
+							+ "<td> "+ cartLine.getQuantity()+"</td>"
+							+ "<td>"+ nf.format(cartLine.getQuantity() * cartLine.getUnitPrice())+"</td>"
+							+ "</tr>";
+					
+					
+					
 					cartLine.setCart(cart);
 					cartLineService.insertCartLine(cartLine);
 				}
 			}
 
+			orderDetail += "</tbody></table>"
+					+ "<hr>"
+					+ "<p>Total : "+ nf.format(Long.parseLong(subTotal))+" VND<br>"
+					+ "Shipping fee: 30.000VND<br>"
+					+ "Discount with voucher: -"+ nf.format(Long.parseLong(discount))+" VND<br>"
+					+ "Final total: "+nf.format(cart.getTotal())+" VND</p><hr>"
+					+ "<p>Please contact us if any inconveniences come up!<br>"
+					+ "Best regards,<br>"
+					+ "<b>Lapeki Ecommerce &copy;</b></p>";
+
 			MailTools mailTools = new MailTools();
 
 			try {
-				mailTools.sendMail(account.getEmail(), "Lapeki - Order placed successfully",
-						"Your order - #" + cartID + " has been successfully placed.\n"
-								+ " The chosen payment method is " + cart.getPaymentMode() + " . "
-										+ "The total charge is " + cart.getTotal() + "VND .Please be noticed!");
+
+				mailTools.sendMail(account.getEmail(), "Lapeki - Order placed successfully", message + orderDetail);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -152,6 +182,10 @@ public class CheckoutServlet extends HttpServlet {
 			rd.forward(req, resp);
 
 		}
+
+	}
+
+	public static void main(String[] args) {
 
 	}
 

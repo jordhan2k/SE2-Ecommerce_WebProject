@@ -22,6 +22,7 @@
 
 <style type="text/css">
 .pr-detail-icon {
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -292,7 +293,7 @@
 															<h3>${pr.productName }</h3>
 														</div>
 														<span class="p-price"> <ins>
-																<span class="pr-price">${product.productPrice}</span>
+																<span class="pr-price">${pr.productPrice}</span>
 																VND
 															</ins>
 														</span>
