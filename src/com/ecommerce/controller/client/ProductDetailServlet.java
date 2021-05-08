@@ -31,7 +31,7 @@ public class ProductDetailServlet extends HttpServlet{
 		Category cat  = product.getCategory();
 		
 		List<Product> relatedProducts = productService.searchProductByCategory(cat.getCategoryID());
-		
+		System.out.println(relatedProducts.size());
 		
 		List<Category> categories = categoryService.getAllCategories();
 		
