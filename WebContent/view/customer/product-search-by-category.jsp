@@ -38,10 +38,11 @@
 	<div class="container"></div>
 
 	<div class="body-container" sty>
-		
+
 		<div class="product-sec">
 			<div class="header">
-				<span style="font-weight: 500; color: #D03737;">${category.categoryName } | <span
+				<span style="font-weight: 500; color: #D03737;">${category.categoryName }
+					| <span
 					style="color: gray; text-transform: lowercase; font-weight: normal;">(${results.size() }
 						products)</span>
 				</span>
@@ -91,9 +92,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -133,9 +143,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -174,9 +193,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -220,9 +248,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -264,9 +301,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -305,6 +351,11 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
+	const prices = document.querySelectorAll(".pr-price");
+	for (const x of prices){
+		const b = parseInt(x.textContent);
+		x.textContent = b.toLocaleString("vi-VN");
+	}
 		//Get the button
 		var mybutton = document.querySelector("#btnTop");
 

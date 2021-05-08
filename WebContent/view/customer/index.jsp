@@ -235,11 +235,18 @@
 															<div class="p-name">
 																<h3>${product.productName }</h3>
 															</div>
-															<span class="p-price"> <ins>${product.productPrice} VND
-																</ins>
+															<span class="p-price"> <ins ><span class="pr-price">${product.productPrice}</span> 
+																	VND </ins>
 															</span>
+
+															<div style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+																<i class="fas fa-star"></i> <i class="fas fa-star"></i>
+																<i class="fas fa-star"></i> <i class="fas fa-star"></i>
+																<i class="fas fa-star-half-alt"></i> 
+															</div>
 															<div class="atc-btn">
-																<i class="fa fa-shopping-basket"></i> <em style="margin-left:7px">See more details</em>
+																<i class="fa fa-shopping-basket"></i> <em
+																	style="margin-left: 7px">See more details</em>
 															</div>
 
 														</div>
@@ -292,6 +299,16 @@
 			document.body.scrollTop = 0;
 			document.documentElement.scrollTop = 0;
 		}
+		
+		
+		
+		const prices = document.querySelectorAll(".pr-price");
+		for (const x of prices){
+			const b = parseInt(x.textContent);
+			x.textContent = b.toLocaleString("vi-VN");
+		}
+		
+		
 	</script>
 
 </body>

@@ -43,15 +43,16 @@
 		<!-- Trend Search Section -->
 
 		<!-- Product Section -->
-		
-		<nav class="bcnav" aria-label="breadcrumb" style="margin-top: 20px">
-				<ol class="breadcrumb breadcrumb-custom">
-					<li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
-				
-					<li class="breadcrumb-item active" aria-current="page"><span>${pname }</span></li>
 
-				</ol>
-			</nav>
+		<nav class="bcnav" aria-label="breadcrumb" style="margin-top: 20px">
+			<ol class="breadcrumb breadcrumb-custom">
+				<li class="breadcrumb-item"><a
+					href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
+
+				<li class="breadcrumb-item active" aria-current="page"><span>${pname }</span></li>
+
+			</ol>
+		</nav>
 
 
 
@@ -66,7 +67,9 @@
 									<div>
 										<div class="page">
 											<c:forEach items="${categories}" var="category">
-												<a class="item" href="${pageContext.request.contextPath }/product/category?id=${category.categoryID}"> <span class="text">${category.categoryName }</span>
+												<a class="item"
+													href="${pageContext.request.contextPath }/product/category?id=${category.categoryID}">
+													<span class="text">${category.categoryName }</span>
 												</a>
 											</c:forEach>
 										</div>
@@ -149,9 +152,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -201,9 +213,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -248,9 +269,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -295,9 +325,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -339,9 +378,18 @@
 														<div class="p-name">
 															<h3>${product.productName }</h3>
 														</div>
-														<span class="p-price"> <ins>$${product.productPrice}
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
 															</ins>
 														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
 														<div class="atc-btn">
 															<i class="fa fa-shopping-basket"></i> <em>Add To
 																Cart</em>
@@ -380,6 +428,12 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
+	
+	const prices = document.querySelectorAll(".pr-price");
+	for (const x of prices){
+		const b = parseInt(x.textContent);
+		x.textContent = b.toLocaleString("vi-VN");
+	}
 		//Get the button
 		var mybutton = document.querySelector("#btnTop");
 

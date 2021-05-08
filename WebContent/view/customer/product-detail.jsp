@@ -1,75 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <c:url value="/view/customer/" var="url"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="icon" type="image/png" href="${url }images/favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lapeki - Enjoy incredible online shopping.</title>
+<title>Detail</title>
 <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="${url }custom.css/breadcrumb.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="${url }custom.css/landing.css">
-<link rel="stylesheet" href="${url }custom.css/style.css">
 
-<style>
-.wrapper {
-	margin: 35px 25px 5px 25px;
+
+<style type="text/css">
+.pr-detail-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	width: 40px;
+	height: 40px;
+	border-radius: 25px;
+	box-shadow: rgb(47 83 151/ 20%) 0px 2px 6px 0px;
 }
 
-.productName {
-	min-height: 40px;
-	text-decoration:;
+.icon-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.info {
-	font-size: 15px;
-	line-height: 0.5;
-	margin-top: 30px;
-}
-
-table, td {
-	text-align: left;
-	padding: 15px;
-	border-bottom: 1px solid #ddd;
-	flex: 1 1 0%;
-}
-
-/* .content-has-table{
-    width: 1000px;
-    padding: 20px;
-    display: inline-block;
-    color: rgb(36, 36, 36);
-    line-height:25px;
-    text-align: justify;
-    background-color: rgb(255, 255, 255);
-    border-radius: 4px; */
-}
-.shop-product-title {
-	min-height: 40px;
-}
-
-.price {
-	font-size: 20px;
-	font-weight: bolder;
-	margin-bottom: 50px;
-}
-
-.quantity {
-	border: 1px solid #94c4ec;
-	border-radius: 3px;
-	display: block;
-	width: 70px;
-	text-align: center;
-	height: 30px;
+#price-container {
+	padding: 20px;
+	background-color: rgba(0, 0, 0, .04);
+	border-radius: 10px;
 }
 
 .btn-add-to-cart {
@@ -95,239 +67,305 @@ table, td {
 	outline: none;
 }
 
-h3 {
-	margin-top: 15px;
-	margin-bottom: 15px;
-	text-align: center;
+.little-img {
+	margin-right: 10px;
+	padding: 10px;
+	transition: box-shadow .5s;
 }
 
-.pt-1 {
-	text-align: justify;
-	margin: 5px 30px 20px 5px;
-	line-height: 2.2;
+.little-img:hover {
+	box-shadow: rgb(47 83 151/ 40%) 0px 2px 6px 0px;
 }
 
-h2 {
-	/* font-family: Roboto, Helvetica, Arial, sans-serif; */
-	margin-left: 30px;
-	margin-top: 10px
+.little-img.active {
+	box-shadow: rgb(47 83 151/ 60%) 0px 2px 6px 0px;
 }
 
-.qty-wrapper {
-	display: flex;
-	flex-wrap: nowrap;
-	border: 2px solid #808080;
-	border-radius: 3px;
-	width: 100px;
-}
 
-.qty-decrease {
-	display: inline-block;
-	border-right: 2px solid #808080;
-	color: rgb(153, 153, 153);
-	padding: 6px 12px;
-	cursor: pointer;
-}
-
-.qty-input {
-	padding: 6px 12px;
-}
-
-.qty-increase {
-	border-right: none;
-	border-left: 2px solid #808080;
-	color: rgb(153, 153, 153);
-	padding: 6px 12px;
-	cursor: pointer;
-	display: inline-block;
-}
-
-.qty-input {
-	border: none;
-	background: transparent;
-	width: 35px;
-	text-align: center;
-	font-size: 13px;
-	appearance: none;
-	margin: 0px;
-}
-
-#button {
-	border-radius: 5px;
-}
 </style>
-
-
 </head>
 <body style="background-color: rgb(244, 244, 244);">
 
 	<jsp:include page="../customer/header.jsp"></jsp:include>
 
 
-	<div class="wrapper">
 
-		<!--=== Shop Product ===-->
-		<div class="shop-product">
 
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 md-margin-bottom-50">
-						<div class="ms-showcase2-template">
-							<!-- Master Slider -->
-<!-- 							<div class="master-slider ms-skin-default" id="masterslider"> -->
-<!-- 								<div class="ms-slide"></div> -->
-<%-- 								<c:set var="imgs" value="${cl.product.productImg}"/> --%>
-<%-- 								<c:set var="img" value="${fn:split(imgs,',') }"/> --%>
-<%-- 								<c:set var="ava" value="${img[0] }"/> --%>
-<%-- 								<td><img height="100" src ="${img[0]}" /></td> --%>
-<!-- 							</div> -->
+	<div class="body-container">
+		<nav class="bcnav" aria-label="breadcrumb" style="margin-top: 20px;">
+			<ol class="breadcrumb breadcrumb-custom">
+				<li class="breadcrumb-item"><a
+					href="${pageContext.request.contextPath}/" data-abc="true">Home</a></li>
+				<li class="breadcrumb-item"><a
+					href="${pageContext.request.contextPath }/product/category?id=${product.category.categoryID}"
+					data-abc="true">${product.category.categoryName }</a></li>
+
+				<li class="breadcrumb-item active" aria-current="page"><span>${product.productName }</span></li>
+
+			</ol>
+		</nav>
+
+
+
+
+
+
+
+
+		<div class="product-sec">
+
+			<div class="row">
+				<div class="col-md-5"
+					style="padding: 20px; border-right: 1px rgba(0, 0, 0, .1) solid;">
+
+
+					<c:set var="imgstr" value="${product.productImg}" />
+					<c:set var="imgs" value="${fn:split(imgstr,',')}" />
+					<c:set var="ava" value="${imgs[0]}" />
+
+					<div class="row" style="display: flex; justify-content: center;">
+
+						<img id="big-img" height="400px" src="${ava}" />
+					</div>
+
+					<div class="row" id=" lil-img-container">
+						<c:set var="c" value="${0}" />
+						<c:forEach items="${ imgs}" var="img">
+
+							<c:set var="count" value="${count + 1}" />
+							<c:if test="${c < 7}">
+								<div class="col-md-2 little-img" style="padding: 5px;">
+									<img class="" src="${img}" />
+								</div>
+							</c:if>
+
+
+
+						</c:forEach>
+
+
+
+					</div>
+
+				</div>
+
+				<div class="col-md-7" style="padding: 20px;">
+					<div class="row" style="margin: 0;">
+						<div class="col-md-10">
+							<img height="35px" style="display: inline-block;" alt=""
+								src="${url }images/name-img.png">
+							<div style="font-size: 25px">${product.productName }</div>
+
+							<div style="color: #FBC52E; margin: 10px 0;">
+								<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+									class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+									class="fas fa-star-half-alt"></i> <span
+									style="color: rgba(0, 0, 0, .4)">| (4.5/5.0)</span>
+							</div>
+						</div>
+						<div class="col-md-2 icon-container">
+
+							<div class="pr-detail-icon">
+								<i class="far fa-heart"></i>
+							</div>
+							<div class="pr-detail-icon">
+								<i class="fas fa-share-alt"></i>
+							</div>
 						</div>
 					</div>
 
+					<div class="row" style="margin: 0;">
 
-					<div class="col-md-6">
-						<div class="productName">
-							<h1>${product.productName}</h1>
+						<div class="col-md-8">
+
+							<div id="price-container">
+								<h6>Discount applied</h6>
+								<span id="price" style="font-size: 30px; font-weight: bold;">
+									${product.productPrice }</span> VND <br> <img height="25px"
+									alt="" src="${url }images/lamember.png"> <span
+									style="font-size: 14px;">Register now for more super
+									duper hot deals </span>
+							</div>
+							<form name="f1" class="product-quantity sm-margin-bottom-20"
+								method="get" action="<c:url value="/customer/cart/add"></c:url>">
+								<input type="hidden" value="${product.productID }"
+									name="productID">
+								<div style="width: 50%; margin: 20px 0;">
+									<input style="width: 100px;" type="number" min="1"
+										name="quantity" value=1 required="required">
+
+									<button type="submit" class="btn-add-to-cart">Add to
+										Cart</button>
+								</div>
+							</form>
+						</div>
+
+						<div class="col-md-4"
+							style="border: 1px rgba(0, 0, 0, .1) solid; border-radius: 10px; padding: 10px;">
+							<span
+								style="color: #0C1248; display: inline-block; margin: 0 10px;"><i
+								class="fas fa-store"></i></span> <span
+								style="color: #D03737; font-weight: bold;">Lapeki
+								Ecommerce</span>
+
+							<hr>
+
+
+							<div style="padding: 10px; font-size: 14px;">
+								<span style="color: green;"><i class="fas fa-award"></i></span>
+								Authenication commitment
+							</div>
+							<div style="padding: 10px; font-size: 14px;">
+								<span style="color: green;"><i
+									class="fas fa-check-circle"></i></span> Package check on delivery
+							</div>
+
+							<div style="padding: 10px; font-size: 14px;">
+								<span style="color: green;"><i class="fas fa-sync-alt"></i></span>
+								Return within 7 days
+							</div>
+
+
+
 						</div>
 
 
-						<ul class="list-inline shop-product-prices margin-bottom-30">
-							<li class="price">${product.productPrice}VND</li>
 
-							<div class=content-has-table></div>
-							<table>
-								<tr>
-									<td>Category</td>
-									<td>${product.category.categoryName}</td>
-								</tr>
-
-								<tr>
-									<td>Instock</td>
-									<td>${product.instock}</td>
-								</tr>
-
-								<tr>
-									<td>Quantity</td>
-
-								</tr>
+					</div>
 
 
-							</table>
-							<%-- 	<li class="info">Category:
-										${product.category.categoryName}</li>
-									<li class="info">Instock: ${product.instock}</li>
-									
-									<li class="info">Quantity</li>
-								</ul> --%>
 
-							<div class="qty-box">
-								<div class="margin-bottom-40">
 
-									<form name="f1" class="product-quantity sm-margin-bottom-20"
-										method="get"
-										action="<c:url value="/customer/cart/add"></c:url>">
-										<input type="text" value="${product.productID }"
-											name="productID" hidden="">
 
-										<div class="cart-product-qty">
-											<div class="qty-wrapper">
-												<span class="qty-decrease" onclick="decreaseValue()">-</span>
 
-												<input class="qty-input" min="1" name="quantity"
-													value="${map.value.quantity }" type="tel" id='input-num'>
 
-												<span class="qty-increase" onclick="increaseValue()">+</span>
-											</div>
+
+
+				</div>
+
+
+
+
+			</div>
+
+
+		</div>
+
+
+
+
+
+
+
+		<div class="product-sec">
+			<div class="header">
+				<span style="font-weight: 500; color: #D03737;">Products you
+					may like</span> <a class="seemore"
+					href="${pageContext.request.contextPath }/product/category?id=${product.category.categoryID}">See
+					more</a>
+			</div>
+			<div class="product-list-wrapper">
+				<div class="content">
+					<c:set var="count" value="${0}" />
+					<c:forEach items="${relatedProducts}" var="pr">
+						<c:set var="count" value="${count + 1}" />
+						<c:if test="${count < 11}">
+
+							<c:if test="${product.productID != pr.productID}">
+								<div>
+									<a class="product-item"
+										href="${pageContext.request.contextPath }/product/detail?id=${pr.productID}">
+										<div class="product-border">
+											<span class="product-inner">
+												<div>
+													<div class="thumbnail">
+														<c:set var="imgs" value="${pr.productImg}" />
+														<c:set var="img" value="${fn:split(imgs,',')}" />
+														<c:set var="ava" value="${img[0]}" />
+														<img src="${ava}" />
+													</div>
+													<div class="info">
+														<div class="p-categories">
+															<span>${pr.category.categoryName }</span>
+														</div>
+														<div class="p-name">
+															<h3>${pr.productName }</h3>
+														</div>
+														<span class="p-price"> <ins>
+																<span class="pr-price">${product.productPrice}</span>
+																VND
+															</ins>
+														</span>
+
+														<div
+															style="color: #FBC52E; margin: 20px 0; font-size: 15px;">
+															<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+																class="fas fa-star-half-alt"></i>
+														</div>
+														<div class="atc-btn">
+															<i class="fa fa-shopping-basket"></i> <em
+																style="margin-left: 7px">See more details</em>
+														</div>
+
+													</div>
+												</div>
+											</span>
 										</div>
 
-										<button type="submit" class="btn-add-to-cart">Add to
-											Cart</button>
-									</form>
+									</a>
 								</div>
-							</div>
-					</div>
+							</c:if>
+
+
+						</c:if>
+
+					</c:forEach>
+
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="content-md container">
-		<div class="tab-v5">
-			<div class="classic-tabs border rounded px-4 pt-1">
-
-
-
-
-				<button data-toggle="collapse" data-target="#demo" id="button">
-					<h3>Description</h3>
-				</button>
-				<div class="collapse" id="demo">
-					<div class="tab-pane fade show active" id="description"
-						role="tabpanel" aria-labelledby="description-tab">
-						<p class="pt-1">${product.productDesc }</p>
-					</div>
+		<div class="product-sec" style="width: 700px;">
+			<div class="header">
+				<span style="font-weight: 500; color: #D03737;">Description</span>
+			</div>
+			<div class="product-list-wrapper" style="padding: 20px;">
+				<div  id="collapseExample">
+					<div class="card card-body">${product.productDesc}</div>
 				</div>
 
 			</div>
 		</div>
+
 	</div>
 
-	<div class="container">
-		<div class="heading heading-v1 margin-bottom-20">
-			<h2>Product You May Like</h2>
-		</div>
-
-		<section class="text-center">
 
 
 
 
-			<!-- Grid row -->
-			<div class="row">
-				<c:forEach var="relatedProducts" items="${relatedProducts}">
-
-					<c:if test="${relatedProducts.productID != product.productID}">
-						<!-- Grid column -->
-						<div class="col-md-6 col-lg-3 mb-5">
-
-							<!-- Card -->
-							<div class="">
 
 
-								<div class="view zoom overlay z-depth-2 rounded">
-									<div class="mask">
-										<c:set var="imgs" value="${relatedProducts.productImg}" />
-										<c:set var="img" value="${fn:split(imgs,',')}" />
-										<c:set var="ava" value="${img[0]}" />
-										<div class="mask rgba-black-slight"></div>
-										<td><img src="${ava}" /></td>
-									</div>
 
-								</div>
 
-								<div class="pt-4">
 
-									<a class="namelink"
-										href="${pageContext.request.contextPath }/product/detail?id=${relatedProducts.productID}">
-										${relatedProducts.productName}</a>
-									<h6>${relatedProducts.productPrice}VND</h6>
-								</div>
 
-							</div>
-							<!-- Card -->
 
-						</div>
-						<!-- Grid column -->
 
-					</c:if>
-				</c:forEach>
-			</div>
-			<!-- Grid row -->
 
-		</section>
-		<!--Section: Block Content-->
-	</div>
-	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -335,7 +373,9 @@ h2 {
 	<!-- FOOTER -->
 	<jsp:include page="../customer/footer.jsp"></jsp:include>
 
-
+	<a onclick="topFunction()" id="btnTop"> <i
+		class="fas fa-chevron-up"></i>
+	</a>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -343,34 +383,65 @@ h2 {
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+	<script src="${url }/js/input-spinner.js"></script>
 	<script type="text/javascript">
-		function increaseValue() {
-			var value = parseInt(document.getElementById('input-num').value, 10);
-			value = isNaN(value) ? 0 : value;
-			value++;
-			document.getElementById('input-num').value = value;
+    $("input[type='number']").inputSpinner()
+</script>
+
+	<script type="text/javascript">
+
+	
+	
+	const bigImg = document.querySelector("#big-img");
+	console.log(bigImg.src);
+
+	const smallImg = document.querySelectorAll(".little-img");
+	smallImg[0].classList.add("active");
+
+	for (const aa of smallImg) {
+		
+		const img = aa.querySelector("img");
+	    aa.onclick = function() {
+	    	for (const x of smallImg){
+	    		x.classList.remove("active");
+	    	}
+	    	aa.classList.add("active");
+	        bigImg.src = img.src;
+	    }
+	}
+	
+	const prices = document.querySelectorAll(".pr-price");
+	for (const x of prices){
+		const b = parseInt(x.textContent);
+		x.textContent = b.toLocaleString("vi-VN");
+	}
+	
+	
+		const price = document.querySelector("#price");
+		const b = parseInt(price.textContent);
+		price.textContent = b.toLocaleString("vi-VN");
+
+		//Get the button
+		var mybutton = document.querySelector("#btnTop");
+
+		// When the user scrolls down 20px from the top of the document, show the button
+		window.onscroll = function scrollFunction() {
+			if (document.body.scrollTop > 20
+					|| document.documentElement.scrollTop > 20) {
+				mybutton.style.display = "block";
+			} else {
+				mybutton.style.display = "none";
+			}
 		}
 
-		function decreaseValue() {
-			var value = parseInt(document.getElementById('input-num').value, 10);
-			value = isNaN(value) ? 0 : value;
-			value < 2 ? value = 2 : '';
-			value--;
-			document.getElementById('input-num').value = value;
+		// When the user clicks on the button, scroll to the top of the document
+		function topFunction() {
+			document.body.scrollTop = 0;
+			document.documentElement.scrollTop = 0;
 		}
 	</script>
-	<script>
-		function createImage(url) {
-			const newImage = document.createElement('img');
-			newImage.src = url;
-			document.querySelector('.ms-slide').appendChild(newImage);
-		}
-		const urls = "${product.productImg}";
-		const urlList = urls.split(",");
-
-		urlList.forEach(createImage);
-	</script>
-
-
 </body>
 </html>
