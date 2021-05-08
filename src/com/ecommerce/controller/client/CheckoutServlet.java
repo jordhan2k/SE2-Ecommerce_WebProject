@@ -115,7 +115,7 @@ public class CheckoutServlet extends HttpServlet {
 			cart.setStatus("Pending");
 			cart.setPayment(paymentMode);
 			cart.setVoucher(voucher);
-			cart.setTotal(Long.parseLong(total));
+			cart.setTotal(Long.parseLong(total) + 30000);
 
 			// get inserted cartID
 			int cartID = cartService.insertCart(cart);
