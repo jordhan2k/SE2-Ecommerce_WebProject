@@ -2,8 +2,8 @@ package com.ecommerce.dao.impl;
 
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement ;
+import java.sql.ResultSet ;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,9 @@ import com.ecommerce.model.Voucher;
  *
  */
 public class VoucherDAOImpl implements VoucherDAO {
-	Connection connection = DatabaseConnection.getConnection();
+	Connection connection = null;
+	PreparedStatement ps =null;
+	ResultSet  rs = null;
 	
 	/**
 	 * 	Insert a new Voucher to database
@@ -27,10 +29,11 @@ public class VoucherDAOImpl implements VoucherDAO {
 	 */
 	@Override
 	public void insertVoucher(Voucher voucher) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "INSERT INTO voucher(voucher_code, discount_percent, expire_date) VALUES (?,?,?)";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			  ps = connection.prepareStatement(sql);
 			
 			ps.setString(1, voucher.getVoucherCode());
 			ps.setInt(2, voucher.getDiscountPercentage());
@@ -40,6 +43,9 @@ public class VoucherDAOImpl implements VoucherDAO {
 			
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 	}
 	
@@ -50,11 +56,12 @@ public class VoucherDAOImpl implements VoucherDAO {
 	 * @return true if voucher is updated, false if not
 	 */
 	public boolean updateVoucher(Voucher voucher){
+		connection = DatabaseConnection.getConnection();
 		String sql = "UPDATE voucher SET voucher_code = ?, discount_percent = ?, expire_date = ? WHERE voucher_id = ?";
 		boolean isUpdated = false;
 		
 		try {
-			PreparedStatement ps  = connection.prepareStatement(sql);
+			  ps  = connection.prepareStatement(sql);
 			
 			ps.setString(1, voucher.getVoucherCode());
 			ps.setInt(2, voucher.getDiscountPercentage());
@@ -67,6 +74,9 @@ public class VoucherDAOImpl implements VoucherDAO {
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isUpdated;
 	}
@@ -78,18 +88,22 @@ public class VoucherDAOImpl implements VoucherDAO {
 	 */
 	@Override
 	public boolean deleteVoucher(int voucherID) {
+		connection = DatabaseConnection.getConnection();
 		boolean isDeleted = false;
 		String sql = "DELETE FROM voucher WHERE voucher_id = ?";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			  ps = connection.prepareStatement(sql);
 			ps.setInt(1, voucherID);
 			
 			isDeleted = ps.executeUpdate() > 0;
 			
  		} catch (Exception e) {
  			System.err.println(e.getMessage());
- 		}
+ 		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+		}
 		return isDeleted;
 	}
 	
@@ -101,12 +115,13 @@ public class VoucherDAOImpl implements VoucherDAO {
 	 */
 	@Override
 	public Voucher getVoucherByID(int voucherID) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM voucher WHERE voucher_id = ?";
 		Voucher voucher = null;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			  ps = connection.prepareStatement(sql);
 			ps.setInt(1, voucherID);
-			ResultSet rs = ps.executeQuery();
+			  rs = ps.executeQuery();
 			
 			if(rs.next()) {
 				String voucherCode= rs.getString("voucher_code");
@@ -119,6 +134,10 @@ public class VoucherDAOImpl implements VoucherDAO {
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return voucher;
 	}
@@ -130,12 +149,13 @@ public class VoucherDAOImpl implements VoucherDAO {
 	 */
 	@Override
 	public Voucher getVoucherByCode(String voucherCode) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM voucher WHERE voucher_code = ?";
 		Voucher voucher = null;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			  ps = connection.prepareStatement(sql);
 			ps.setString(1, voucherCode);
-			ResultSet rs = ps.executeQuery();
+			  rs = ps.executeQuery();
 			
 			if(rs.next()) {
 				int voucherID = rs.getInt("voucher_id");
@@ -146,6 +166,10 @@ public class VoucherDAOImpl implements VoucherDAO {
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return voucher;
 	}
@@ -155,13 +179,14 @@ public class VoucherDAOImpl implements VoucherDAO {
 	 */
 	@Override
 	public List<Voucher> getAllVouchers() {
+		connection = DatabaseConnection.getConnection();
 		List<Voucher> list = new ArrayList<Voucher>();
 		Voucher voucher = null;
 		String sql = "SELECT * FROM voucher";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
+			  ps = connection.prepareStatement(sql);
+			  rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				int voucherID = rs.getInt("voucher_id");
@@ -177,6 +202,10 @@ public class VoucherDAOImpl implements VoucherDAO {
 		
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return list;
 	}
@@ -189,14 +218,15 @@ public class VoucherDAOImpl implements VoucherDAO {
 	 */
 	@Override
 	public List<Voucher> searchVoucherByCode(String voucherCode) {
+		connection = DatabaseConnection.getConnection();
 		List<Voucher> list = new ArrayList<Voucher>();
 		Voucher voucher = null;
 		String sql = "SELECT * FROM voucher WHERE voucher_code LIKE ?";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			  ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + voucherCode + "%");
-			ResultSet rs = ps.executeQuery();
+			  rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				int voucherID = rs.getInt("voucher_id");	
@@ -211,6 +241,10 @@ public class VoucherDAOImpl implements VoucherDAO {
 		
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return list;
 	}

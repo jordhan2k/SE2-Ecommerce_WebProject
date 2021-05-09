@@ -23,18 +23,20 @@ import javafx.scene.chart.PieChart.Data;
  *
  */
 public class CartDAOImpl implements CartDAO {
-	Connection connection = DatabaseConnection.getConnection();
-
+	Connection connection = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
 	/**
 	 * @effects Insert a new cart record into Cart table
 	 * @param cart
 	 */
 	@Override
 	public int insertCart(Cart cart) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "INSERT INTO cart(voucher_id, user_id, order_date, status, payment_mode, total) VALUES (?, ?, ?, ?,?, ?)";
 		int cartID = 0;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, cart.getVoucher().getVoucherID());
 			ps.setInt(2, cart.getUser().getUserID());
 			ps.setDate(3, cart.getOrderDate());
@@ -45,14 +47,18 @@ public class CartDAOImpl implements CartDAO {
 			
 			
 			
-			ResultSet generatedKeys = ps.getGeneratedKeys();
-			if (generatedKeys.next()) {
-				cartID = generatedKeys.getInt(1);
+			rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				cartID = rs.getInt(1);
 			}
 			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return cartID;
 	}
@@ -73,11 +79,12 @@ public class CartDAOImpl implements CartDAO {
 	 */
 	@Override
 	public boolean updateCart(Cart cart) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "UPDATE cart SET voucher_id = ?, user_id = ?, order_date = ?, status =?, payment_mode =? , total = ? WHERE cart_id = ?";
 		boolean isUpdated = false;
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 
 			ps.setInt(1, cart.getVoucher().getVoucherID());
 			ps.setInt(2, cart.getUser().getUserID());
@@ -90,6 +97,9 @@ public class CartDAOImpl implements CartDAO {
 			isUpdated = ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isUpdated;
 	}
@@ -110,11 +120,12 @@ public class CartDAOImpl implements CartDAO {
 	 */
 	@Override
 	public boolean updateCartStatus(int cartID, String cartStatus) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "UPDATE cart SET status =? WHERE cart_id = ?";
 		boolean isUpdated = false;
 		System.out.println(cartID + "" + cartStatus);
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 
 			ps.setString(1, cartStatus);
 			ps.setInt(2, cartID);
@@ -122,6 +133,9 @@ public class CartDAOImpl implements CartDAO {
 			isUpdated = ps.executeUpdate() > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isUpdated;
 	}
@@ -144,17 +158,21 @@ public class CartDAOImpl implements CartDAO {
 	 */
 	@Override
 	public boolean deleteCart(int cartId) {
+		connection = DatabaseConnection.getConnection();
 		// Query statement
 		String sql = "DELETE FROM cart WHERE cart_id = ?";
 		boolean isDeleted = false;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, cartId);
 			ps.executeUpdate();
 			isDeleted = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return isDeleted;
@@ -177,15 +195,16 @@ public class CartDAOImpl implements CartDAO {
 	 */
 	@Override
 	public Cart getCartById(int cartId) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT c.order_date, c.status, c.payment_mode, c.total,u.user_email,u.user_id, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date"
 				+ "	FROM cart c INNER JOIN user u" + "    ON c.user_id = u.user_id" + "    INNER JOIN voucher v"
 				+ "    ON c.voucher_id = v.voucher_id" + "	WHERE cart_id = ?";
 		Cart cart = null;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, cartId);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				// create user object with required data
@@ -214,6 +233,10 @@ public class CartDAOImpl implements CartDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return cart;
 	}
@@ -225,15 +248,15 @@ public class CartDAOImpl implements CartDAO {
 	 */
 	@Override
 	public List<Cart> getAllCarts() {
-
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT c.cart_id, c.order_date, c.status,c.user_id, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date\r\n"
 				+ "				FROM cart c INNER JOIN user u" + "				ON c.user_id = u.user_id"
 				+ "				INNER JOIN voucher v " + "				ON c.voucher_id = v.voucher_id;";
 		List<Cart> carts = new ArrayList<>();
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				// create user object with required data
@@ -261,6 +284,10 @@ public class CartDAOImpl implements CartDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return carts;
 	}
@@ -274,6 +301,7 @@ public class CartDAOImpl implements CartDAO {
 	 */
 	@Override
 	public List<Cart> searchCartByEmail(String email) {
+		connection = DatabaseConnection.getConnection();
 		List<Cart> carts = new ArrayList<>();
 
 		String sql = "SELECT c.cart_id, c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date \r\n"
@@ -282,9 +310,9 @@ public class CartDAOImpl implements CartDAO {
 				+ "    WHERE u.user_email LIKE ?";
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + email + "%");
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				// create user object with required data
@@ -312,6 +340,10 @@ public class CartDAOImpl implements CartDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return carts;
@@ -331,6 +363,7 @@ public class CartDAOImpl implements CartDAO {
 	 */
 	@Override
 	public List<Cart> searchCartByPhone(String phone) {
+		connection = DatabaseConnection.getConnection();
 		List<Cart> carts = new ArrayList<>();
 
 		String sql = "SELECT c.cart_id, c.order_date, c.status, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date \r\n"
@@ -339,9 +372,9 @@ public class CartDAOImpl implements CartDAO {
 				+ "    WHERE u.user_phone LIKE ?";
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + phone + "%");
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				// create user object with required data
@@ -369,6 +402,10 @@ public class CartDAOImpl implements CartDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return carts;
@@ -376,15 +413,16 @@ public class CartDAOImpl implements CartDAO {
 
 	@Override
 	public List<Cart> getCartByUserId(int userId) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT c.cart_id, c.order_date, c.status,c.user_id, c.payment_mode, c.total, u.user_fullname, u.user_phone, u.user_address, v.voucher_code, v.discount_percent, v.expire_date\r\n"
 				+ "				FROM cart c INNER JOIN user u" + "				ON c.user_id = u.user_id"
 				+ "				INNER JOIN voucher v " + "				ON c.voucher_id = v.voucher_id WHERE c.user_id = ? ORDER BY c.order_date DESC";
 		List<Cart> carts = new ArrayList<>();
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, userId);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				// create user object with required data
@@ -412,6 +450,10 @@ public class CartDAOImpl implements CartDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return carts;
 	}

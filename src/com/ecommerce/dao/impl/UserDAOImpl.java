@@ -17,7 +17,9 @@ import com.ecommerce.model.User;
  * @author DungHT
  */
 public class UserDAOImpl implements UserDAO {
-	Connection connection = DatabaseConnection.getConnection();
+	Connection connection = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
 
 	/**
 	 * Insert a new User to database
@@ -26,13 +28,15 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public void insertUser(User user) {
+		connection = DatabaseConnection.getConnection();
+
 		int roleID = 0;
 		String gender = null;
 		String sql = "INSERT INTO user(user_name, user_password, user_fullname, user_phone, user_email, user_address, gender, user_dob, role_id) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getFullname());
@@ -41,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(6, user.getAddress());
 			if (user.getGender() == null) {
 				gender = "Other";
-			}else {
+			} else {
 				gender = user.getGender();
 			}
 			ps.setString(7, gender);
@@ -49,20 +53,22 @@ public class UserDAOImpl implements UserDAO {
 			// TODO: wait for User to have dob modified
 			ps.setDate(8, user.getDob());
 			try {
-				if(user.getRoleID() == 1) {
+				if (user.getRoleID() == 1) {
 					roleID = 1;
-				}else {
+				} else {
 					roleID = 0;
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
 				roleID = 0;
 			}
 			ps.setInt(9, roleID);
 			ps.executeUpdate();
 
-
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 	}
@@ -75,13 +81,14 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public boolean updateUser(User user) {
+		connection = DatabaseConnection.getConnection();
 		int roleID = 0;
 		boolean isUpdated = false;
 		String sql = "UPDATE user SET user_name = ? , user_password = ?, user_fullname=?, user_phone=?, "
 				+ "user_email=?, user_address=?, gender=?, user_dob=?, role_id=? WHERE user_id=?";
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getFullname());
@@ -92,12 +99,12 @@ public class UserDAOImpl implements UserDAO {
 			// TODO: wait for User to have dob modified
 			ps.setDate(8, user.getDob());
 			try {
-				if(user.getRoleID() == 1) {
+				if (user.getRoleID() == 1) {
 					roleID = 1;
-				}else {
+				} else {
 					roleID = 0;
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
 				roleID = 0;
 			}
 			ps.setInt(9, roleID);
@@ -108,6 +115,9 @@ public class UserDAOImpl implements UserDAO {
 			isUpdated = true;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return isUpdated;
@@ -121,11 +131,12 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public boolean deleteUser(int userID) {
+		connection = DatabaseConnection.getConnection();
 		boolean isDeleted = false;
 		String sql = "DELETE FROM user WHERE user_id=?";
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, userID);
 			ps.executeUpdate();
 			isDeleted = true;
@@ -133,6 +144,9 @@ public class UserDAOImpl implements UserDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isDeleted;
 	}
@@ -145,14 +159,15 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public User getUserByID(int userID) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM user WHERE user_id = ?";
 		User user = null;
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, userID);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 
@@ -177,9 +192,13 @@ public class UserDAOImpl implements UserDAO {
 				user = new User(userID, username, password, fullname, mobile, email, address, gender, dob, roleID);
 
 			}
-			
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return user;
@@ -193,14 +212,15 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public User getUserByUsername(String username) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM user WHERE user_name = ?";
 		User user = null;
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, username);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 
@@ -224,10 +244,13 @@ public class UserDAOImpl implements UserDAO {
 
 				user = new User(userID, username, password, fullname, mobile, email, address, gender, dob, roleID);
 
-				
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return user;
@@ -240,13 +263,14 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public List<User> getAllUsers() {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM user";
 		List<User> list = new ArrayList<User>();
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				int userID = rs.getInt("user_id");
@@ -273,10 +297,13 @@ public class UserDAOImpl implements UserDAO {
 
 				list.add(user);
 
-				
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return list;
@@ -290,16 +317,17 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public List<User> searchUserByKeyword(String keyword) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM user WHERE user_name LIKE ? " + "OR user_email LIKE ? OR phone LIKE ?";
 		List<User> list = new ArrayList<User>();
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + keyword + "%");
 			ps.setString(2, "%" + keyword + "%");
 			ps.setString(3, "%" + keyword + "%");
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				int userID = rs.getInt("user_id");
@@ -326,11 +354,14 @@ public class UserDAOImpl implements UserDAO {
 
 				list.add(user);
 
-			
 			}
-			
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return list;
@@ -344,12 +375,13 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public boolean checkExistEmail(String email) {
+		connection = DatabaseConnection.getConnection();
 		boolean isDuplicated = false;
 		String sql = "SELECT * FROM user WHERE user_email = ?";
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, email);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				isDuplicated = true;
@@ -357,6 +389,10 @@ public class UserDAOImpl implements UserDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isDuplicated;
 	}
@@ -369,46 +405,55 @@ public class UserDAOImpl implements UserDAO {
 	 */
 	@Override
 	public boolean checkExistUsername(String username) {
+		connection = DatabaseConnection.getConnection();
 		boolean isDuplicated = false;
 		String sql = "SELECT * FROM user WHERE user_name = ?";
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, username);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				isDuplicated = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isDuplicated;
 	}
-	
-	
+
 	/**
 	 * Check if a phone exists in database
+	 * 
 	 * @param phone - the phone to be checked
 	 * @return
 	 */
 	@Override
 	public boolean checkExistPhone(String phone) {
+		connection = DatabaseConnection.getConnection();
 		boolean isDuplicated = false;
 		String sql = "SELECT * FROM user WHERE user_phone = ?";
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, phone);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				isDuplicated = true;
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isDuplicated;
 	}
-	
 
 }

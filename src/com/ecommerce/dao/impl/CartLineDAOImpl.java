@@ -21,7 +21,9 @@ import com.ecommerce.model.User;
  * @author Tus
  */
 public class CartLineDAOImpl implements CartLineDAO {
-	Connection connection = DatabaseConnection.getConnection();
+	Connection connection = null;
+	PreparedStatement ps =null;
+	ResultSet rs = null;
 	UserDAO userDao = new UserDAOImpl();
 	
 	/**
@@ -31,10 +33,11 @@ public class CartLineDAOImpl implements CartLineDAO {
 	 */
 	@Override
 	public void insertCartLine(CartLine cartLine) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "INSERT INTO cartline(cart_id, product_id, quantity, unit_price) VALUES (?,?,?,?)";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			
 			ps.setInt(1, cartLine.getCart().getCartID());
 			ps.setInt(2, cartLine.getProduct().getProductID());
@@ -45,6 +48,9 @@ public class CartLineDAOImpl implements CartLineDAO {
 			
 		}catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 	}
 	
@@ -56,11 +62,12 @@ public class CartLineDAOImpl implements CartLineDAO {
 	 */
 	@Override
 	public boolean updateCartLine(CartLine cartLine){
+		connection = DatabaseConnection.getConnection();
 		String sql = "UPDATE cartline SET cart_id = ?, product_id = ?, quantity = ?, unit_price = ? WHERE cartline_id = ?";
 		boolean isUpdated = false;
 		
 		try {
-			PreparedStatement ps  = connection.prepareStatement(sql);
+			ps  = connection.prepareStatement(sql);
 			
 			ps.setInt(1, cartLine.getCart().getCartID());
 			ps.setInt(2, cartLine.getProduct().getProductID());
@@ -72,6 +79,9 @@ public class CartLineDAOImpl implements CartLineDAO {
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isUpdated;
 	}
@@ -84,16 +94,20 @@ public class CartLineDAOImpl implements CartLineDAO {
 	 */
 	@Override
 	public boolean deleteCartLine(int cartLineID){
+		connection = DatabaseConnection.getConnection();
 		String sql = "DELETE FROM cartline WHERE cartline_id = ?";
 		boolean isDeleted = false;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			
 			ps.setInt(1, cartLineID);
 			isDeleted = ps.executeUpdate() > 0;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isDeleted;
 	}
@@ -106,6 +120,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 	 */
 	@Override
 	public CartLine getCartLineByID(int cartLineID) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT " +
 				"cartline.cartline_id, " +
 				"cartline.quantity, " +
@@ -122,9 +137,9 @@ public class CartLineDAOImpl implements CartLineDAO {
 				"WHERE cartline.cartline_id = ?";
 		CartLine cartLine = null;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, cartLineID);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				User user = userDao.getUserByID(rs.getInt("user_id"));
@@ -146,12 +161,17 @@ public class CartLineDAOImpl implements CartLineDAO {
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return cartLine;
 	}
 	
 	@Override
 	public List<CartLine> getCartLineByCartID(int cartID) {
+		connection = DatabaseConnection.getConnection();
 		List<CartLine> cartLines = new ArrayList<>();
 		CartLine cartLine = null;
 		String sql ="SELECT cl.cartline_id, cl.cart_id, cl.quantity,cl.product_id, cl.unit_price, p.product_name, p.product_img, product_price " + 
@@ -160,9 +180,9 @@ public class CartLineDAOImpl implements CartLineDAO {
 				"ON cl.product_id = p.product_id " + 
 				"WHERE cl.cart_id = ?";
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, cartID);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			while (rs.next()) {
 				int cartLineID = rs.getInt("cartline_id");
@@ -184,6 +204,10 @@ public class CartLineDAOImpl implements CartLineDAO {
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		
 		return cartLines;
@@ -195,6 +219,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 	 */
 	@Override
 	public List<CartLine> getAllCartLines() {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT " + 
 				"cartline.cartline_id, " + 
 				"cartline.quantity, " + 
@@ -212,9 +237,9 @@ public class CartLineDAOImpl implements CartLineDAO {
 		CartLine cartLine = null;
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				User user = userDao.getUserByID(rs.getInt("u_id"));
@@ -238,6 +263,10 @@ public class CartLineDAOImpl implements CartLineDAO {
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		
 		return list;

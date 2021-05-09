@@ -16,7 +16,9 @@ import com.ecommerce.model.Category;
  * @author Tus
  */
 public class CategoryDAOImpl implements CategoryDAO {
-	Connection connection = DatabaseConnection.getConnection();
+	Connection connection = null;
+	PreparedStatement ps= null;
+	ResultSet rs = null;
 	
 	/**
 	 * 	Insert a new Category to database
@@ -25,15 +27,19 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 */
 	@Override
 	public void insertCategory(Category category) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "INSERT INTO category(category_name) VALUES (?)";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, category.getCategoryName());
 			ps.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		
 	}
@@ -46,11 +52,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 */
 	@Override
 	public boolean updateCategory(Category category) {
+		connection = DatabaseConnection.getConnection();
 		boolean isUpdated = false;
 		String sql = "UPDATE category SET category_name = ? where category_id = ?";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, category.getCategoryName());
 			ps.setInt(2, category.getCategoryID());
 			
@@ -59,7 +66,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 			
  		} catch (Exception e) {
  			System.err.println(e.getMessage());
- 		}
+ 		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+		}
 		return isUpdated;
 	}
 	
@@ -71,18 +81,22 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 */
 	@Override
 	public boolean deleteCategory(int categoryID) {
+		connection = DatabaseConnection.getConnection();
 		boolean isDeleted = false;
 		String sql = "DELETE FROM category WHERE category_id = ?";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, categoryID);
 			
 			isDeleted = ps.executeUpdate() > 0;
 			
  		} catch (Exception e) {
  			System.err.println(e.getMessage());
- 		}
+ 		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+		}
 		return isDeleted;
 	}
 	
@@ -94,12 +108,13 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 */
 	@Override
 	public Category getCategoryByID(int categoryID) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM category WHERE category_id = ?";
 		Category category = null;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, categoryID);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				String categoryName = rs.getString("category_name");
@@ -109,6 +124,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return category;
 	}
@@ -121,12 +140,13 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 */
 	@Override
 	public Category getCategoryByName(String categoryName) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM category WHERE category_name = ?";
 		Category category = null;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, categoryName);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				int categoryID = rs.getInt("category_id");
@@ -136,6 +156,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return category;
 	}
@@ -146,13 +170,14 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 */
 	@Override
 	public List<Category> getAllCategories() {
+		connection = DatabaseConnection.getConnection();
 		List<Category> list = new ArrayList<Category>();
 		Category category = null;
 		String sql = "SELECT * FROM category";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
+			ps = connection.prepareStatement(sql);
+			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				int categoryID = rs.getInt("category_id");
@@ -165,6 +190,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return list;
 	}
@@ -177,14 +206,15 @@ public class CategoryDAOImpl implements CategoryDAO {
 	 */
 	@Override
 	public List<Category> searchCategoryByName(String categoryName) {
+		connection = DatabaseConnection.getConnection();
 		List<Category> list = new ArrayList<Category>();
 		Category category = null;
 		String sql = "SELECT * FROM category WHERE category_name LIKE ?";
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + categoryName + "%");
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			
 			while(rs.next()) {
 				int categoryID = rs.getInt("category_id");
@@ -196,6 +226,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return list;
 	}

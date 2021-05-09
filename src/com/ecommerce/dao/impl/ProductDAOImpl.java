@@ -22,7 +22,9 @@ import com.mysql.cj.protocol.Resultset;
  */
 
 public class ProductDAOImpl implements ProductDAO {
-	Connection connection = DatabaseConnection.getConnection();
+	Connection connection = null;
+	PreparedStatement ps =  null;
+	ResultSet rs = null;
 	CategoryDAO categoryDao = new CategoryDAOImpl();
 
 	/**
@@ -32,11 +34,12 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public void insertProduct(Product product) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "INSERT INTO product(category_id, product_name, product_img, product_price, instock, product_description)"
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, product.getCategory().getCategoryID());
 			ps.setString(2, product.getProductName());
 			ps.setString(3, product.getProductImg());
@@ -49,6 +52,9 @@ public class ProductDAOImpl implements ProductDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 	}
 
@@ -60,10 +66,11 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public boolean updateProduct(Product product) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "UPDATE product SET category_id = ?, product_name = ?, product_img = ?, product_price = ?, instock = ?, product_description = ? WHERE product_id = ?";
 		boolean isUpdated = false;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, product.getCategory().getCategoryID());
 			ps.setString(2, product.getProductName());
 			ps.setString(3, product.getProductImg());
@@ -78,6 +85,9 @@ public class ProductDAOImpl implements ProductDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isUpdated;
 	}
@@ -90,10 +100,11 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public boolean deleteProduct(int productID) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "DELETE FROM product WHERE product_id = ?";
 		boolean isDeleted = false;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 
 			ps.setInt(1, productID);
 			isDeleted = ps.executeUpdate() > 0;
@@ -101,6 +112,9 @@ public class ProductDAOImpl implements ProductDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return isDeleted;
 	}
@@ -113,6 +127,7 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public Product getProductByID(int productID) {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT " + "product.product_id, " + "category.category_id, " + "product.product_name, "
 				+ "product.product_img, " + "product.product_price, " + "product.instock, "
 				+ "product.product_description " + "FROM product " + "INNER JOIN category "
@@ -120,9 +135,9 @@ public class ProductDAOImpl implements ProductDAO {
 		Product product = null;
 
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setInt(1, productID);
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
 				Category category = categoryDao.getCategoryByID(rs.getInt("category_id"));
@@ -140,6 +155,10 @@ public class ProductDAOImpl implements ProductDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return product;
 	}
@@ -151,6 +170,7 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public List<Product> getAllProducts() {
+		connection = DatabaseConnection.getConnection();
 		String sql = "SELECT " + "product.product_id, " + "category.category_id, " + "product.product_name, "
 				+ "product.product_img, " + "product.product_price, " + "product.instock, "
 				+ "product.product_description " + "FROM product " + "INNER JOIN category "
@@ -158,8 +178,8 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Product> products = new ArrayList<>();
 		Product product = null;
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
+			ps = connection.prepareStatement(sql);
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				Category category = categoryDao.getCategoryByID(rs.getInt("category_id"));
@@ -178,6 +198,10 @@ public class ProductDAOImpl implements ProductDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 		return products;
 	}
@@ -190,15 +214,16 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public List<Product> searchProductByName(String productName) {
+		connection = DatabaseConnection.getConnection();
 		List<Product> list = new ArrayList<Product>();
 		Product product = null;
 
 		String sql = "SELECT * FROM product p INNER JOIN category c ON p.category_id = c.category_id WHERE product_name LIKE ? OR c.category_name LIKE ?";
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + productName + "%");
 			ps.setString(2, "%" + productName + "%");
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				Category category = categoryDao.getCategoryByID(rs.getInt("category_id"));
@@ -219,6 +244,10 @@ public class ProductDAOImpl implements ProductDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return list;
@@ -232,14 +261,15 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public List<Product> searchProductByCategory(int categoryID) {
+		connection = DatabaseConnection.getConnection();
 		List<Product> list = new ArrayList<Product>();
 		Product product = null;
 
 		String sql = "SELECT * FROM product WHERE category_id LIKE ?";
 		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
+			ps = connection.prepareStatement(sql);
 			ps.setString(1, "%" + categoryID + "%");
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				Category category = categoryDao.getCategoryByID(rs.getInt("category_id"));
@@ -258,6 +288,10 @@ public class ProductDAOImpl implements ProductDAO {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}finally {
+		    try { rs.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { ps.close(); } catch (Exception e) { e.printStackTrace(); }
+		    try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
 		}
 
 		return list;
