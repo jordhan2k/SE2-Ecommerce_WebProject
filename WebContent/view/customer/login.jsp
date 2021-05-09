@@ -9,12 +9,17 @@
 <head>
 	<title>Lapeki</title>
 	<meta charset="UTF-8">
+	<link rel="icon" type="image/png" href="${url }images/favicon.png">
 	<link rel="stylesheet" href="${url }custom.css/login_register_style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
   	<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
 </head>
 <body>
+ <%
+ 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+ 	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+ %>
 
   <div class="cont">
     <form action="login" method="post" class="form sign-in">

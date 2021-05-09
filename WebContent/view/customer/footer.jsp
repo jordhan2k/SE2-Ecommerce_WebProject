@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/view/customer/" var="url"></c:url>
 
@@ -50,6 +50,6 @@
 			</div>
 
 		</div>
-		<div class="footer-copyright text-center py-3" style="background-color: #d03737; color: white">Copyright: © 2020
+		<div class="footer-copyright text-center py-3" style="background-color: #d03737; color: white">Copyright: Â© 2020
 			Lapeki. All Rights Reserved.</div>
 	</footer>
