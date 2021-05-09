@@ -30,9 +30,6 @@ public class PayPalService {
 	private static final String CLIENT_SECRET = "EClN3vm6PLvL0a2VeS4q35anDXSzX4ocZyvkhW3vEOwjSw6XK29tLlhYY5R1m4RhmDHGixAHrd_EFx79";
 	private static final String MODE = "sandbox";
 
-//	private static final String CLIENT_ID = "AeWpNhJLY_mioNSgx3ui7MWuVC6EMB9Qdt3zHH0T5s6EUC9xRn-cYG1PHsvDjY6WPqPtCYCpzgkj_EE7";
-//	private static final String CLIENT_SECRET = "EC0FUhda46ekpTd865QRvYr17zG60iTH6ycr1K8n1K_DFbrfUrkqLg4SVuvKZI2SdVol1u9rpdXtkQdz";
-//	private static final String MODE = "sandbox";
 
 	public PayPalService() {
 
