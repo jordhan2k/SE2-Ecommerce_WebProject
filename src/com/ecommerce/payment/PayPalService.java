@@ -26,8 +26,8 @@ public class PayPalService {
 
 	CartLineService cartLineService = new CartLineServiceImpl();
 
-	private static final String CLIENT_ID = "AWhcdW0ZT4lDKI-KdIQpDQcismJ-A1A2ew2KLHA2SGTp5c89iPj9QBrqcQXDhkeWJP8YSOedE_Xz3O0_";
-	private static final String CLIENT_SECRET = "EGJmyNlf0cLYs5Jq5orXzDqmGsnpw_yJ-wVCEN_Zvcckf24DIxLH_P25oSOIB-C7J73VlaOfhirCwMCg";
+	private static final String CLIENT_ID = "AZfHEUX0D1o8-NceGpw26YiJfs_RQMQ-SQkwr8397LNVmhLya7FevYkpjBiersfw9aRcc1gcgqSH9-1H";
+	private static final String CLIENT_SECRET = "EClN3vm6PLvL0a2VeS4q35anDXSzX4ocZyvkhW3vEOwjSw6XK29tLlhYY5R1m4RhmDHGixAHrd_EFx79";
 	private static final String MODE = "sandbox";
 
 //	private static final String CLIENT_ID = "AeWpNhJLY_mioNSgx3ui7MWuVC6EMB9Qdt3zHH0T5s6EUC9xRn-cYG1PHsvDjY6WPqPtCYCpzgkj_EE7";
@@ -53,7 +53,6 @@ public class PayPalService {
 		APIContext apiContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
 
 		Payment approvedPayment = requestPayment.create(apiContext);
-
 		return getApprovalLink(approvedPayment);
 	}
 
@@ -69,12 +68,18 @@ public class PayPalService {
 
 		PayerInfo payerInfo = new PayerInfo();
 
-		payerInfo.setFirstName("A").setLastName("B").setEmail("email");
+		payerInfo.setFirstName("Nguyen").setLastName("Bang").setEmail("huubang2k@gmail.com");
 
 		payer.setPayerInfo(payerInfo);
 		return payer;
 
 	}
+	
+	public Payment getPaymentDetail(String paymentID) throws PayPalRESTException {
+		APIContext apiContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
+		return Payment.get(apiContext, paymentID);
+	}
+	
 
 	/**
 	 * Specify the urls to which PayPal will redirect during the checkout process
@@ -103,7 +108,7 @@ public class PayPalService {
 
 			subtotal += line.getUnitPrice() * line.getQuantity();
 		}
-		System.out.println(subtotal);
+
 		Details details = new Details();
 
 		details.setShipping("30000");
@@ -112,7 +117,7 @@ public class PayPalService {
 
 		Amount amount = new Amount();
 
-		amount.setCurrency("VND");
+		amount.setCurrency("USD");
 		amount.setTotal("" + (subtotal + 30000));
 
 		amount.setDetails(details);
@@ -127,7 +132,7 @@ public class PayPalService {
 
 		for (CartLine line : map.values()) {
 			Item item = new Item();
-			item.setCurrency("VND");
+			item.setCurrency("USD");
 			item.setName(line.getProduct().getProductName());
 			item.setPrice("" + (line.getQuantity() * line.getUnitPrice()));
 			item.setQuantity("" + line.getQuantity());
@@ -157,7 +162,7 @@ public class PayPalService {
 		String approvalLink = null;
 
 		for (Links link : links) {
-			if (link.getRel().equalsIgnoreCase("approval_link")) {
+			if (link.getRel().equalsIgnoreCase("approval_url")) {
 				approvalLink = link.getHref();
 				break;
 			}
