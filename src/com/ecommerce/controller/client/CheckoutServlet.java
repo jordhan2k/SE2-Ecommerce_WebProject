@@ -64,36 +64,19 @@ public class CheckoutServlet extends HttpServlet {
 
 		Voucher voucher = voucherService.getVoucherByID(Integer.parseInt(voucherID));
 
-		System.out.println(subTotal);
-		System.out.println(discount);
-		System.out.println(total);
-		System.out.println(voucherID);
-		System.out.println(paymentMode);
 
 		if (paymentMode.equals("PayPal")) { // handle online payment with pay pal
 
 			Object temporaryCart = req.getSession().getAttribute("cart");
 			Map<Integer, CartLine> map = (Map<Integer, CartLine>) temporaryCart; // keep
 			try {
-				// TEST
-
-//				Product pr1 = productService.getProductByID(100010);
-//				Product pr2 = productService.getProductByID(100011);
-//				CartLine line1 = new CartLine(2, 20000, pr1, null); // test
-//				CartLine line2 = new CartLine(2, 20000, pr2, null); // test
-//
-//				Map<Integer, CartLine> map = new HashMap<Integer, CartLine>();
-//				map.put(1, line1);
-//				map.put(2, line2);
-				// TEST ends
-
-				for (CartLine line : map.values()) {
-					System.out.println(line.toString());
-				}
+				
+				HttpSession httpSession = req.getSession();
+				httpSession.setAttribute("voucher", voucher);
 
 				PayPalService payPalService = new PayPalService();
 				String approvalLink = payPalService.authorizePayment(map);
-				System.out.println(approvalLink);
+
 				resp.sendRedirect(approvalLink);
 			} catch (PayPalRESTException ex) {
 				req.setAttribute("errorMessage", ex.getMessage());
@@ -175,7 +158,6 @@ public class CheckoutServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			System.out.println(cartID);
 			session.removeAttribute("cart");
 			req.setAttribute("placed-id", cartID);
 			RequestDispatcher rd = req.getRequestDispatcher("/view/customer/checkout-succeed.jsp");
@@ -185,8 +167,5 @@ public class CheckoutServlet extends HttpServlet {
 
 	}
 
-	public static void main(String[] args) {
-
-	}
 
 }

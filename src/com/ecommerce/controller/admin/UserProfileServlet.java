@@ -32,11 +32,11 @@ public class UserProfileServlet extends HttpServlet{
 		int userID = Integer.parseInt(req.getParameter("userID"));
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		String fullname = req.getParameter("fullName");
+		String fullname = req.getParameter("fullname");
 		String mobile = req.getParameter("mobile");
 		String address = req.getParameter("address");
 		String email = req.getParameter("email");
-		
+		System.out.println("Userprofile: "+email);
 		String gender = "";
 		String genderCode = req.getParameter("gender");
 		int code = Integer.parseInt(genderCode);

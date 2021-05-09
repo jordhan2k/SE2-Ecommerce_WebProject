@@ -29,9 +29,7 @@ public class LoginServlet extends HttpServlet{
 		
 		//Check cookie for remember me 
 		Cookie[] cookies = req.getCookies();
-		if(cookies != null) {
-			System.out.println("doGet " + cookies.length);
-		}
+
 		
 		if(cookies != null) { //if cookies exist
 			for (Cookie cookie : cookies) {
