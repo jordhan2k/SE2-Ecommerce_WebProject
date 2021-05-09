@@ -23,6 +23,10 @@
 <link href="${url}/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
 </head>
 <body class="">
+	 <%
+	 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+	 	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+	 %>
 	<div class="wrapper ">
 		<!-- SIDE BAR -->
 		<jsp:include page="../admin/side-bar.jsp"></jsp:include>

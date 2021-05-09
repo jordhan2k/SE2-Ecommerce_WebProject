@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url value="/view/assets" var="url"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="${url}/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${url}/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
@@ -22,6 +21,10 @@
 </head>
 </head>
 <body>
+	 <%
+	 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+	 	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+	 %>
 	<div class="wrapper ">
    	<!-- SIDE BAR -->
    	<jsp:include page="../admin/side-bar.jsp"></jsp:include>

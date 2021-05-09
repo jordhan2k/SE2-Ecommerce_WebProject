@@ -1,27 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:url value="/view/assets" var="url"></c:url>
 
-<!--
-=========================================================
-Material Dashboard - v2.1.2
-=========================================================
 
-Product Page: https://www.creative-tim.com/product/material-dashboard
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8" />
-<link rel="apple-touch-icon" sizes="76x76"
-	href="${url}/img/apple-icon.png">
+
 <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>Edit product</title>
@@ -41,6 +30,10 @@ The above copyright notice and this permission notice shall be included in all c
 </head>
 
 <body class="">
+	 <%
+	 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+	 	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+	 %>
 	<div class="wrapper ">
 
 		<!-- SIDE-BAR -->
